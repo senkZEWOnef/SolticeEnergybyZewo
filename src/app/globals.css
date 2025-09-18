@@ -279,3 +279,26 @@ h1, h2, h3, h4, h5, h6 {
 .btn-professional:hover::before {
   left: 100%;
 }
+
+/* Golden form controls for dark theme */
+.form-control-golden::placeholder {
+  color: rgba(255, 215, 0, 0.6) !important;
+}
+
+.form-control-golden::-webkit-input-placeholder {
+  color: rgba(255, 215, 0, 0.6) !important;
+}
+
+.form-control-golden::-moz-placeholder {
+  color: rgba(255, 215, 0, 0.6) !important;
+  opacity: 1;
+}
+
+.form-control-golden:-ms-input-placeholder {
+  color: rgba(255, 215, 0, 0.6) !important;
+}
+
+.form-control-golden:-moz-placeholder {
+  color: rgba(255, 215, 0, 0.6) !important;
+  opacity: 1;
+}

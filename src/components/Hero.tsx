@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useChatContext } from '@/contexts/ChatContext';
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Hero = () => {
     town: '',
     message: ''
   });
+  const [showPhone, setShowPhone] = useState(false);
+  const { initializeChat } = useChatContext();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,14 +27,24 @@ const Hero = () => {
     });
   };
 
+  const handleStartChat = () => {
+    initializeChat({
+      name: formData.name || 'Cliente desde Hero',
+      email: formData.email,
+      phone: formData.phone,
+      source: 'widget'
+    });
+    // Could scroll to chat widget or show a message
+  };
+
   return (
     <section 
       id="inicio" 
       className="position-relative overflow-hidden d-flex align-items-center" 
       style={{
-        minHeight: '100vh',
+        minHeight: '70vh',
         paddingTop: '0',
-        paddingBottom: '0'
+        paddingBottom: '40px'
       }}
     >
       {/* Epic Storm Background with Parallax */}
@@ -265,18 +278,49 @@ const Hero = () => {
                   textShadow: '0 2px 12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 0, 0, 0.7)'
                 }}
               >
+                Descubre nuestras{' '}
                 <span 
                   className="position-relative"
                   style={{
-                    color: '#ffffff',
+                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
                     fontWeight: '700',
-                    textShadow: '0 2px 12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 0, 0, 0.7)'
+                    textShadow: 'none'
                   }}
                 >
-                  Tecnología solar revolucionaria
+                  baterías solares residenciales, comerciales e industriales
                 </span>
-                {' '}que elimina los apagones de tu vida para siempre.
+                {' '}con tecnología de última generación.
               </p>
+
+              <div className="mb-4">
+                <a 
+                  href="#productos"
+                  className="btn btn-lg fw-bold border-0 text-decoration-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
+                    color: '#131d3b',
+                    borderRadius: '50px',
+                    padding: '15px 35px',
+                    fontSize: '16px',
+                    letterSpacing: '0.5px',
+                    boxShadow: '0 8px 30px rgba(180, 254, 0, 0.3)',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(180, 254, 0, 0.4)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(180, 254, 0, 0.3)';
+                  }}
+                >
+                  Ver Todas las Baterías
+                </a>
+              </div>
               
             </div>
 
@@ -508,99 +552,125 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Elegant Lead Capture Form */}
+          {/* Hero Image and Compact Form */}
           <div className="col-lg-6 col-xl-6 d-none d-lg-block">
             <div className="d-flex justify-content-end align-items-center h-100">
+              
+              {/* Hero Image */}
+              <div 
+                className="position-relative me-3"
+                style={{
+                  maxWidth: '320px',
+                  width: '100%'
+                }}
+              >
+                <img 
+                  src="/heropic.png" 
+                  alt="Soltice Energy Products" 
+                  className="img-fluid rounded-3"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'cover'
+                  }}
+                />
+                
+                {/* Floating effect overlay */}
+                <div 
+                  className="position-absolute top-0 start-0 w-100 h-100 rounded-3"
+                  style={{
+                    background: 'linear-gradient(45deg, transparent 30%, rgba(180, 254, 0, 0.1) 50%, transparent 70%)',
+                    animation: 'shimmer 3s linear infinite',
+                    pointerEvents: 'none'
+                  }}
+                />
+              </div>
               <div 
                 className="card border-0 shadow-lg"
                 style={{
                   background: 'rgba(19, 29, 59, 0.95)',
                   backdropFilter: 'blur(20px)',
-                  borderRadius: '20px',
-                  width: '350px',
+                  borderRadius: '16px',
+                  width: '280px',
                   maxWidth: '100%',
                   border: '1px solid rgba(255, 255, 255, 0.1)'
                 }}
               >
-                <div className="card-body p-4">
+                <div className="card-body p-3">
                   <div className="text-center mb-3">
-                    <h5 
-                      className="fw-bold mb-2"
+                    <h6 
+                      className="fw-bold mb-1"
                       style={{
                         background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
                         fontFamily: 'Rubik, sans-serif',
-                        fontSize: '18px'
+                        fontSize: '16px'
                       }}
                     >
                       Cotización Gratuita
-                    </h5>
-                    <p style={{color: 'rgba(255, 215, 0, 0.8)', fontSize: '13px'}} className="mb-0">
-                      Obtén tu propuesta personalizada
+                    </h6>
+                    <p style={{color: 'rgba(255, 215, 0, 0.8)', fontSize: '12px'}} className="mb-0">
+                      Propuesta personalizada
                     </p>
                   </div>
 
                   <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
+                    <div className="mb-2">
                       <input
                         type="text"
-                        className="form-control"
-                        placeholder="Nombre completo *"
+                        className="form-control form-control-golden"
+                        placeholder="Nombre *"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
                         style={{
-                          borderRadius: '10px',
-                          border: '2px solid rgba(255, 255, 255, 0.2)',
-                          padding: '12px 16px',
-                          fontSize: '14px',
+                          borderRadius: '8px',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          padding: '8px 12px',
+                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
                           color: '#ffd700',
                           transition: 'all 0.3s ease'
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.2rem rgba(180, 254, 0, 0.25)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
                           e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
                         }}
                       />
                     </div>
 
-                    <div className="mb-3">
+                    <div className="mb-2">
                       <input
                         type="tel"
-                        className="form-control"
+                        className="form-control form-control-golden"
                         placeholder="Teléfono *"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         required
                         style={{
-                          borderRadius: '10px',
-                          border: '2px solid rgba(255, 255, 255, 0.2)',
-                          padding: '12px 16px',
-                          fontSize: '14px',
+                          borderRadius: '8px',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          padding: '8px 12px',
+                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
                           color: '#ffd700',
                           transition: 'all 0.3s ease'
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.2rem rgba(180, 254, 0, 0.25)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
                           e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
                         }}
                       />
                     </div>
@@ -608,90 +678,27 @@ const Hero = () => {
                     <div className="mb-3">
                       <input
                         type="email"
-                        className="form-control"
+                        className="form-control form-control-golden"
                         placeholder="Email (opcional)"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                         style={{
-                          borderRadius: '10px',
-                          border: '2px solid rgba(255, 255, 255, 0.2)',
-                          padding: '12px 16px',
-                          fontSize: '14px',
+                          borderRadius: '8px',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          padding: '8px 12px',
+                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
                           color: '#ffd700',
                           transition: 'all 0.3s ease'
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.2rem rgba(180, 254, 0, 0.25)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
                           e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                        }}
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Pueblo (opcional)"
-                        name="town"
-                        value={formData.town || ''}
-                        onChange={handleChange}
-                        style={{
-                          borderRadius: '10px',
-                          border: '2px solid rgba(255, 255, 255, 0.2)',
-                          padding: '12px 16px',
-                          fontSize: '14px',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffd700',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.2rem rgba(180, 254, 0, 0.25)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                        }}
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <textarea
-                        className="form-control"
-                        rows={3}
-                        placeholder="Comentarios adicionales (opcional)"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        style={{
-                          borderRadius: '10px',
-                          border: '2px solid rgba(255, 255, 255, 0.2)',
-                          padding: '12px 16px',
-                          fontSize: '14px',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffd700',
-                          resize: 'none',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.2rem rgba(180, 254, 0, 0.25)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
                         }}
                       />
                     </div>
@@ -702,98 +709,31 @@ const Hero = () => {
                       style={{
                         background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
                         color: '#131d3b',
-                        borderRadius: '12px',
-                        padding: '12px',
-                        fontSize: '15px',
+                        borderRadius: '10px',
+                        padding: '10px',
+                        fontSize: '14px',
                         letterSpacing: '0.3px',
-                        boxShadow: '0 4px 15px rgba(180, 254, 0, 0.3)',
+                        boxShadow: '0 3px 12px rgba(180, 254, 0, 0.3)',
                         transition: 'all 0.3s ease'
                       }}
                       onMouseOver={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 8px 25px rgba(180, 254, 0, 0.4)';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(180, 254, 0, 0.4)';
                       }}
                       onMouseOut={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(180, 254, 0, 0.3)';
+                        e.currentTarget.style.boxShadow = '0 3px 12px rgba(180, 254, 0, 0.3)';
                       }}
                     >
                       Solicitar Cotización
                     </button>
 
-                    <div className="text-center mt-3">
-                      <small style={{color: 'rgba(255, 215, 0, 0.7)', fontSize: '11px'}}>
-                        ✓ Respuesta en 24 horas • Sin compromiso
+                    <div className="text-center mt-2">
+                      <small style={{color: 'rgba(255, 215, 0, 0.7)', fontSize: '10px'}}>
+                        ✓ Respuesta en 24 horas
                       </small>
                     </div>
                   </form>
-
-                  {/* Action Buttons */}
-                  <div className="mt-4 pt-3" style={{borderTop: '1px solid rgba(255, 255, 255, 0.1)'}}>
-                    <div className="d-grid gap-2">
-                      <a 
-                        href="tel:787-233-9002"
-                        className="btn fw-bold text-decoration-none border-0"
-                        style={{
-                          background: 'linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%)',
-                          color: 'white',
-                          borderRadius: '10px',
-                          padding: '10px',
-                          fontSize: '14px',
-                          letterSpacing: '0.3px',
-                          boxShadow: '0 3px 12px rgba(255, 71, 87, 0.3)',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-1px)';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 71, 87, 0.4)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = '0 3px 12px rgba(255, 71, 87, 0.3)';
-                        }}
-                      >
-                        📞 Llamar Ahora: 787-233-9002
-                      </a>
-                      
-                      <a 
-                        href="https://wa.me/17875152632"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn fw-bold text-decoration-none border-2"
-                        style={{
-                          borderColor: '#25D366',
-                          color: '#25D366',
-                          backgroundColor: 'rgba(37, 211, 102, 0.1)',
-                          borderRadius: '10px',
-                          padding: '10px',
-                          fontSize: '14px',
-                          letterSpacing: '0.3px',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.backgroundColor = '#25D366';
-                          e.currentTarget.style.color = 'white';
-                          e.currentTarget.style.transform = 'translateY(-1px)';
-                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(37, 211, 102, 0.3)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(37, 211, 102, 0.1)';
-                          e.currentTarget.style.color = '#25D366';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = 'none';
-                        }}
-                      >
-                        💬 Chat con Servicio al Cliente
-                      </a>
-                    </div>
-                    
-                    <div className="text-center mt-3">
-                      <small style={{color: 'rgba(255, 215, 0, 0.7)', fontSize: '10px'}}>
-                        Atención inmediata disponible
-                      </small>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

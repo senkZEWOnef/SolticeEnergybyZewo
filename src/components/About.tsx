@@ -32,7 +32,7 @@ const About = () => {
       id="sobre-nosotros" 
       className="position-relative overflow-hidden"
       style={{
-        padding: '80px 0',
+        padding: '40px 0',
         background: `
           radial-gradient(circle at 20% 80%, rgba(180, 254, 0, 0.08) 0%, transparent 50%),
           radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),

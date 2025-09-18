@@ -9,30 +9,27 @@ const Header = () => {
     <nav 
       className="navbar navbar-expand-lg navbar-dark fixed-top" 
       style={{
-        background: 'rgba(19, 29, 59, 0.98)', 
+        background: 'rgba(13, 19, 40, 0.98)', 
         backdropFilter: 'blur(40px)',
         boxShadow: '0 2px 40px rgba(0, 0, 0, 0.15)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         padding: '15px 0',
+        minHeight: '80px',
         transition: 'all 0.3s ease'
       }}
     >
       <div className="container">
-        <a className="navbar-brand text-decoration-none" href="#inicio">
-          <h3 
-            className="mb-0 fw-bold"
+        <a className="navbar-brand text-decoration-none d-flex align-items-center" href="#inicio" style={{height: '80px'}}>
+          <img 
+            src="/name.png" 
+            alt="Soltice Energy" 
             style={{
-              fontFamily: 'Rubik, sans-serif',
-              fontSize: '24px',
-              background: 'linear-gradient(135deg, #ffffff 0%, #b4fe00 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              letterSpacing: '0.5px'
+              height: '250px',
+              width: 'auto',
+              maxWidth: '1250px',
+              objectFit: 'contain'
             }}
-          >
-            Soltice Energy
-          </h3>
+          />
         </a>
 
         <button 

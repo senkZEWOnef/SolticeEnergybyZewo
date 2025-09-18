@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ChatProvider from "@/contexts/ChatContext";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://solticeenergypr.org'),
   title: "Soltice Energy PR - Energía Solar y Baterías en Puerto Rico",
   description: "Líder en soluciones de energía solar en Puerto Rico. Sistemas residenciales, comerciales y portátiles. Independencia energética garantizada. ¡Cotización gratis!",
   keywords: "energía solar, baterías, Puerto Rico, sistemas solares, independencia energética, apagones, sostenible",
@@ -49,7 +51,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="antialiased">
-        {children}
+        <ChatProvider>
+          {children}
+        </ChatProvider>
       </body>
     </html>
   );
