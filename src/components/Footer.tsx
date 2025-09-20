@@ -7,507 +7,233 @@ const Footer = () => {
 
   return (
     <footer 
-      className="position-relative overflow-hidden"
+      className="position-relative"
       style={{
-        background: `
-          radial-gradient(circle at 20% 80%, rgba(180, 254, 0, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(255, 107, 122, 0.04) 0%, transparent 50%),
-          linear-gradient(135deg, 
-            rgba(19, 29, 59, 0.95) 0%, 
-            rgba(25, 42, 86, 0.92) 25%,
-            rgba(45, 55, 72, 0.94) 50%,
-            rgba(25, 42, 86, 0.92) 75%,
-            rgba(19, 29, 59, 0.96) 100%
-          )
-        `,
-        padding: '60px 0 40px'
+        background: `linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%)`,
+        padding: '30px 0 20px',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)'
       }}
     >
-      {/* Animated Background Elements */}
-      <div className="position-absolute top-0 start-0 w-100 h-100">
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(180, 254, 0, 0.05) 0%, transparent 70%)',
-            top: '10%',
-            right: '5%',
-            animation: 'floatingSlow 25s ease-in-out infinite'
-          }}
-        />
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '150px',
-            height: '150px',
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%)',
-            bottom: '15%',
-            left: '10%',
-            animation: 'floatingMedium 20s ease-in-out infinite reverse'
-          }}
-        />
-      </div>
-
-      <div className="container position-relative" style={{ zIndex: 10 }}>
-        <div className="row">
-          {/* Company Info */}
-          <div className="col-lg-4 mb-5">
-            <div className="mb-4">
-              <img 
-                src="/name.png" 
-                alt="Soltice Energy" 
-                style={{ height: '60px', width: 'auto' }}
-              />
-            </div>
-            <p 
-              className="mb-4"
-              style={{ 
-                color: 'rgba(255, 255, 255, 0.8)', 
-                fontSize: '15px',
-                lineHeight: '1.6',
-                maxWidth: '320px'
-              }}
-            >
-              Líderes en soluciones de energía solar en Puerto Rico. 
-              Ofrecemos baterías portátiles de última generación para garantizar 
-              tu independencia energética total.
-            </p>
-            
-            {/* Social Media */}
-            <div className="d-flex gap-3 mb-4">
+      <div className="container">
+        {/* Main Footer Content - Single Row */}
+        <div className="row align-items-center justify-content-between mb-4">
+          {/* Logo & Contact */}
+          <div className="col-md-4">
+            <div className="d-flex align-items-center mb-3">
               <a 
-                href="https://facebook.com/solticeenergy" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn border-0 p-2 rounded-circle"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  width: '45px',
-                  height: '45px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(24, 119, 242, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                href="/" 
+                className="text-decoration-none"
               >
-                <span style={{ fontSize: '18px' }}>📘</span>
-              </a>
-              
-              <a 
-                href="https://instagram.com/solticeenergy" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn border-0 p-2 rounded-circle"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  width: '45px',
-                  height: '45px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(225, 48, 108, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span style={{ fontSize: '18px' }}>📸</span>
-              </a>
-              
-              <a 
-                href="https://wa.me/17875152632" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn border-0 p-2 rounded-circle"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  width: '45px',
-                  height: '45px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(37, 211, 102, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span style={{ fontSize: '18px' }}>💬</span>
-              </a>
-
-              <a 
-                href="https://youtube.com/@solticeenergypr" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn border-0 p-2 rounded-circle"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  width: '45px',
-                  height: '45px',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 0, 0, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span style={{ fontSize: '18px' }}>📺</span>
+                <img 
+                  src="/name.png" 
+                  alt="Soltice Energy" 
+                  style={{ 
+                    height: '200px', 
+                    width: 'auto',
+                    maxWidth: '1000px',
+                    objectFit: 'contain'
+                  }}
+                />
               </a>
             </div>
-
-            {/* Trust Indicators */}
-            <div 
-              className="d-inline-flex align-items-center px-3 py-2 rounded-pill"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <div className="me-2">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{color: '#ffc107', fontSize: '12px'}}>⭐</span>
-                ))}
-              </div>
-              <small style={{color: 'rgba(255, 255, 255, 0.7)', fontWeight: '500', fontSize: '11px'}}>
-                500+ Clientes Satisfechos
-              </small>
+            <div className="mb-3">
+              <a 
+                href="tel:787-XXX-XXXX" 
+                className="text-decoration-none d-flex align-items-center mb-2"
+                style={{
+                  color: '#ffffff',
+                  fontSize: '16px',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: '600'
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-telephone-fill me-2" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg>
+                (787) XXX-XXXX
+              </a>
+              <a 
+                href="mailto:info@solticeenergy.com" 
+                className="text-decoration-none d-block"
+                style={{
+                  color: '#cbd5e1',
+                  fontSize: '14px',
+                  fontFamily: 'Inter, system-ui, sans-serif'
+                }}
+              >
+                📧 info@solticeenergy.com
+              </a>
             </div>
           </div>
           
           {/* Navigation Links */}
-          <div className="col-lg-2 col-md-6 mb-4">
-            <h6 
-              className="fw-bold mb-4"
-              style={{
-                color: '#ffffff',
-                fontSize: '16px',
-                fontFamily: 'Rubik, sans-serif'
-              }}
-            >
-              Navegación
-            </h6>
-            <ul className="list-unstyled">
-              {[
-                { href: '#inicio', text: 'Inicio' },
-                { href: '#sobre-nosotros', text: 'Sobre Nosotros' },
-                { href: '#productos', text: 'Productos' },
-                { href: '#testimonios', text: 'Testimonios' },
-                { href: '#contacto', text: 'Contacto' }
-              ].map((link, index) => (
-                <li key={index} className="mb-2">
-                  <a 
-                    href={link.href} 
-                    className="text-decoration-none"
-                    style={{
-                      color: 'rgba(255, 255, 255, 0.7)',
-                      fontSize: '14px',
-                      transition: 'all 0.3s ease'
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.color = '#b4fe00';
-                      e.currentTarget.style.paddingLeft = '5px';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)';
-                      e.currentTarget.style.paddingLeft = '0';
-                    }}
-                  >
-                    {link.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="col-md-4 text-center">
+            <div className="d-flex justify-content-center gap-4">
+              <a 
+                href="/productos" 
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  fontSize: '15px',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: '500',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#b4fe00'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                Productos
+              </a>
+              <a 
+                href="/about" 
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  fontSize: '15px',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: '500',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#b4fe00'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                Nosotros
+              </a>
+              <a 
+                href="/contacto" 
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  fontSize: '15px',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: '500',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#b4fe00'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                Contacto
+              </a>
+            </div>
           </div>
           
-          {/* Services */}
-          <div className="col-lg-3 col-md-6 mb-4">
-            <h6 
-              className="fw-bold mb-4"
-              style={{
-                color: '#ffffff',
-                fontSize: '16px',
-                fontFamily: 'Rubik, sans-serif'
-              }}
-            >
-              Nuestros Servicios
-            </h6>
-            <ul className="list-unstyled">
-              {[
-                'Baterías 2500W Portátiles',
-                'Baterías 3600W Residenciales', 
-                'Baterías 6000W Comerciales',
-                'Instalación Profesional',
-                'Soporte Técnico 24/7',
-                'Garantía Extendida'
-              ].map((service, index) => (
-                <li key={index} className="mb-2 d-flex align-items-start">
-                  <div 
-                    className="me-2 mt-1"
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                      flexShrink: 0
-                    }}
-                  />
-                  <span 
-                    style={{
-                      color: 'rgba(255, 255, 255, 0.7)',
-                      fontSize: '14px',
-                      lineHeight: '1.4'
-                    }}
-                  >
-                    {service}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Contact & Location */}
-          <div className="col-lg-3 mb-4">
-            <h6 
-              className="fw-bold mb-4"
-              style={{
-                color: '#ffffff',
-                fontSize: '16px',
-                fontFamily: 'Rubik, sans-serif'
-              }}
-            >
-              Contacto Directo
-            </h6>
-            
-            <div className="mb-4">
-              <div className="d-flex align-items-center mb-3">
-                <div 
-                  className="d-flex align-items-center justify-content-center rounded-circle me-3"
-                  style={{
-                    width: '35px',
-                    height: '35px',
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)'
-                  }}
-                >
-                  <span style={{ fontSize: '16px' }}>📞</span>
-                </div>
-                <div>
-                  <a 
-                    href="tel:787-233-9002" 
-                    className="text-decoration-none"
-                    style={{
-                      color: '#ffffff',
-                      fontWeight: '600',
-                      fontSize: '16px'
-                    }}
-                  >
-                    787-233-9002
-                  </a>
-                  <div style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
-                    Llama para cotización inmediata
-                  </div>
-                </div>
-              </div>
-
-              <div className="d-flex align-items-center mb-3">
-                <div 
-                  className="d-flex align-items-center justify-content-center rounded-circle me-3"
-                  style={{
-                    width: '35px',
-                    height: '35px',
-                    background: 'linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%)'
-                  }}
-                >
-                  <span style={{ fontSize: '16px' }}>📧</span>
-                </div>
-                <div>
-                  <a 
-                    href="mailto:info@solticeenergypr.org" 
-                    className="text-decoration-none"
-                    style={{
-                      color: '#ffffff',
-                      fontWeight: '600',
-                      fontSize: '14px'
-                    }}
-                  >
-                    info@solticeenergypr.org
-                  </a>
-                  <div style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
-                    Respuesta en 24 horas
-                  </div>
-                </div>
-              </div>
-
-              <div className="d-flex align-items-center mb-4">
-                <div 
-                  className="d-flex align-items-center justify-content-center rounded-circle me-3"
-                  style={{
-                    width: '35px',
-                    height: '35px',
-                    background: 'linear-gradient(135deg, #ffa502 0%, #ff6348 100%)'
-                  }}
-                >
-                  <span style={{ fontSize: '16px' }}>📍</span>
-                </div>
-                <div>
-                  <div 
-                    style={{
-                      color: '#ffffff',
-                      fontWeight: '600',
-                      fontSize: '14px'
-                    }}
-                  >
-                    Puerto Rico
-                  </div>
-                  <div style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
-                    Servicio a toda la isla
-                  </div>
-                </div>
-              </div>
+          {/* Simple Social Links */}
+          <div className="col-md-4">
+            <div className="d-flex justify-content-md-end justify-content-start gap-3 align-items-center">
+              <a 
+                href="https://facebook.com/solticeenergy" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#1877f2'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-facebook" viewBox="0 0 16 16">
+                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                </svg>
+              </a>
+              <a 
+                href="https://instagram.com/solticeenergy" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#e4405f'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-instagram" viewBox="0 0 16 16">
+                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                </svg>
+              </a>
+              <a 
+                href="https://wa.me/1787XXXXXXX" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+                style={{
+                  color: '#cbd5e1',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#25d366'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#cbd5e1'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
+                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                </svg>
+              </a>
             </div>
-
-            {/* Operating Hours */}
-            <div 
-              className="p-3 rounded-3 mb-4"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <h6 className="fw-bold mb-2" style={{ color: '#ffffff', fontSize: '14px' }}>
-                Horarios de Atención
-              </h6>
-              <div style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.7)' }}>
-                <div className="mb-1">Lun - Vie: 8:00 AM - 6:00 PM</div>
-                <div className="mb-1">Sábado: 9:00 AM - 4:00 PM</div>
-                <div className="mb-1">Domingo: Solo emergencias</div>
-                <div style={{color: '#b4fe00', fontWeight: '600'}}>Emergencias 24/7</div>
-              </div>
-            </div>
-
-            {/* Quick CTA */}
-            <a 
-              href="#inicio"
-              className="btn border-0 fw-bold w-100"
-              style={{
-                background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                color: '#131d3b',
-                borderRadius: '10px',
-                padding: '10px',
-                fontSize: '13px',
-                letterSpacing: '0.3px',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(180, 254, 0, 0.3)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              ⚡ Cotización Gratis
-            </a>
           </div>
         </div>
         
-        {/* Separator */}
-        <div 
-          className="my-5"
-          style={{
-            height: '1px',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%)'
-          }}
-        />
-        
         {/* Bottom Section */}
-        <div className="row align-items-center">
-          <div className="col-md-6 mb-3 mb-md-0">
-            <p className="mb-0" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px' }}>
-              &copy; 2024 Soltice Energy PR. Todos los derechos reservados.
-            </p>
-            <p className="mb-0 mt-1" style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '12px' }}>
-              Hecho con ❤️ en Puerto Rico
-            </p>
-          </div>
-          <div className="col-md-6 text-md-end">
-            <div className="d-flex gap-4 justify-content-md-end justify-content-start align-items-center">
-              <a 
-                href="#" 
-                className="text-decoration-none"
-                style={{
-                  color: 'rgba(255, 255, 255, 0.6)',
+        <div 
+          className="pt-3"
+          style={{
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <div className="row align-items-center">
+            <div className="col-md-8 mb-2 mb-md-0">
+              <p 
+                className="mb-0" 
+                style={{ 
+                  color: '#cbd5e1', 
                   fontSize: '14px',
-                  transition: 'color 0.3s ease'
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: '500'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.color = '#b4fe00'}
-                onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)'}
               >
-                Política de Privacidad
-              </a>
-              <a 
-                href="#" 
-                className="text-decoration-none"
-                style={{
-                  color: 'rgba(255, 255, 255, 0.6)',
-                  fontSize: '14px',
-                  transition: 'color 0.3s ease'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.color = '#b4fe00'}
-                onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)'}
-              >
-                Términos de Servicio
-              </a>
-              
-              <button
-                onClick={scrollToTop}
-                className="btn border-0 rounded-circle"
-                style={{
-                  background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                  color: '#131d3b',
-                  width: '40px',
-                  height: '40px',
-                  fontSize: '16px',
-                  fontWeight: '700',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(180, 254, 0, 0.4)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-                title="Volver arriba"
-              >
-                ↑
-              </button>
+                &copy; 2024{' '}
+                <span style={{ color: '#4b5563', fontWeight: '700', fontFamily: 'Space Grotesk, system-ui, sans-serif' }}>SOLTICE</span>{' '}
+                <span style={{ color: '#b4fe00', fontWeight: '700', fontFamily: 'Space Grotesk, system-ui, sans-serif' }}>ENERGY</span>.{' '}
+                Todos los derechos reservados.
+              </p>
+            </div>
+            <div className="col-md-4">
+              <div className="d-flex justify-content-md-end justify-content-start align-items-center gap-3">
+                <small 
+                  style={{
+                    color: '#64748b',
+                    fontSize: '12px',
+                    fontFamily: 'Inter, system-ui, sans-serif'
+                  }}
+                >
+                  Hecho en 🇵🇷
+                </small>
+                
+                <button
+                  onClick={scrollToTop}
+                  className="btn border-0 rounded-3 d-flex align-items-center justify-content-center"
+                  style={{
+                    background: 'rgba(180, 254, 0, 0.1)',
+                    border: '1px solid rgba(180, 254, 0, 0.2)',
+                    color: '#b4fe00',
+                    width: '32px',
+                    height: '32px',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = '#b4fe00';
+                    e.currentTarget.style.color = '#000000';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = 'rgba(180, 254, 0, 0.1)';
+                    e.currentTarget.style.color = '#b4fe00';
+                  }}
+                  title="Volver arriba"
+                >
+                  ↑
+                </button>
+              </div>
             </div>
           </div>
         </div>

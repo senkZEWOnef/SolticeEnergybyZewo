@@ -11,7 +11,6 @@ const Hero = () => {
     town: '',
     message: ''
   });
-  const [showPhone, setShowPhone] = useState(false);
   const { initializeChat } = useChatContext();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,83 +26,58 @@ const Hero = () => {
     });
   };
 
-  const handleStartChat = () => {
-    initializeChat({
-      name: formData.name || 'Cliente desde Hero',
-      email: formData.email,
-      phone: formData.phone,
-      source: 'widget'
-    });
-    // Could scroll to chat widget or show a message
-  };
+  const stats = [
+    { number: '500+', label: 'Clientes', icon: '👥' },
+    { number: '4,000+', label: 'Ciclos', icon: '🔄' },
+    { number: '0dB', label: 'Silencioso', icon: '🔇' },
+    { number: '24/7', label: 'Soporte', icon: '💬' }
+  ];
+
+  const features = [
+    { title: 'Cero Mantenimiento', icon: '⚙️', color: 'emerald' },
+    { title: '100% Portátil', icon: '📱', color: 'sky' },
+    { title: 'Garantía 7 Años', icon: '🛡️', color: 'amber' }
+  ];
 
   return (
     <section 
       id="inicio" 
-      className="position-relative overflow-hidden d-flex align-items-center" 
+      className="position-relative overflow-hidden" 
       style={{
-        minHeight: '70vh',
-        paddingTop: '0',
-        paddingBottom: '40px'
+        minHeight: '100vh',
+        paddingTop: '100px',
+        paddingBottom: '80px',
+        background: `
+          linear-gradient(135deg, 
+            var(--slate-900) 0%, 
+            var(--slate-800) 50%,
+            var(--slate-900) 100%
+          )
+        `
       }}
     >
-      {/* Epic Storm Background with Parallax */}
+      {/* Subtle background pattern */}
       <div 
-        className="position-absolute top-0 start-0 w-100 h-100"
+        className="position-absolute top-0 start-0 w-100 h-100 opacity-10"
         style={{
-          background: `
-            radial-gradient(circle at 30% 50%, rgba(180, 254, 0, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 70% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
-            linear-gradient(135deg, 
-              rgba(13, 32, 64, 0.95) 0%, 
-              rgba(25, 42, 86, 0.92) 25%,
-              rgba(45, 55, 72, 0.94) 50%,
-              rgba(25, 42, 86, 0.92) 75%,
-              rgba(13, 32, 64, 0.96) 100%
-            ),
-            url('/hero.jpg')
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          animation: 'epicBackgroundShift 25s ease-in-out infinite',
-          filter: 'contrast(1.1) brightness(0.9)'
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, var(--emerald-500) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, var(--sky-500) 0%, transparent 50%)
+          `
         }}
       />
       
-      {/* Dynamic Light Rays */}
-      <div 
-        className="position-absolute top-0 start-0 w-100 h-100"
-        style={{
-          background: `
-            linear-gradient(45deg, transparent 30%, rgba(180, 254, 0, 0.03) 50%, transparent 70%),
-            linear-gradient(-45deg, transparent 20%, rgba(0, 212, 255, 0.02) 40%, transparent 60%)
-          `,
-          animation: 'lightRays 30s linear infinite'
-        }}
-      />
-      
-      {/* Moving Elements */}
+      {/* Floating elements */}
       <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden">
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(circle, rgba(180, 254, 0, 0.1) 0%, transparent 70%)',
-            top: '10%',
-            right: '5%',
-            animation: 'floatingSlow 25s ease-in-out infinite'
-          }}
-        />
         <div 
           className="position-absolute rounded-circle"
           style={{
             width: '200px',
             height: '200px',
-            background: 'radial-gradient(circle, rgba(180, 65, 65, 0.1) 0%, transparent 70%)',
-            bottom: '15%',
-            left: '10%',
-            animation: 'floatingMedium 20s ease-in-out infinite reverse'
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
+            top: '20%',
+            right: '10%',
+            animation: 'subtleFloat 8s ease-in-out infinite'
           }}
         />
         <div 
@@ -111,566 +85,281 @@ const Hero = () => {
           style={{
             width: '150px',
             height: '150px',
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%)',
-            top: '50%',
-            left: '70%',
-            animation: 'floatingFast 18s ease-in-out infinite'
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%)',
+            bottom: '30%',
+            left: '5%',
+            animation: 'subtleFloat 6s ease-in-out infinite reverse'
           }}
         />
       </div>
-      {/* Background Pattern */}
-      <div className="position-absolute w-100 h-100 top-0 start-0" style={{opacity: 0.1}}>
-        <div className="position-absolute" style={{top: '20%', left: '10%', width: '200px', height: '200px', background: 'radial-gradient(circle, #b4fe00 0%, transparent 70%)', borderRadius: '50%'}}></div>
-        <div className="position-absolute" style={{top: '60%', right: '15%', width: '150px', height: '150px', background: 'radial-gradient(circle, #b43041 0%, transparent 70%)', borderRadius: '50%'}}></div>
-        <div className="position-absolute" style={{bottom: '30%', left: '60%', width: '100px', height: '100px', background: 'radial-gradient(circle, #b4fe00 0%, transparent 70%)', borderRadius: '50%'}}></div>
-      </div>
 
-      <div className="container position-relative" style={{zIndex: 20}}>
-        <div className="row align-items-center min-vh-100">
-          {/* Hero Content */}
-          <div className="col-lg-6 col-xl-5 text-white">
-            
-            {/* Revolutionary Main Heading */}
-            <div className="mb-5 position-relative">
-              <div 
-                className="position-absolute"
+      <div className="container position-relative" style={{ zIndex: 10 }}>
+        <div className="row align-items-center min-vh-75">
+          {/* Main Content */}
+          <div className="col-lg-7 col-xl-6 text-white mb-5 mb-lg-0">
+            {/* Main Heading */}
+            <h1 
+              className="mb-4"
+              style={{
+                fontSize: 'clamp(3rem, 7vw, 5rem)',
+                fontWeight: '900',
+                lineHeight: '1.1',
+                fontFamily: 'Space Grotesk, system-ui, sans-serif',
+                letterSpacing: '-0.03em'
+              }}
+            >
+              <span style={{ color: '#4b5563', fontWeight: '900' }}>SOLTICE</span>{' '}
+              <span style={{ color: '#b4fe00', fontWeight: '900' }}>ENERGY</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p 
+              className="mb-5"
+              style={{
+                fontSize: 'clamp(1.3rem, 3vw, 1.5rem)',
+                color: 'var(--slate-300)',
+                lineHeight: '1.6',
+                fontWeight: '600',
+                maxWidth: '600px'
+              }}
+            >
+              <span style={{ fontWeight: '700' }}>Tu aliado en</span>{' '}
+              <span 
                 style={{
-                  top: '-20px',
-                  left: '-20px',
-                  width: '100px',
-                  height: '100px',
-                  background: 'radial-gradient(circle, rgba(180, 254, 0, 0.1) 0%, transparent 70%)',
-                  animation: 'float 6s ease-in-out infinite',
-                  zIndex: -1
-                }}
-              />
-              <h1 
-                className="mb-3 position-relative" 
-                style={{
-                  fontSize: 'clamp(2.8rem, 6vw, 5rem)',
-                  fontWeight: '900',
-                  lineHeight: '0.95',
-                  fontFamily: 'Rubik, sans-serif',
-                  letterSpacing: '-0.03em',
-                  textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-                }}
-              >
-                <div 
-                  style={{
-                    color: '#ffffff',
-                    marginBottom: '0.2em',
-                    position: 'relative',
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5)'
-                  }}
-                >
-                  Olvídate de
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      top: '0',
-                      left: '0',
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)',
-                      animation: 'shimmer 3s linear infinite',
-                      pointerEvents: 'none'
-                    }}
-                  />
-                </div>
-                <div 
-                  className="position-relative d-inline-block"
-                  style={{
-                    background: `
-                      linear-gradient(135deg, 
-                        #ff4757 0%, 
-                        #ff6b7a 25%,
-                        #ff8e8e 50%,
-                        #ffb3b3 75%,
-                        #ff4757 100%
-                      )
-                    `,
-                    backgroundSize: '300% 300%',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    animation: 'gradientPulse 4s ease-in-out infinite',
-                    marginBottom: '0.2em',
-                    filter: 'drop-shadow(0 0 20px rgba(255, 71, 87, 0.3))'
-                  }}
-                >
-                  APAGONES
-                  <div 
-                    className="position-absolute"
-                    style={{
-                      bottom: '-15px',
-                      left: '0',
-                      width: '100%',
-                      height: '8px',
-                      background: `
-                        linear-gradient(90deg, 
-                          #ff4757 0%, 
-                          rgba(255, 71, 87, 0.8) 50%, 
-                          transparent 100%
-                        )
-                      `,
-                      borderRadius: '4px',
-                      boxShadow: '0 0 20px rgba(255, 71, 87, 0.5)',
-                      animation: 'underlineGlow 3s ease-in-out infinite'
-                    }}
-                  />
-                  <div 
-                    className="position-absolute"
-                    style={{
-                      top: '50%',
-                      right: '-30px',
-                      width: '20px',
-                      height: '20px',
-                      background: 'radial-gradient(circle, #ff4757 0%, transparent 70%)',
-                      animation: 'sparkle 2s linear infinite',
-                      transform: 'translateY(-50%)'
-                    }}
-                  />
-                </div>
-                <div 
-                  style={{
-                    color: '#ffffff',
-                    display: 'inline',
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5)'
-                  }}
-                >
-                  para{' '}
-                </div>
-                <span 
-                  style={{
-                    background: `
-                      linear-gradient(135deg, 
-                        #b4fe00 0%, 
-                        #00d4ff 25%,
-                        #b4fe00 50%,
-                        #00d4ff 75%,
-                        #b4fe00 100%
-                      )
-                    `,
-                    backgroundSize: '300% 300%',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    animation: 'energyPulse 3s ease-in-out infinite',
-                    filter: 'drop-shadow(0 0 30px rgba(180, 254, 0, 0.4))',
-                    position: 'relative'
-                  }}
-                >
-                  SIEMPRE
-                </span>
-              </h1>
-            </div>
-            
-            {/* Premium Subheading */}
-            <div className="mb-6">
-              <p 
-                className="mb-4" 
-                style={{
-                  fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
-                  color: '#ffffff',
-                  lineHeight: '1.7',
-                  fontWeight: '500',
-                  maxWidth: '650px',
-                  textShadow: '0 2px 12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 0, 0, 0.7)'
+                  color: '#b4fe00',
+                  fontWeight: '700'
                 }}
               >
-                Descubre nuestras{' '}
-                <span 
-                  className="position-relative"
-                  style={{
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontWeight: '700',
-                    textShadow: 'none'
-                  }}
-                >
-                  baterías solares residenciales, comerciales e industriales
-                </span>
-                {' '}con tecnología de última generación.
-              </p>
+                energía confiable.
+              </span>
+              {' '}<span style={{ fontWeight: '700' }}>Protegemos lo que más importa con</span>{' '}
+              <span style={{ color: '#ffffff', fontWeight: '700' }}>
+                soluciones solares diseñadas para tu comodidad y paz mental.
+              </span>
+            </p>
 
-              <div className="mb-4">
-                <a 
-                  href="#productos"
-                  className="btn btn-lg fw-bold border-0 text-decoration-none"
-                  style={{
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                    color: '#131d3b',
-                    borderRadius: '50px',
-                    padding: '15px 35px',
-                    fontSize: '16px',
-                    letterSpacing: '0.5px',
-                    boxShadow: '0 8px 30px rgba(180, 254, 0, 0.3)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(180, 254, 0, 0.4)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(180, 254, 0, 0.3)';
-                  }}
-                >
-                  Ver Todas las Baterías
-                </a>
-              </div>
-              
+            {/* CTA Buttons */}
+            <div className="d-flex flex-column flex-sm-row gap-3 mb-5">
+              <a 
+                href="/productos"
+                className="btn btn-modern gradient-primary px-4 py-3"
+                style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  minWidth: '200px',
+                  color: '#000000'
+                }}
+              >
+                Ver Productos
+              </a>
+              <a 
+                href="#contacto"
+                className="btn btn-modern text-white px-4 py-3"
+                style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  minWidth: '200px'
+                }}
+              >
+                Consulta Gratis
+              </a>
             </div>
 
-            {/* Premium Feature Cards */}
+            {/* Features */}
             <div className="row g-3 mb-5">
-              <div className="col-6 col-lg-3">
-                <div 
-                  className="p-3 rounded-3 h-100"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(180, 254, 0, 0.1) 0%, rgba(180, 254, 0, 0.05) 100%)',
-                    border: '1px solid rgba(180, 254, 0, 0.2)',
-                    backdropFilter: 'blur(20px)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(180, 254, 0, 0.2)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="d-flex align-items-center">
-                    <div 
-                      className="d-flex align-items-center justify-content-center rounded-circle me-2"
+              {features.map((feature, index) => (
+                <div key={index} className="col-md-4">
+                  <div 
+                    className="d-flex align-items-center p-3 rounded-3"
+                    style={{
+                      background: `rgba(${
+                        feature.color === 'emerald' ? '16, 185, 129' :
+                        feature.color === 'sky' ? '14, 165, 233' :
+                        '245, 158, 11'
+                      }, 0.1)`,
+                      border: `1px solid rgba(${
+                        feature.color === 'emerald' ? '16, 185, 129' :
+                        feature.color === 'sky' ? '14, 165, 233' :
+                        '245, 158, 11'
+                      }, 0.2)`
+                    }}
+                  >
+                    <span className="me-3" style={{ fontSize: '24px' }}>
+                      {feature.icon}
+                    </span>
+                    <span 
                       style={{
-                        width: '32px',
-                        height: '32px',
-                        background: 'linear-gradient(135deg, #b4fe00 0%, #a8e600 100%)'
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        fontWeight: '500',
+                        fontSize: '14px'
                       }}
                     >
-                      <span style={{fontSize: '16px'}}>🔋</span>
-                    </div>
-                    <div>
-                      <div className="text-white mb-0" style={{fontSize: '13px', fontWeight: '700'}}>4,000+</div>
-                      <small style={{color: '#b4fe00', fontSize: '11px', fontWeight: '500'}}>CICLOS</small>
-                    </div>
+                      {feature.title}
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div className="col-6 col-lg-3">
-                <div 
-                  className="p-3 rounded-3 h-100"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%)',
-                    border: '1px solid rgba(0, 212, 255, 0.2)',
-                    backdropFilter: 'blur(20px)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 212, 255, 0.2)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="d-flex align-items-center">
-                    <div 
-                      className="d-flex align-items-center justify-content-center rounded-circle me-2"
-                      style={{
-                        width: '32px',
-                        height: '32px',
-                        background: 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)'
-                      }}
-                    >
-                      <span style={{fontSize: '16px'}}>🔇</span>
-                    </div>
-                    <div>
-                      <div className="text-white mb-0" style={{fontSize: '13px', fontWeight: '700'}}>0dB</div>
-                      <small style={{color: '#00d4ff', fontSize: '11px', fontWeight: '500'}}>SILENCIOSO</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6 col-lg-3">
-                <div 
-                  className="p-3 rounded-3 h-100"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255, 107, 122, 0.1) 0%, rgba(255, 107, 122, 0.05) 100%)',
-                    border: '1px solid rgba(255, 107, 122, 0.2)',
-                    backdropFilter: 'blur(20px)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 107, 122, 0.2)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="d-flex align-items-center">
-                    <div 
-                      className="d-flex align-items-center justify-content-center rounded-circle me-2"
-                      style={{
-                        width: '32px',
-                        height: '32px',
-                        background: 'linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%)'
-                      }}
-                    >
-                      <span style={{fontSize: '16px'}}>⚙️</span>
-                    </div>
-                    <div>
-                      <div className="text-white mb-0" style={{fontSize: '13px', fontWeight: '700'}}>ZERO</div>
-                      <small style={{color: '#ff6b7a', fontSize: '11px', fontWeight: '500'}}>MANTENIMIENTO</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6 col-lg-3">
-                <div 
-                  className="p-3 rounded-3 h-100"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255, 165, 2, 0.1) 0%, rgba(255, 165, 2, 0.05) 100%)',
-                    border: '1px solid rgba(255, 165, 2, 0.2)',
-                    backdropFilter: 'blur(20px)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 165, 2, 0.2)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="d-flex align-items-center">
-                    <div 
-                      className="d-flex align-items-center justify-content-center rounded-circle me-2"
-                      style={{
-                        width: '32px',
-                        height: '32px',
-                        background: 'linear-gradient(135deg, #ffa502 0%, #ff6348 100%)'
-                      }}
-                    >
-                      <span style={{fontSize: '16px'}}>📱</span>
-                    </div>
-                    <div>
-                      <div className="text-white mb-0" style={{fontSize: '13px', fontWeight: '700'}}>100%</div>
-                      <small style={{color: '#ffa502', fontSize: '11px', fontWeight: '500'}}>PORTÁTIL</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
-            
-            {/* Premium Trust Indicators */}
-            <div className="mt-5">
-              <div 
-                className="d-inline-flex align-items-center px-3 py-2 mb-3 rounded-pill"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <div className="me-2">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} style={{color: '#ffc107', fontSize: '14px'}}>⭐</span>
-                  ))}
-                </div>
-                <small style={{color: 'rgba(255, 255, 255, 0.8)', fontWeight: '500'}}>
-                  Más de 500 clientes satisfechos en Puerto Rico
-                </small>
-              </div>
-              
-              <div className="d-flex gap-6 flex-wrap">
-                <div className="text-center">
-                  <div 
-                    className="fw-bold mb-1"
-                    style={{
-                      fontSize: '24px',
-                      background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      fontWeight: '800'
-                    }}
-                  >
-                    500+
+            {/* Stats */}
+            <div className="row g-4">
+              {stats.map((stat, index) => (
+                <div key={index} className="col-6 col-lg-3">
+                  <div className="text-center">
+                    <div 
+                      className="mb-1"
+                      style={{
+                        fontSize: '24px',
+                        fontWeight: '700',
+                        background: 'linear-gradient(135deg, var(--emerald-500) 0%, var(--sky-500) 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}
+                    >
+                      {stat.number}
+                    </div>
+                    <small 
+                      style={{
+                        color: 'var(--slate-400)',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        letterSpacing: '0.5px'
+                      }}
+                    >
+                      {stat.label.toUpperCase()}
+                    </small>
                   </div>
-                  <small style={{color: 'rgba(255, 255, 255, 0.7)', fontWeight: '500', fontSize: '12px', letterSpacing: '0.5px'}}>
-                    INSTALACIONES
-                  </small>
                 </div>
-                <div className="text-center">
-                  <div 
-                    className="fw-bold mb-1"
-                    style={{
-                      fontSize: '24px',
-                      background: 'linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      fontWeight: '800'
-                    }}
-                  >
-                    7 AÑOS
-                  </div>
-                  <small style={{color: 'rgba(255, 255, 255, 0.7)', fontWeight: '500', fontSize: '12px', letterSpacing: '0.5px'}}>
-                    GARANTÍA
-                  </small>
-                </div>
-                <div className="text-center">
-                  <div 
-                    className="fw-bold mb-1"
-                    style={{
-                      fontSize: '24px',
-                      background: 'linear-gradient(135deg, #ffa502 0%, #ff6348 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      fontWeight: '800'
-                    }}
-                  >
-                    24/7
-                  </div>
-                  <small style={{color: 'rgba(255, 255, 255, 0.7)', fontWeight: '500', fontSize: '12px', letterSpacing: '0.5px'}}>
-                    SOPORTE
-                  </small>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           
-          {/* Hero Image and Compact Form */}
-          <div className="col-lg-6 col-xl-6 d-none d-lg-block">
-            <div className="d-flex justify-content-end align-items-center h-100">
-              
+          {/* Hero Image and Form */}
+          <div className="col-lg-5 col-xl-6">
+            <div className="row g-4 align-items-center">
               {/* Hero Image */}
-              <div 
-                className="position-relative me-3"
-                style={{
-                  maxWidth: '320px',
-                  width: '100%'
-                }}
-              >
-                <img 
-                  src="/heropic.png" 
-                  alt="Soltice Energy Products" 
-                  className="img-fluid rounded-3"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'cover'
-                  }}
-                />
-                
-                {/* Floating effect overlay */}
-                <div 
-                  className="position-absolute top-0 start-0 w-100 h-100 rounded-3"
-                  style={{
-                    background: 'linear-gradient(45deg, transparent 30%, rgba(180, 254, 0, 0.1) 50%, transparent 70%)',
-                    animation: 'shimmer 3s linear infinite',
-                    pointerEvents: 'none'
-                  }}
-                />
+              <div className="col-12 col-md-6 col-lg-12">
+                <div className="position-relative">
+                  <img 
+                    src="/heropic.png" 
+                    alt="Soltice Energy Products" 
+                    className="img-fluid rounded-4"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      maxWidth: '400px',
+                      margin: '0 auto',
+                      display: 'block',
+                      boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+                    }}
+                  />
+                  
+                  {/* Floating card */}
+                  <div 
+                    className="position-absolute card-modern p-3"
+                    style={{
+                      bottom: '20px',
+                      right: '20px',
+                      background: 'rgba(255, 255, 255, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      minWidth: '150px'
+                    }}
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className="me-2" style={{ fontSize: '20px' }}>⭐</span>
+                      <div>
+                        <div 
+                          style={{
+                            fontSize: '14px',
+                            fontWeight: '700',
+                            color: 'var(--slate-900)'
+                          }}
+                        >
+                          4.9/5
+                        </div>
+                        <small style={{ color: 'var(--slate-600)', fontSize: '12px' }}>
+                          500+ reseñas
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div 
-                className="card border-0 shadow-lg"
-                style={{
-                  background: 'rgba(19, 29, 59, 0.95)',
-                  backdropFilter: 'blur(20px)',
-                  borderRadius: '16px',
-                  width: '280px',
-                  maxWidth: '100%',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <div className="card-body p-3">
+
+              {/* Contact Form */}
+              <div className="col-12 col-md-6 col-lg-12">
+                <div 
+                  className="card-modern p-4"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
+                >
                   <div className="text-center mb-3">
                     <h6 
-                      className="fw-bold mb-1"
+                      className="mb-1"
                       style={{
-                        background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        fontFamily: 'Rubik, sans-serif',
+                        color: '#ffffff',
+                        fontWeight: '600',
                         fontSize: '16px'
                       }}
                     >
-                      Cotización Gratuita
+                      Consulta Gratuita
                     </h6>
-                    <p style={{color: 'rgba(255, 215, 0, 0.8)', fontSize: '12px'}} className="mb-0">
-                      Propuesta personalizada
+                    <p 
+                      style={{
+                        color: 'var(--slate-400)',
+                        fontSize: '14px',
+                        margin: 0
+                      }}
+                    >
+                      Respuesta en 24 horas
                     </p>
                   </div>
 
                   <form onSubmit={handleSubmit}>
-                    <div className="mb-2">
+                    <div className="mb-3">
                       <input
                         type="text"
-                        className="form-control form-control-golden"
-                        placeholder="Nombre *"
+                        className="form-control"
+                        placeholder="Nombre completo"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
                         style={{
-                          borderRadius: '8px',
-                          border: '1px solid rgba(255, 255, 255, 0.2)',
-                          padding: '8px 12px',
-                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffd700',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = 'none';
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '8px',
+                          padding: '12px 16px',
+                          color: 'white',
+                          fontSize: '14px'
                         }}
                       />
                     </div>
 
-                    <div className="mb-2">
+                    <div className="mb-3">
                       <input
                         type="tel"
-                        className="form-control form-control-golden"
-                        placeholder="Teléfono *"
+                        className="form-control"
+                        placeholder="Teléfono"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         required
                         style={{
-                          borderRadius: '8px',
-                          border: '1px solid rgba(255, 255, 255, 0.2)',
-                          padding: '8px 12px',
-                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffd700',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = 'none';
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '8px',
+                          padding: '12px 16px',
+                          color: 'white',
+                          fontSize: '14px'
                         }}
                       />
                     </div>
@@ -678,59 +367,37 @@ const Hero = () => {
                     <div className="mb-3">
                       <input
                         type="email"
-                        className="form-control form-control-golden"
+                        className="form-control"
                         placeholder="Email (opcional)"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                         style={{
-                          borderRadius: '8px',
-                          border: '1px solid rgba(255, 255, 255, 0.2)',
-                          padding: '8px 12px',
-                          fontSize: '13px',
                           background: 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffd700',
-                          transition: 'all 0.3s ease'
-                        }}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = '#b4fe00';
-                          e.currentTarget.style.boxShadow = '0 0 0 0.15rem rgba(180, 254, 0, 0.2)';
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                          e.currentTarget.style.boxShadow = 'none';
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '8px',
+                          padding: '12px 16px',
+                          color: 'white',
+                          fontSize: '14px'
                         }}
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="btn w-100 fw-bold border-0"
+                      className="btn btn-modern gradient-primary w-100 py-3"
                       style={{
-                        background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                        color: '#131d3b',
-                        borderRadius: '10px',
-                        padding: '10px',
-                        fontSize: '14px',
-                        letterSpacing: '0.3px',
-                        boxShadow: '0 3px 12px rgba(180, 254, 0, 0.3)',
-                        transition: 'all 0.3s ease'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(180, 254, 0, 0.4)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 3px 12px rgba(180, 254, 0, 0.3)';
+                        fontSize: '15px',
+                        fontWeight: '600',
+                        color: '#000000'
                       }}
                     >
-                      Solicitar Cotización
+                      Solicitar Consulta
                     </button>
 
-                    <div className="text-center mt-2">
-                      <small style={{color: 'rgba(255, 215, 0, 0.7)', fontSize: '10px'}}>
-                        ✓ Respuesta en 24 horas
+                    <div className="text-center mt-3">
+                      <small style={{ color: 'var(--slate-400)', fontSize: '12px' }}>
+                        ✓ Sin compromiso • ✓ Asesoría personalizada
                       </small>
                     </div>
                   </form>

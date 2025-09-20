@@ -124,66 +124,232 @@ const Products = () => {
 
   return (
     <section 
+      id="productos"
       className="position-relative overflow-hidden"
       style={{
-        padding: '40px 0',
+        paddingTop: '120px',
+        paddingBottom: '80px',
         background: `
-          radial-gradient(circle at 20% 80%, rgba(180, 254, 0, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(255, 107, 122, 0.04) 0%, transparent 50%),
           linear-gradient(135deg, 
-            rgba(19, 29, 59, 0.95) 0%, 
-            rgba(25, 42, 86, 0.92) 25%,
-            rgba(45, 55, 72, 0.94) 50%,
-            rgba(25, 42, 86, 0.92) 75%,
-            rgba(19, 29, 59, 0.96) 100%
+            var(--slate-900) 0%, 
+            var(--slate-800) 50%,
+            var(--slate-900) 100%
           )
         `,
         minHeight: '100vh'
       }}
     >
-      <div className="container">
+      {/* Same background pattern as Hero */}
+      <div 
+        className="position-absolute top-0 start-0 w-100 h-100 opacity-10"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, var(--emerald-500) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, var(--sky-500) 0%, transparent 50%)
+          `
+        }}
+      />
+      
+      {/* Floating elements */}
+      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden">
+        <div 
+          className="position-absolute rounded-circle"
+          style={{
+            width: '200px',
+            height: '200px',
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
+            top: '10%',
+            right: '20%',
+            animation: 'subtleFloat 8s ease-in-out infinite'
+          }}
+        />
+        <div 
+          className="position-absolute rounded-circle"
+          style={{
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%)',
+            bottom: '20%',
+            left: '15%',
+            animation: 'subtleFloat 6s ease-in-out infinite reverse'
+          }}
+        />
+      </div>
+      <div className="container position-relative" style={{ zIndex: 10 }}>
         <div className="text-center mb-5">
           <h2 
-            className="display-4 fw-bold mb-4"
+            className="mb-4"
             style={{
-              background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontFamily: 'Rubik, sans-serif'
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: '700',
+              lineHeight: '1.1',
+              fontFamily: 'Space Grotesk, system-ui, sans-serif',
+              letterSpacing: '-0.02em',
+              color: '#ffffff'
             }}
           >
-            Nuestras Baterías Solares
+            Nuestras{' '}
+            <span style={{ color: '#b4fe00', fontWeight: '800' }}>
+              Baterías Solares
+            </span>
           </h2>
           <p 
-            className="lead mb-0"
-            style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+            className="mb-0"
+            style={{ 
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
+              color: 'var(--slate-300)',
+              fontWeight: '500',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}
           >
-            Tecnología avanzada para independencia energética total
+            Tecnología avanzada para{' '}
+            <span style={{ color: '#ffffff', fontWeight: '600' }}>
+              independencia energética total
+            </span>
           </p>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mb-5">
+          <div className="row justify-content-center">
+            <div className="col-lg-10">
+              <div 
+                className="card-modern p-5"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                <div className="row g-4 align-items-center">
+                  <div className="col-lg-7">
+                    <h3 
+                      className="mb-4"
+                      style={{
+                        fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+                        fontWeight: '700',
+                        color: '#ffffff',
+                        fontFamily: 'Space Grotesk, system-ui, sans-serif'
+                      }}
+                    >
+                      ¿Por qué elegir{' '}
+                      <span style={{ color: '#b4fe00' }}>energía solar?</span>
+                    </h3>
+                    
+                    <p 
+                      className="mb-4"
+                      style={{
+                        fontSize: '16px',
+                        color: 'var(--slate-300)',
+                        fontWeight: '500',
+                        lineHeight: '1.6'
+                      }}
+                    >
+                      Las baterías solares ofrecen una fuente de energía{' '}
+                      <span style={{ color: '#ffffff', fontWeight: '600' }}>
+                        limpia, silenciosa y confiable
+                      </span>, ideal para enfrentar los apagones frecuentes en Puerto Rico.{' '}
+                      <span style={{ color: '#ffffff', fontWeight: '600' }}>
+                        Almacena energía durante el día para usarla cuando más la necesites.
+                      </span>
+                    </p>
+
+                    <div className="row g-3">
+                      {[
+                        { icon: '🔇', text: 'Funcionamiento silencioso' },
+                        { icon: '🌱', text: 'Cero emisiones contaminantes' },
+                        { icon: '⚙️', text: 'Sin mantenimiento requerido' },
+                        { icon: '📱', text: 'Fácil instalación y uso' },
+                        { icon: '🔄', text: 'Múltiples métodos de carga' }
+                      ].map((benefit, index) => (
+                        <div key={index} className="col-md-6">
+                          <div className="d-flex align-items-center">
+                            <div 
+                              className="d-flex align-items-center justify-content-center me-3"
+                              style={{
+                                width: '40px',
+                                height: '40px',
+                                background: 'rgba(180, 254, 0, 0.1)',
+                                borderRadius: '12px',
+                                fontSize: '18px'
+                              }}
+                            >
+                              {benefit.icon}
+                            </div>
+                            <span 
+                              style={{
+                                color: 'var(--slate-300)',
+                                fontSize: '15px',
+                                fontWeight: '500'
+                              }}
+                            >
+                              {benefit.text}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="col-lg-5">
+                    <div 
+                      className="text-center p-4 rounded-4"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(180, 254, 0, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%)',
+                        border: '2px solid rgba(180, 254, 0, 0.2)'
+                      }}
+                    >
+                      <div 
+                        className="mb-3"
+                        style={{
+                          fontSize: 'clamp(3rem, 6vw, 4rem)',
+                          fontWeight: '900',
+                          color: '#b4fe00',
+                          fontFamily: 'Space Grotesk, system-ui, sans-serif',
+                          textShadow: '0 0 20px rgba(180, 254, 0, 0.3)'
+                        }}
+                      >
+                        5
+                      </div>
+                      <h4 
+                        className="mb-3"
+                        style={{
+                          color: '#ffffff',
+                          fontWeight: '700',
+                          fontSize: '24px'
+                        }}
+                      >
+                        Beneficios que te brinda la{' '}
+                        <span style={{ color: '#b4fe00' }}>energía solar</span>
+                      </h4>
+                      <p 
+                        style={{
+                          color: 'var(--slate-300)',
+                          fontSize: '14px',
+                          marginBottom: '0'
+                        }}
+                      >
+                        Energía limpia, confiable y económica para tu hogar o negocio
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="row g-4">
           {products.map((product, index) => (
             <div key={product.id} className="col-lg-4 col-md-6">
               <div 
-                className="card border-0 h-100"
+                className="card-modern h-100"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(20px)',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  transition: 'all 0.3s ease',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   overflow: 'hidden'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(180, 254, 0, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 {/* Product Image */}
@@ -211,8 +377,8 @@ const Products = () => {
                   <div 
                     className="position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill"
                     style={{
-                      background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                      color: '#131d3b',
+                      background: '#b4fe00',
+                      color: '#000000',
                       fontWeight: '700',
                       fontSize: '14px'
                     }}
@@ -308,26 +474,26 @@ const Products = () => {
                   {/* Action Buttons */}
                   <div className="d-grid gap-2">
                     <button 
-                      className="btn border-0 fw-bold"
+                      className="btn btn-modern gradient-primary"
                       style={{
-                        background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                        color: '#131d3b',
-                        borderRadius: '10px',
+                        color: '#000000',
                         padding: '12px',
-                        fontSize: '14px'
+                        fontSize: '14px',
+                        fontWeight: '600'
                       }}
                     >
-                      Ver Detalles Completos
+                      Solicitar Consulta
                     </button>
                     <button 
                       className="btn btn-outline-light border-2"
                       style={{
-                        borderRadius: '10px',
+                        borderRadius: '12px',
                         padding: '10px',
-                        fontSize: '14px'
+                        fontSize: '14px',
+                        color: 'rgba(255, 255, 255, 0.9)'
                       }}
                     >
-                      Solicitar Cotización
+                      Ver Detalles
                     </button>
                   </div>
                 </div>
@@ -339,52 +505,65 @@ const Products = () => {
         {/* Call to Action */}
         <div className="text-center mt-5">
           <div 
-            className="card border-0 mx-auto"
+            className="card-modern mx-auto p-4"
             style={{
               maxWidth: '600px',
               background: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '20px',
+              backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 255, 255, 0.1)'
             }}
           >
-            <div className="card-body p-4">
-              <h5 
-                className="card-title fw-bold mb-3"
-                style={{ color: '#ffffff' }}
+            <h5 
+              className="mb-3"
+              style={{ 
+                color: '#ffffff',
+                fontWeight: '600',
+                fontSize: '20px'
+              }}
+            >
+              ¿Necesitas ayuda para elegir?
+            </h5>
+            <p 
+              className="mb-3"
+              style={{ 
+                color: 'var(--slate-300)',
+                fontSize: '16px',
+                fontWeight: '500'
+              }}
+            >
+              Nuestros expertos te ayudan a seleccionar la{' '}
+              <span style={{ color: '#ffffff', fontWeight: '600' }}>
+                batería perfecta para tus necesidades específicas
+              </span>
+            </p>
+            <div className="d-flex gap-3 justify-content-center flex-wrap">
+              <a 
+                href="#contacto"
+                className="btn btn-modern gradient-primary"
+                style={{
+                  color: '#000000',
+                  padding: '12px 24px',
+                  fontSize: '15px',
+                  fontWeight: '600',
+                  textDecoration: 'none'
+                }}
               >
-                ¿Necesitas ayuda para elegir?
-              </h5>
-              <p 
-                className="card-text mb-3"
-                style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}
+                Consulta Personalizada
+              </a>
+              <a 
+                href="tel:+1234567890"
+                className="btn btn-modern text-white"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  padding: '12px 24px',
+                  fontSize: '15px',
+                  fontWeight: '600',
+                  textDecoration: 'none'
+                }}
               >
-                Nuestros expertos te ayudan a seleccionar la batería perfecta para tus necesidades específicas
-              </p>
-              <div className="d-flex gap-2 justify-content-center flex-wrap">
-                <button 
-                  className="btn border-0 fw-bold"
-                  style={{
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                    color: '#131d3b',
-                    borderRadius: '10px',
-                    padding: '10px 20px',
-                    fontSize: '14px'
-                  }}
-                >
-                  📞 Llamar Ahora
-                </button>
-                <button 
-                  className="btn btn-outline-light"
-                  style={{
-                    borderRadius: '10px',
-                    padding: '10px 20px',
-                    fontSize: '14px'
-                  }}
-                >
-                  💬 Chat en Vivo
-                </button>
-              </div>
+                📞 Llamar Ahora
+              </a>
             </div>
           </div>
         </div>
