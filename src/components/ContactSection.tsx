@@ -97,524 +97,534 @@ const ContactSection = () => {
   return (
     <section 
       id="contacto"
-      className="position-relative overflow-hidden"
-      style={{
-        padding: '80px 0',
-        background: `
-          linear-gradient(135deg, 
-            var(--slate-900) 0%, 
-            var(--slate-800) 50%,
-            var(--slate-900) 100%
-          )
-        `
-      }}
+      className="relative overflow-hidden py-20 lg:py-32 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900"
     >
-      {/* Same background pattern as other sections */}
-      <div 
-        className="position-absolute top-0 start-0 w-100 h-100 opacity-10"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 25% 25%, var(--emerald-500) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, var(--sky-500) 0%, transparent 50%)
-          `
-        }}
-      />
+      {/* Ultra-Enhanced background patterns */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-glow-primary rounded-full blur-3xl animate-float transform will-change-transform"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-glow-accent rounded-full blur-3xl animate-float-delayed transform will-change-transform"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-glow-neon rounded-full blur-[120px] opacity-10 animate-pulse-soft"></div>
+        
+        {/* Additional dynamic elements */}
+        <div className="absolute top-20 right-20 w-48 h-48 bg-gradient-to-br from-primary-400/10 to-neon/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-br from-accent-400/15 to-primary-400/15 rounded-full blur-2xl animate-float-delayed"></div>
+        
+        {/* Contact-themed particle effects */}
+        {[
+          { top: 10, left: 20 },
+          { top: 75, left: 85 },
+          { top: 40, left: 5 },
+          { top: 85, left: 50 },
+          { top: 15, left: 75 },
+          { top: 60, left: 10 },
+          { top: 30, left: 90 },
+          { top: 90, left: 25 },
+          { top: 5, left: 60 },
+          { top: 70, left: 35 },
+          { top: 45, left: 85 },
+          { top: 25, left: 15 },
+          { top: 80, left: 70 },
+          { top: 55, left: 40 },
+          { top: 35, left: 95 },
+          { top: 95, left: 45 },
+          { top: 20, left: 80 },
+          { top: 65, left: 25 },
+          { top: 50, left: 5 },
+          { top: 85, left: 65 }
+        ].map((position, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-primary-400/30 rounded-full animate-float"
+            style={{
+              top: `${position.top}%`,
+              left: `${position.left}%`,
+              animationDelay: `${i * 0.6}s`,
+              animationDuration: `${4 + (i % 6)}s`
+            }}
+          />
+        ))}
+      </div>
       
-      {/* Floating elements */}
-      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden">
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
-            top: '10%',
-            right: '20%',
-            animation: 'subtleFloat 8s ease-in-out infinite'
-          }}
-        />
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '150px',
-            height: '150px',
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%)',
-            bottom: '20%',
-            left: '15%',
-            animation: 'subtleFloat 6s ease-in-out infinite reverse'
-          }}
-        />
+      {/* Enhanced animated grid overlay */}
+      <div className="absolute inset-0 opacity-[0.05]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(180, 254, 0, 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '70px 70px',
+          animation: 'shimmer 22s linear infinite'
+        }}></div>
+        
+        {/* Communication-themed patterns */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(180, 254, 0, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.05) 0%, transparent 50%)`,
+          backgroundSize: '200px 200px'
+        }}></div>
+      </div>
+      
+      {/* Enhanced floating geometric elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-1/6 w-6 h-6 border-2 border-primary-400/40 rounded-lg rotate-45 animate-float shadow-glow-primary"></div>
+        <div className="absolute bottom-1/3 left-1/6 w-8 h-8 border-2 border-accent-400/40 rounded-full animate-float-delayed shadow-glow-accent"></div>
+        <div className="absolute top-2/3 right-1/3 w-4 h-4 bg-neon/30 rounded-full animate-pulse-soft shadow-glow-neon"></div>
+        <div className="absolute top-1/6 left-1/4 w-3 h-3 bg-primary-400/40 rounded-full animate-float"></div>
+        <div className="absolute bottom-1/6 right-1/3 w-5 h-5 border border-neon/40 rounded-xl rotate-12 animate-float-delayed"></div>
+        
+        {/* Communication icons floating */}
+        <div className="absolute top-12 left-12 text-primary-400/20 text-2xl animate-float">📞</div>
+        <div className="absolute bottom-12 right-12 text-neon/20 text-2xl animate-float-delayed">💬</div>
+        <div className="absolute top-1/3 right-20 text-accent-400/20 text-xl animate-pulse-soft">📧</div>
       </div>
 
-      <div className="container position-relative" style={{ zIndex: 10 }}>
-        {/* Header */}
-        <div className="text-center mb-5">
-          <h2 
-            className="mb-4"
-            style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '700',
-              lineHeight: '1.1',
-              fontFamily: 'Space Grotesk, system-ui, sans-serif',
-              letterSpacing: '-0.02em',
-              color: '#ffffff'
-            }}
-          >
-            ¿Listo para tu{' '}
-            <span style={{ color: '#b4fe00', fontWeight: '800' }}>
-              independencia energética?
-            </span>
-          </h2>
-          <p 
-            className="mb-0"
-            style={{ 
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
-              color: 'var(--slate-300)',
-              fontWeight: '500',
-              maxWidth: '700px',
-              margin: '0 auto'
-            }}
-          >
-            <span style={{ fontWeight: '700' }}>Contáctanos hoy</span>{' '}
-            <span style={{ color: '#ffffff', fontWeight: '600' }}>
-              y descubre cómo nuestras baterías solares pueden transformar tu experiencia energética
-            </span>
-          </p>
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
+        {/* Ultra-Enhanced Header */}
+        <div className="text-center mb-20 animate-fade-in-up">
+          <div className="space-y-8">
+            {/* Enhanced section badge */}
+            <div className="flex items-center justify-center space-x-4 mb-8">
+              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-neon rounded-full"></div>
+              <div className="px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
+                <span className="text-slate-300 text-sm font-bold tracking-widest uppercase">
+                  Conecta con Nosotros
+                </span>
+              </div>
+              <div className="w-20 h-0.5 bg-gradient-to-r from-neon via-primary-400 to-transparent rounded-full"></div>
+            </div>
+            
+            <div className="relative">
+              <h2 className="font-heading font-black text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-white">
+                ¿Listo para tu{' '}
+                <span className="text-gradient-neon relative inline-block group">
+                  independencia energética
+                  <div className="absolute inset-0 bg-gradient-to-r from-neon/20 to-primary-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </span>
+                ?
+              </h2>
+              
+              {/* Dynamic background text */}
+              <div className="absolute inset-0 font-heading font-black text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-primary-400/5 transform translate-x-1 translate-y-1 -z-10">
+                ¿Listo para tu independencia energética?
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-medium">
+                <span className="text-white font-bold">Contáctanos hoy</span>{' '}
+                y descubre cómo nuestras baterías solares pueden{' '}
+                <span className="text-neon font-semibold">transformar tu experiencia energética</span>
+              </p>
+              
+              {/* Response time indicator */}
+              <div className="flex items-center justify-center space-x-6 text-sm text-slate-400">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
+                  <span>Respuesta en 24h</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <span>Consulta gratuita</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
+                  <span>Sin compromiso</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-3">
+                <div className="w-32 h-1 bg-gradient-to-r from-neon to-primary-400 rounded-full animate-shimmer shadow-glow-neon"></div>
+                <div className="flex space-x-1">
+                  {[...Array(3)].map((_, i) => (
+                    <div 
+                      key={i}
+                      className="w-2 h-2 bg-neon/60 rounded-full animate-pulse"
+                      style={{ animationDelay: `${i * 0.3}s` }}
+                    />
+                  ))}
+                </div>
+                <div className="w-32 h-1 bg-gradient-to-r from-primary-400 to-neon rounded-full animate-shimmer shadow-glow-primary"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Contact Methods */}
-        <div className="row g-4 mb-5 justify-content-center">
+        {/* Ultra-Enhanced Contact Methods */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 mb-20">
           {contactMethods.map((method, index) => (
-            <div key={index} className="col-lg-3 col-md-4 col-sm-6">
+            <div 
+              key={index}
+              className="relative group animate-fade-in-up"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-neon/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
               <a 
                 href={method.action}
-                className="text-decoration-none d-block"
+                className="relative bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 text-center p-8 block transition-all duration-500 hover:scale-105 hover:border-primary-400/40 hover:shadow-glow-primary"
               >
-                <div 
-                  className="card-modern h-100 p-3 text-center"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.borderColor = '#b4fe00';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                  }}
-                >
-                  <div className="mb-2">
-                    <div 
-                      className="mx-auto d-flex align-items-center justify-content-center"
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        background: 'linear-gradient(135deg, #b4fe00 0%, rgba(180, 254, 0, 0.7) 100%)',
-                        borderRadius: '12px',
-                        fontSize: '20px'
-                      }}
-                    >
-                      {method.icon}
+                <div className="space-y-6">
+                  {/* Enhanced icon with animated background */}
+                  <div className="relative mx-auto w-20 h-20">
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon to-primary-400 rounded-2xl animate-pulse-soft opacity-80"></div>
+                    <div className="relative w-full h-full bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center shadow-glow-neon group-hover:shadow-glow-neon group-hover:scale-110 transition-all duration-300">
+                      <span className="text-3xl filter group-hover:brightness-110">{method.icon}</span>
                     </div>
+                    {/* Orbiting elements */}
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon/60 rounded-full animate-pulse"></div>
+                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-primary-400/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
                   </div>
                   
-                  <h6 
-                    className="mb-1"
-                    style={{
-                      color: '#ffffff',
-                      fontWeight: '600',
-                      fontSize: '16px'
-                    }}
-                  >
-                    {method.title}
-                  </h6>
-                  
-                  <p 
-                    className="mb-2"
-                    style={{
-                      color: 'var(--slate-400)',
-                      fontSize: '12px'
-                    }}
-                  >
-                    {method.description}
-                  </p>
-                  
-                  <small 
-                    style={{
-                      color: '#b4fe00',
-                      fontSize: '13px',
-                      fontWeight: '600'
-                    }}
-                  >
-                    {method.actionText}
-                  </small>
+                  <div className="space-y-4">
+                    <h3 className="font-heading font-bold text-2xl text-white group-hover:text-neon transition-colors duration-300">
+                      {method.title}
+                    </h3>
+                    
+                    <p className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors duration-300">
+                      {method.description}
+                    </p>
+                    
+                    {/* Enhanced action button */}
+                    <div className="relative inline-block">
+                      <div className="px-6 py-3 bg-gradient-to-r from-neon/20 to-primary-400/20 border border-neon/40 rounded-xl transition-all duration-300 group-hover:border-neon/60 group-hover:bg-neon/30">
+                        <span className="text-neon font-bold text-sm tracking-wide flex items-center justify-center gap-2">
+                          {method.actionText}
+                          <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                
+                {/* Animated border on hover */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-primary-400/0 group-hover:border-primary-400/50 transition-all duration-300"></div>
               </a>
             </div>
           ))}
         </div>
 
-        {/* Main Contact Form */}
-        <div className="row justify-content-center mb-5">
-          <div className="col-lg-8">
-            <div 
-              className="card-modern p-4"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <div className="text-center mb-4">
-                <h3 
-                  className="mb-3"
-                  style={{
-                    color: '#ffffff',
-                    fontWeight: '600',
-                    fontSize: '24px',
-                    fontFamily: 'Space Grotesk, system-ui, sans-serif'
-                  }}
-                >
-                  Solicita tu{' '}
-                  <span style={{ color: '#b4fe00' }}>Consulta Personalizada</span>
-                </h3>
-                <p 
-                  style={{
-                    color: 'var(--slate-300)',
-                    fontSize: '16px',
-                    fontWeight: '500'
-                  }}
-                >
-                  Completa este formulario y{' '}
-                  <span style={{ color: '#ffffff', fontWeight: '600' }}>
-                    nuestros expertos diseñarán la solución perfecta para ti
-                  </span>
-                </p>
+        {/* Ultra-Enhanced Contact Form */}
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="relative group">
+            {/* Enhanced glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-neon/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden animate-fade-in-up hover:border-primary-400/40 transition-all duration-500">
+              {/* Animated background pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                    linear-gradient(rgba(180, 254, 0, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '60px 60px',
+                  animation: 'shimmer 35s linear infinite'
+                }}></div>
               </div>
-
-              <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-                  {/* Required Fields */}
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="name" 
-                      className="form-label"
-                      style={{ color: '#ffffff', fontWeight: '600', fontSize: '14px' }}
-                    >
-                      Nombre Completo *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="form-control"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    />
+              
+              <div className="relative p-8 lg:p-16">
+                <div className="text-center mb-12">
+                  {/* Enhanced form header */}
+                  <div className="flex items-center justify-center mb-8">
+                    <div className="w-16 h-16 bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center animate-pulse-soft shadow-glow-neon">
+                      <svg className="w-8 h-8 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
                   </div>
-
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="phone" 
-                      className="form-label"
-                      style={{ color: '#ffffff', fontWeight: '600', fontSize: '14px' }}
-                    >
-                      Teléfono *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="form-control"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    />
-                  </div>
-
-                  {/* Optional Fields */}
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="email" 
-                      className="form-label"
-                      style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
-                    >
-                      Email (opcional)
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="form-control"
-                      value={formData.email}
-                      onChange={handleChange}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="location" 
-                      className="form-label"
-                      style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
-                    >
-                      Ubicación/Ciudad
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      name="location"
-                      className="form-control"
-                      value={formData.location}
-                      onChange={handleChange}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="batteryInterest" 
-                      className="form-label"
-                      style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
-                    >
-                      Batería de Interés
-                    </label>
-                    <select
-                      id="batteryInterest"
-                      name="batteryInterest"
-                      className="form-control"
-                      value={formData.batteryInterest}
-                      onChange={handleChange}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    >
-                      <option value="" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Seleccionar...
-                      </option>
-                      <option value="2500W" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Batería 2500W - Residencial
-                      </option>
-                      <option value="3600W" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Batería 3600W - Hogar/Negocio
-                      </option>
-                      <option value="6000W" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Batería 6000W - Comercial/Industrial
-                      </option>
-                      <option value="unsure" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        No estoy seguro
-                      </option>
-                    </select>
-                  </div>
-
-                  <div className="col-md-6">
-                    <label 
-                      htmlFor="urgency" 
-                      className="form-label"
-                      style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
-                    >
-                      Urgencia
-                    </label>
-                    <select
-                      id="urgency"
-                      name="urgency"
-                      className="form-control"
-                      value={formData.urgency}
-                      onChange={handleChange}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px'
-                      }}
-                    >
-                      <option value="normal" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Normal (24-48 horas)
-                      </option>
-                      <option value="urgent" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Urgente (mismo día)
-                      </option>
-                      <option value="planning" style={{ background: 'var(--slate-800)', color: 'white' }}>
-                        Planificando (próximas semanas)
-                      </option>
-                    </select>
-                  </div>
-
-                  <div className="col-12">
-                    <label 
-                      htmlFor="message" 
-                      className="form-label"
-                      style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
-                    >
-                      Mensaje Adicional (opcional)
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      className="form-control"
-                      rows={3}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Cuéntanos sobre tu situación actual o necesidades específicas..."
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '8px',
-                        padding: '12px 16px',
-                        color: 'white',
-                        fontSize: '14px',
-                        resize: 'vertical'
-                      }}
-                    />
-                  </div>
-
-                  <div className="col-12 text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-modern gradient-primary px-5 py-3 me-3"
-                      style={{
-                        color: '#000000',
-                        fontSize: '16px',
-                        fontWeight: '600',
-                        minWidth: '200px'
-                      }}
-                    >
-                      Enviar Consulta
-                    </button>
-                    
-                    <a 
-                      href="/contacto"
-                      className="btn btn-modern text-white px-4 py-3"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        fontSize: '15px',
-                        fontWeight: '600',
-                        textDecoration: 'none'
-                      }}
-                    >
-                      Más Opciones
-                    </a>
-                    
-                    <div className="mt-3">
-                      <small style={{ color: 'var(--slate-400)', fontSize: '12px' }}>
-                        ✓ Respuesta garantizada • ✓ Sin compromiso • ✓ Consulta gratuita
-                      </small>
+                  
+                  <h3 className="font-heading font-bold text-3xl lg:text-5xl text-white mb-6 leading-tight">
+                    Solicita tu{' '}
+                    <span className="text-gradient-neon relative inline-block group/text">
+                      Consulta Personalizada
+                      <div className="absolute inset-0 bg-gradient-to-r from-neon/20 to-primary-400/20 blur-lg opacity-0 group-hover/text:opacity-100 transition-opacity duration-500"></div>
+                    </span>
+                  </h3>
+                  
+                  <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                    Completa este formulario y{' '}
+                    <span className="text-white font-semibold">
+                      nuestros expertos diseñarán la solución perfecta para ti
+                    </span>
+                    {' '}en menos de 24 horas.
+                  </p>
+                  
+                  {/* Form benefits */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                      <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
+                      <span>Asesoría especializada</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                      <div className="w-2 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                      <span>Cotización personalizada</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                      <div className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
+                      <span>Respuesta garantizada</span>
                     </div>
                   </div>
                 </div>
-              </form>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Required Fields */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="name" 
+                    className="block text-white font-semibold text-sm"
+                  >
+                    Nombre Completo *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="input-modern"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="phone" 
+                    className="block text-white font-semibold text-sm"
+                  >
+                    Teléfono *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="input-modern"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    placeholder="(787) 123-4567"
+                  />
+                </div>
+
+                {/* Optional Fields */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="email" 
+                    className="block text-slate-300 font-medium text-sm"
+                  >
+                    Email (opcional)
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="input-modern"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="tu@email.com"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="location" 
+                    className="block text-slate-300 font-medium text-sm"
+                  >
+                    Ubicación/Ciudad
+                  </label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    className="input-modern"
+                    value={formData.location}
+                    onChange={handleChange}
+                    placeholder="San Juan, PR"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="batteryInterest" 
+                    className="block text-slate-300 font-medium text-sm"
+                  >
+                    Batería de Interés
+                  </label>
+                  <select
+                    id="batteryInterest"
+                    name="batteryInterest"
+                    className="input-modern"
+                    value={formData.batteryInterest}
+                    onChange={handleChange}
+                  >
+                    <option value="" className="bg-dark-800 text-white">
+                      Seleccionar...
+                    </option>
+                    <option value="2500W" className="bg-dark-800 text-white">
+                      Batería 2500W - Residencial
+                    </option>
+                    <option value="3600W" className="bg-dark-800 text-white">
+                      Batería 3600W - Hogar/Negocio
+                    </option>
+                    <option value="6000W" className="bg-dark-800 text-white">
+                      Batería 6000W - Comercial/Industrial
+                    </option>
+                    <option value="unsure" className="bg-dark-800 text-white">
+                      No estoy seguro
+                    </option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="urgency" 
+                    className="block text-slate-300 font-medium text-sm"
+                  >
+                    Urgencia
+                  </label>
+                  <select
+                    id="urgency"
+                    name="urgency"
+                    className="input-modern"
+                    value={formData.urgency}
+                    onChange={handleChange}
+                  >
+                    <option value="normal" className="bg-dark-800 text-white">
+                      Normal (24-48 horas)
+                    </option>
+                    <option value="urgent" className="bg-dark-800 text-white">
+                      Urgente (mismo día)
+                    </option>
+                    <option value="planning" className="bg-dark-800 text-white">
+                      Planificando (próximas semanas)
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label 
+                  htmlFor="message" 
+                  className="block text-slate-300 font-medium text-sm"
+                >
+                  Mensaje Adicional (opcional)
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="input-modern"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Cuéntanos sobre tu situación actual o necesidades específicas..."
+                  style={{ resize: 'vertical' }}
+                />
+              </div>
+
+              <div className="text-center space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button
+                    type="submit"
+                    className="btn-modern btn-neon text-lg px-8 py-4 group relative overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center gap-3">
+                      Enviar Consulta
+                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                    </span>
+                  </button>
+                  
+                  <a 
+                    href="/contacto"
+                    className="btn-modern btn-ghost text-lg px-8 py-4 group"
+                  >
+                    <span className="flex items-center gap-3">
+                      Más Opciones
+                      <svg className="w-5 h-5 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+                
+                <div className="flex items-center justify-center space-x-6 text-slate-400 text-sm">
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Respuesta garantizada
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Sin compromiso
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Consulta gratuita
+                  </span>
+                </div>
+              </div>
+            </form>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Client Reviews Section */}
-        <div className="text-center mb-4">
-          <h4 
-            className="mb-3"
-            style={{
-              color: '#ffffff',
-              fontWeight: '600',
-              fontSize: '24px',
-              fontFamily: 'Space Grotesk, system-ui, sans-serif'
-            }}
-          >
-            Lo que dicen nuestros{' '}
-            <span style={{ color: '#b4fe00' }}>clientes</span>
-          </h4>
-          <p 
-            style={{
-              color: 'var(--slate-400)',
-              fontSize: '14px'
-            }}
-          >
-            Más de 500 familias confían en Soltice Energy
-          </p>
+        {/* Enhanced Client Reviews Section */}
+        <div className="text-center mb-12 animate-fade-in-up">
+          <div className="space-y-4">
+            <h4 className="font-heading font-bold text-3xl lg:text-4xl text-white">
+              Lo que dicen nuestros{' '}
+              <span className="text-gradient-neon">clientes</span>
+            </h4>
+            <p className="text-slate-400 text-lg">
+              Más de 500 familias confían en Soltice Energy
+            </p>
+            <div className="w-20 h-1 bg-gradient-to-r from-neon to-primary-400 rounded-full mx-auto"></div>
+          </div>
         </div>
 
-        {/* Testimonials Grid - Smaller */}
-        <div className="row g-3">
+        {/* Enhanced Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="col-lg-3 col-md-6">
-              <div 
-                className="card-modern h-100 p-3"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  backdropFilter: 'blur(5px)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)'
-                }}
-              >
-                {/* Stars */}
-                <div className="mb-2">
+            <div 
+              key={index} 
+              className="card-glass p-6 h-full animate-fade-in-up group hover:scale-105 transition-all duration-300"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="space-y-4">
+                {/* Enhanced Stars */}
+                <div className="flex space-x-1">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} style={{ color: '#b4fe00', fontSize: '14px' }}>⭐</span>
+                    <span key={i} className="text-neon text-lg group-hover:scale-110 transition-transform">⭐</span>
                   ))}
                 </div>
                 
                 {/* Review Text */}
-                <blockquote className="mb-3">
-                  <p 
-                    style={{
-                      color: 'var(--slate-300)',
-                      fontSize: '13px',
-                      lineHeight: '1.5',
-                      fontStyle: 'italic'
-                    }}
-                  >
-                    "{testimonial.text}"
-                  </p>
+                <blockquote className="text-slate-300 text-sm leading-relaxed italic font-medium">
+                  "{testimonial.text}"
                 </blockquote>
                 
                 {/* Customer Info */}
-                <div>
-                  <p className="mb-1" style={{ color: '#ffffff', fontWeight: '600', fontSize: '14px' }}>
+                <div className="border-t border-white/10 pt-4">
+                  <p className="text-white font-semibold text-sm mb-1">
                     {testimonial.name}
                   </p>
-                  <p className="mb-0" style={{ color: 'var(--slate-400)', fontSize: '12px' }}>
+                  <p className="text-slate-400 text-xs mb-2">
                     {testimonial.location}
                   </p>
+                  <span className="inline-block bg-gradient-to-r from-neon/20 to-primary-400/20 border border-neon/30 rounded-full px-3 py-1 text-neon text-xs font-medium">
+                    {testimonial.product}
+                  </span>
                 </div>
               </div>
             </div>

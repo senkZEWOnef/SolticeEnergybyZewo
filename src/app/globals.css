@@ -1,5 +1,8 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -10,6 +13,7 @@
   --soltice-dark: #1e293b;
   --soltice-light: #f8fafc;
   --soltice-muted: #64748b;
+  --soltice-neon: #b4fe00;
   
   /* Modern color system */
   --emerald-50: #ecfdf5;
@@ -187,6 +191,49 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out;
+}
+
+/* Modern Component Classes */
+@layer components {
+  .btn-modern {
+    @apply px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 focus:ring-primary-500 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-neon {
+    @apply bg-gradient-to-r from-neon to-primary-400 text-dark-900 hover:shadow-glow-neon focus:ring-neon;
+  }
+  
+  .btn-ghost {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 focus:ring-white/30;
+  }
+  
+  .card-modern {
+    @apply bg-white/80 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .card-glass {
+    @apply bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300;
+  }
+  
+  .gradient-mesh {
+    @apply bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-neon {
+    @apply bg-gradient-to-r from-neon to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .input-modern {
+    @apply w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:bg-white/20 focus:border-primary-400 focus:ring-4 focus:ring-primary-400/30 transition-all duration-200;
+  }
 }
 
 /* Professional button hover effects */

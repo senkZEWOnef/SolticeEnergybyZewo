@@ -30,547 +30,289 @@ const About = () => {
   return (
     <section 
       id="sobre-nosotros" 
-      className="position-relative overflow-hidden"
-      style={{
-        padding: '40px 0',
-        background: `
-          radial-gradient(circle at 20% 80%, rgba(180, 254, 0, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(255, 107, 122, 0.04) 0%, transparent 50%),
-          linear-gradient(135deg, 
-            rgba(19, 29, 59, 0.95) 0%, 
-            rgba(25, 42, 86, 0.92) 25%,
-            rgba(45, 55, 72, 0.94) 50%,
-            rgba(25, 42, 86, 0.92) 75%,
-            rgba(19, 29, 59, 0.96) 100%
-          )
-        `
-      }}
+      className="relative overflow-hidden py-20 lg:py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100"
     >
-      {/* Animated Background Elements */}
-      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden">
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '400px',
-            height: '400px',
-            background: 'radial-gradient(circle, rgba(180, 254, 0, 0.08) 0%, transparent 70%)',
-            top: '-200px',
-            right: '-200px',
-            animation: 'floatingSlow 30s ease-in-out infinite'
-          }}
-        />
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.06) 0%, transparent 70%)',
-            bottom: '-150px',
-            left: '-150px',
-            animation: 'floatingMedium 25s ease-in-out infinite reverse'
-          }}
-        />
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(255, 107, 122, 0.04) 0%, transparent 70%)',
-            top: '40%',
-            left: '5%',
-            animation: 'floatingFast 20s ease-in-out infinite'
-          }}
-        />
+      {/* Modern Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-glow-primary opacity-20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-glow-accent opacity-15 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-glow-neon opacity-10 rounded-full blur-3xl animate-pulse-soft"></div>
+      </div>
+      
+      {/* Geometric patterns */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(16, 185, 129, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(16, 185, 129, 0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}></div>
       </div>
 
       {/* Content */}
-      <div className="container position-relative" style={{zIndex: 10, maxWidth: '1400px'}}>
-        <div className="row justify-content-center">
-          <div className="col-12">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
+        <div className="text-center mb-16">
+          {/* Section Header */}
+          <div 
+            className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+            style={{
+              transition: 'all 0.8s ease-out'
+            }}
+          >
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-16 h-0.5 bg-gradient-to-r from-primary-500 to-neon rounded-full"></div>
+              <span className="text-dark-600 text-sm font-bold tracking-widest uppercase">
+                Sobre Nosotros
+              </span>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-neon to-primary-500 rounded-full"></div>
+            </div>
             
-            {/* Section Header */}
-            <div 
-              className={`text-center mb-5 ${isVisible ? 'animate-fade-in-up' : ''}`}
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'all 0.8s ease-out'
-              }}
-            >
-              <div className="d-inline-flex align-items-center mb-3">
-                <div 
-                  className="me-3"
-                  style={{
-                    width: '50px',
-                    height: '2px',
-                    background: 'linear-gradient(90deg, #b4fe00 0%, #00d4ff 100%)'
-                  }}
-                />
-                <span 
-                  style={{
-                    color: '#ffffff',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase'
-                  }}
-                >
-                  Sobre Nosotros
-                </span>
-                <div 
-                  className="ms-3"
-                  style={{
-                    width: '50px',
-                    height: '2px',
-                    background: 'linear-gradient(90deg, #00d4ff 0%, #b4fe00 100%)'
-                  }}
-                />
-              </div>
-              
-              <h2 
-                className="mb-4"
-                style={{
-                  fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                  fontWeight: '800',
-                  lineHeight: '1.1',
-                  fontFamily: 'Rubik, sans-serif',
-                  color: '#ffffff',
-                  letterSpacing: '-0.02em'
-                }}
-              >
-                <span 
-                  style={{
-                    background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}
-                >
-                  Liderando la
-                </span>
+            <div className="space-y-4">
+              <h2 className="font-heading font-black text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight">
+                <span className="text-dark-700">Liderando la</span>
                 <br />
-                <span 
-                  style={{
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    position: 'relative'
-                  }}
-                >
+                <span className="text-gradient-neon relative">
                   Revolución Energética
-                  <div 
-                    className="position-absolute"
-                    style={{
-                      bottom: '-8px',
-                      left: '0',
-                      width: '100%',
-                      height: '6px',
-                      background: 'linear-gradient(90deg, #b4fe00 0%, #00d4ff 100%)',
-                      borderRadius: '3px',
-                      opacity: '0.3'
-                    }}
-                  />
+                  <div className="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-neon/30 to-primary-400/30 rounded-full"></div>
                 </span>
               </h2>
-            </div>
-
-            {/* Main Content Grid */}
-            <div className="row g-4 align-items-center justify-content-center">
-              <div className="col-12">
-                <div className="row g-4">
               
-                  {/* Mission Statement */}
-                  <div className="col-lg-3 col-md-6">
-                    <div 
-                      className={`${isVisible ? 'animate-fade-in-up' : ''}`}
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                        transition: 'all 0.8s ease-out 0.2s'
-                      }}
-                    >
-                      <div 
-                        className="p-4 rounded-4 h-100"
-                        style={{
-                          background: `
-                            linear-gradient(135deg, 
-                              rgba(180, 254, 0, 0.15) 0%, 
-                              rgba(180, 254, 0, 0.08) 50%,
-                              rgba(255, 255, 255, 0.05) 100%
-                            )
-                          `,
-                          border: '1px solid rgba(180, 254, 0, 0.1)',
-                          backdropFilter: 'blur(20px)',
-                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
-                          transition: 'all 0.4s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-5px)';
-                          e.currentTarget.style.boxShadow = '0 20px 60px rgba(180, 254, 0, 0.15)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.05)';
-                        }}
-                      >
-                        <div className="mb-3">
-                          <div 
-                            className="d-inline-flex align-items-center justify-content-center rounded-3"
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                              boxShadow: '0 8px 25px rgba(180, 254, 0, 0.3)'
-                            }}
-                          >
-                            <span style={{fontSize: '28px'}}>⚡</span>
-                          </div>
-                        </div>
-                        
-                        <h4 
-                          className="mb-3"
-                          style={{
-                            color: '#ffffff',
-                            fontWeight: '700',
-                            fontSize: '20px',
-                            fontFamily: 'Rubik, sans-serif'
-                          }}
-                        >
-                          Nuestra Misión
-                        </h4>
-                        
-                        <p 
-                          style={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            fontSize: '16px',
-                            lineHeight: '1.7',
-                            fontWeight: '500',
-                            marginBottom: '0'
-                          }}
-                        >
-                          Soltice Energy impulsa soluciones de energía limpias, silenciosas y confiables. 
-                          Nuestra misión es ofrecer verdadera independencia energética a familias y 
-                          comunidades que enfrentan apagones frecuentes.
-                        </p>
+              <p className="text-xl text-dark-500 max-w-3xl mx-auto leading-relaxed font-medium">
+                Transformamos la manera en que las familias acceden a energía limpia, confiable y sostenible
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
+              
+          {/* Mission Statement */}
+          <div 
+            className={`card-modern group ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+            style={{
+              transition: 'all 0.8s ease-out 0.2s'
+            }}
+          >
+            <div className="p-8 h-full">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center shadow-glow group-hover:shadow-glow-neon transition-all duration-300 group-hover:scale-110">
+                  <span className="text-3xl">⚡</span>
+                </div>
+              </div>
+              
+              <h3 className="font-heading font-bold text-2xl text-dark-800 mb-4 group-hover:text-dark-900 transition-colors">
+                Nuestra Misión
+              </h3>
+              
+              <p className="text-dark-600 leading-relaxed font-medium">
+                Soltice Energy impulsa soluciones de energía limpias, silenciosas y confiables. 
+                Nuestra misión es ofrecer verdadera independencia energética a familias y 
+                comunidades que enfrentan apagones frecuentes.
+              </p>
+            </div>
+          </div>
+
+          {/* Innovation Commitment */}
+          <div 
+            className={`card-modern group ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+            style={{
+              transition: 'all 0.8s ease-out 0.4s'
+            }}
+          >
+            <div className="p-8 h-full">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-primary-500 rounded-2xl flex items-center justify-center shadow-glow-accent group-hover:shadow-glow-accent transition-all duration-300 group-hover:scale-110">
+                  <span className="text-3xl">🚀</span>
+                </div>
+              </div>
+              
+              <h3 className="font-heading font-bold text-2xl text-dark-800 mb-4 group-hover:text-dark-900 transition-colors">
+                Innovación Constante
+              </h3>
+              
+              <p className="text-dark-600 leading-relaxed font-medium">
+                Con un compromiso firme hacia la innovación, desarrollamos sistemas portátiles 
+                fáciles de usar, libres de mantenimiento y que no dependen de la gasolina. 
+                Nuestros equipos están pensados para integrarse a la vida moderna.
+              </p>
+            </div>
+          </div>
+
+          {/* Products & Solutions */}
+          <div 
+            className={`card-modern group ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+            style={{
+              transition: 'all 0.8s ease-out 0.6s'
+            }}
+          >
+            <div className="p-8 h-full">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-red-500 rounded-2xl flex items-center justify-center shadow-hard group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <span className="text-3xl">🔋</span>
+                </div>
+              </div>
+              
+              <h3 className="font-heading font-bold text-2xl text-dark-800 mb-4 group-hover:text-dark-900 transition-colors">
+                Soluciones Completas
+              </h3>
+              
+              <p className="text-dark-600 leading-relaxed font-medium">
+                Desde baterías recargables hasta paneles solares de alto rendimiento, 
+                trabajamos para que cada persona tenga electricidad justo cuando más la necesita.
+              </p>
+            </div>
+          </div>
+
+          {/* Philosophy */}
+          <div 
+            className={`card-modern group ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+            style={{
+              transition: 'all 0.8s ease-out 0.8s'
+            }}
+          >
+            <div className="p-8 h-full">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-glow group-hover:shadow-glow-primary transition-all duration-300 group-hover:scale-110">
+                  <span className="text-3xl">🌱</span>
+                </div>
+              </div>
+              
+              <h3 className="font-heading font-bold text-2xl text-dark-800 mb-4 group-hover:text-dark-900 transition-colors">
+                Nuestra Filosofía
+              </h3>
+              
+              <p className="text-dark-600 leading-relaxed font-medium">
+                En Soltice Energy creemos que la energía segura y sostenible debe estar 
+                al alcance de todos, no ser un privilegio. Democratizamos el acceso a 
+                la energía limpia.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Ultra-Enhanced Call to Action */}
+        <div 
+          className={`text-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}
+          style={{
+            transition: 'all 0.8s ease-out 1s'
+          }}
+        >
+          <div className="relative group">
+            {/* Glowing background effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-neon/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            
+            <div className="relative bg-gradient-to-br from-dark-800 via-dark-900 to-dark-800 rounded-3xl border border-white/10 overflow-hidden">
+              {/* Animated background pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                    linear-gradient(rgba(180, 254, 0, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '40px 40px',
+                  animation: 'shimmer 30s linear infinite'
+                }}></div>
+              </div>
+              
+              <div className="relative p-12 text-white">
+                <div className="space-y-8 max-w-4xl mx-auto">
+                  {/* Enhanced title with animation */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="w-16 h-16 bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center animate-pulse-soft shadow-glow-neon">
+                        <svg className="w-8 h-8 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <h3 className="font-heading font-bold text-3xl lg:text-5xl leading-tight">
+                      ¿Listo para tu{' '}
+                      <span className="text-gradient-neon relative inline-block group/text">
+                        Independencia Energética
+                        <div className="absolute inset-0 bg-gradient-to-r from-neon/20 to-primary-400/20 blur-lg opacity-0 group-hover/text:opacity-100 transition-opacity duration-500"></div>
+                      </span>
+                      ?
+                    </h3>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                      Únete a{' '}
+                      <span className="text-neon font-bold">cientos de familias</span>{' '}
+                      que ya disfrutan de energía limpia, silenciosa y confiable.
+                    </p>
+                    
+                    {/* Enhanced stats display */}
+                    <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-neon">500+</div>
+                        <div className="text-sm text-slate-400">Familias</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-primary-400">0dB</div>
+                        <div className="text-sm text-slate-400">Silencioso</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-accent-400">7 años</div>
+                        <div className="text-sm text-slate-400">Garantía</div>
                       </div>
                     </div>
                   </div>
-
-                  {/* Innovation Commitment */}
-                  <div className="col-lg-3 col-md-6">
-                    <div 
-                      className={`${isVisible ? 'animate-fade-in-up' : ''}`}
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                        transition: 'all 0.8s ease-out 0.4s'
-                      }}
+                  
+                  <div className="pt-6">
+                    <a 
+                      href="#contacto"
+                      className="relative inline-flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-neon to-primary-400 text-dark-900 font-bold text-xl rounded-2xl overflow-hidden group/btn transition-all duration-300 hover:scale-105 hover:shadow-glow-neon transform hover:-translate-y-1"
                     >
-                      <div 
-                        className="p-4 rounded-4 h-100"
-                        style={{
-                          background: `
-                            linear-gradient(135deg, 
-                              rgba(0, 212, 255, 0.15) 0%, 
-                              rgba(0, 212, 255, 0.08) 50%,
-                              rgba(255, 255, 255, 0.05) 100%
-                            )
-                          `,
-                          border: '1px solid rgba(0, 212, 255, 0.1)',
-                          backdropFilter: 'blur(20px)',
-                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
-                          transition: 'all 0.4s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-5px)';
-                          e.currentTarget.style.boxShadow = '0 20px 60px rgba(0, 212, 255, 0.15)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.05)';
-                        }}
-                      >
-                        <div className="mb-3">
-                          <div 
-                            className="d-inline-flex align-items-center justify-content-center rounded-3"
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              background: 'linear-gradient(135deg, #00d4ff 0%, #b4fe00 100%)',
-                              boxShadow: '0 8px 25px rgba(0, 212, 255, 0.3)'
-                            }}
-                          >
-                            <span style={{fontSize: '28px'}}>🚀</span>
-                          </div>
-                        </div>
-                        
-                        <h4 
-                          className="mb-3"
-                          style={{
-                            color: '#ffffff',
-                            fontWeight: '700',
-                            fontSize: '20px',
-                            fontFamily: 'Rubik, sans-serif'
-                          }}
-                        >
-                          Innovación Constante
-                        </h4>
-                        
-                        <p 
-                          style={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            fontSize: '16px',
-                            lineHeight: '1.7',
-                            fontWeight: '500',
-                            marginBottom: '0'
-                          }}
-                        >
-                          Con un compromiso firme hacia la innovación, desarrollamos sistemas portátiles 
-                          fáciles de usar, libres de mantenimiento y que no dependen de la gasolina. 
-                          Nuestros equipos están pensados para integrarse a la vida moderna.
-                        </p>
-                      </div>
-                    </div>
+                      <span className="relative z-10 flex items-center gap-3">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Solicitar Cotización Gratuita
+                        <svg className="w-6 h-6 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                      
+                      {/* Advanced shimmer effect */}
+                      <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transform translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
+                      
+                      {/* Pulsing glow */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-neon/50 to-primary-400/50 blur-lg opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 -z-10"></div>
+                    </a>
                   </div>
-
-                  {/* Products & Solutions */}
-                  <div className="col-lg-3 col-md-6">
-                    <div 
-                      className={`${isVisible ? 'animate-fade-in-up' : ''}`}
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                        transition: 'all 0.8s ease-out 0.6s'
-                      }}
-                    >
-                      <div 
-                        className="p-4 rounded-4 h-100"
-                        style={{
-                          background: `
-                            linear-gradient(135deg, 
-                              rgba(255, 107, 122, 0.15) 0%, 
-                              rgba(255, 107, 122, 0.08) 50%,
-                              rgba(255, 255, 255, 0.05) 100%
-                            )
-                          `,
-                          border: '1px solid rgba(255, 107, 122, 0.1)',
-                          backdropFilter: 'blur(20px)',
-                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
-                          transition: 'all 0.4s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-5px)';
-                          e.currentTarget.style.boxShadow = '0 20px 60px rgba(255, 107, 122, 0.15)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.05)';
-                        }}
-                      >
-                        <div className="mb-3">
-                          <div 
-                            className="d-inline-flex align-items-center justify-content-center rounded-3"
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              background: 'linear-gradient(135deg, #ff6b7a 0%, #ffa502 100%)',
-                              boxShadow: '0 8px 25px rgba(255, 107, 122, 0.3)'
-                            }}
-                          >
-                            <span style={{fontSize: '28px'}}>🔋</span>
-                          </div>
-                        </div>
-                        
-                        <h4 
-                          className="mb-3"
-                          style={{
-                            color: '#ffffff',
-                            fontWeight: '700',
-                            fontSize: '20px',
-                            fontFamily: 'Rubik, sans-serif'
-                          }}
-                        >
-                          Soluciones Completas
-                        </h4>
-                        
-                        <p 
-                          style={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            fontSize: '16px',
-                            lineHeight: '1.7',
-                            fontWeight: '500',
-                            marginBottom: '0'
-                          }}
-                        >
-                          Desde baterías recargables hasta paneles solares de alto rendimiento, 
-                          trabajamos para que cada persona tenga electricidad justo cuando más la necesita.
-                        </p>
+                  
+                  {/* Enhanced benefits display */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-white/10">
+                    <div className="flex items-center justify-center space-x-3 text-slate-300">
+                      <div className="w-8 h-8 bg-primary-400/20 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
                       </div>
+                      <span className="font-medium">Consulta gratuita</span>
                     </div>
-                  </div>
-
-                  {/* Philosophy */}
-                  <div className="col-lg-3 col-md-6">
-                    <div 
-                      className={`${isVisible ? 'animate-fade-in-up' : ''}`}
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                        transition: 'all 0.8s ease-out 0.8s'
-                      }}
-                    >
-                      <div 
-                        className="p-4 rounded-4 h-100"
-                        style={{
-                          background: `
-                            linear-gradient(135deg, 
-                              rgba(255, 165, 2, 0.15) 0%, 
-                              rgba(255, 165, 2, 0.08) 50%,
-                              rgba(255, 255, 255, 0.05) 100%
-                            )
-                          `,
-                          border: '1px solid rgba(255, 165, 2, 0.1)',
-                          backdropFilter: 'blur(20px)',
-                          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
-                          transition: 'all 0.4s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-5px)';
-                          e.currentTarget.style.boxShadow = '0 20px 60px rgba(255, 165, 2, 0.15)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.05)';
-                        }}
-                      >
-                        <div className="mb-3">
-                          <div 
-                            className="d-inline-flex align-items-center justify-content-center rounded-3"
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              background: 'linear-gradient(135deg, #ffa502 0%, #ff6348 100%)',
-                              boxShadow: '0 8px 25px rgba(255, 165, 2, 0.3)'
-                            }}
-                          >
-                            <span style={{fontSize: '28px'}}>🌱</span>
-                          </div>
-                        </div>
-                        
-                        <h4 
-                          className="mb-3"
-                          style={{
-                            color: '#ffffff',
-                            fontWeight: '700',
-                            fontSize: '20px',
-                            fontFamily: 'Rubik, sans-serif'
-                          }}
-                        >
-                          Nuestra Filosofía
-                        </h4>
-                        
-                        <p 
-                          style={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            fontSize: '16px',
-                            lineHeight: '1.7',
-                            fontWeight: '500',
-                            marginBottom: '0'
-                          }}
-                        >
-                          En Soltice Energy creemos que la energía segura y sostenible debe estar 
-                          al alcance de todos, no ser un privilegio. Democratizamos el acceso a 
-                          la energía limpia.
-                        </p>
+                    <div className="flex items-center justify-center space-x-3 text-slate-300">
+                      <div className="w-8 h-8 bg-neon/20 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-neon" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
                       </div>
+                      <span className="font-medium">Sin compromiso</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-3 text-slate-300">
+                      <div className="w-8 h-8 bg-accent-400/20 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-accent-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="font-medium">Respuesta en 24h</span>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div 
-              className={`text-center mt-5 ${isVisible ? 'animate-fade-in-up' : ''}`}
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'all 0.8s ease-out 1s'
-              }}
-            >
-              <div 
-                className="p-5 rounded-4"
-                style={{
-                  background: `
-                    linear-gradient(135deg, 
-                      rgba(19, 29, 59, 0.95) 0%, 
-                      rgba(44, 62, 80, 0.9) 100%
-                    )
-                  `,
-                  boxShadow: '0 20px 60px rgba(19, 29, 59, 0.2)'
-                }}
-              >
-                <h3 
-                  className="mb-3"
-                  style={{
-                    color: '#ffffff',
-                    fontWeight: '700',
-                    fontSize: '24px',
-                    fontFamily: 'Rubik, sans-serif'
-                  }}
-                >
-                  ¿Listo para tu{' '}
-                  <span 
-                    style={{
-                      background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}
-                  >
-                    Independencia Energética
-                  </span>
-                  ?
-                </h3>
-                
-                <p 
-                  className="mb-4"
-                  style={{
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    fontSize: '16px',
-                    maxWidth: '600px',
-                    margin: '0 auto'
-                  }}
-                >
-                  Únete a cientos de familias que ya disfrutan de energía limpia, silenciosa y confiable.
-                </p>
-                
-                <a 
-                  href="#inicio"
-                  className="btn btn-lg fw-bold border-0 text-decoration-none"
-                  style={{
-                    background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                    color: '#131d3b',
-                    borderRadius: '50px',
-                    padding: '15px 40px',
-                    fontSize: '16px',
-                    letterSpacing: '0.5px',
-                    boxShadow: '0 8px 30px rgba(180, 254, 0, 0.3)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(180, 254, 0, 0.4)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(180, 254, 0, 0.3)';
-                  }}
-                >
-                  Solicitar Cotización Gratuita
-                </a>
               </div>
             </div>
           </div>
