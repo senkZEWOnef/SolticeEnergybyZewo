@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useChatContext } from '@/contexts/ChatContext';
+// import { useChatContext } from '@/contexts/ChatContext';
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const Hero = () => {
     message: ''
   });
 
-  const { initializeChat } = useChatContext();
+  // const { initializeChat } = useChatContext();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

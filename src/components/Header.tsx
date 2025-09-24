@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ const Header = () => {
           <div className="flex items-center justify-between h-full">
             
             {/* Logo */}
-            <a href="/" className="flex items-center group -ml-32">
+            <Link href="/" className="flex items-center group -ml-32">
               <img 
                 src="/name.png" 
                 alt="Soltice Energy" 
@@ -42,7 +43,7 @@ const Header = () => {
                   isScrolled ? 'h-28' : 'h-36'
                 } max-w-[450px] filter brightness-0 invert group-hover:scale-105`}
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">

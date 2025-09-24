@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -90,12 +92,12 @@ const Footer = () => {
             <div className="flex justify-center">
               <ul className="flex flex-col sm:flex-row items-center gap-6 text-lg font-medium">
                 <li>
-                  <a 
+                  <Link 
                     href="/"
                     className="text-white hover:text-green-400 transition-colors duration-300"
                   >
                     Inicio
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a 

@@ -349,7 +349,6 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="email" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -376,7 +375,6 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="company" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -403,7 +401,6 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="location" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -430,7 +427,6 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="batteryInterest" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -475,7 +471,6 @@ const ContactPage = () => {
                       <div className="col-12">
                         <label 
                           htmlFor="preferredContact" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -512,7 +507,6 @@ const ContactPage = () => {
                       <div className="col-12">
                         <label 
                           htmlFor="urgency" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >
@@ -548,7 +542,6 @@ const ContactPage = () => {
                       <div className="col-12">
                         <label 
                           htmlFor="message" 
-                          className="form-label"
                           className="text-sm font-medium tracking-wide"
                           style={{ color: 'var(--slate-300)' }}
                         >

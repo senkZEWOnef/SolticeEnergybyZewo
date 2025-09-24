@@ -198,7 +198,7 @@ const Testimonials = () => {
                       className="d-inline-flex align-items-center justify-content-center rounded-circle"
                       style={{width: '60px', height: '60px', background: 'linear-gradient(135deg, #b4fe00 0%, #b43041 100%)'}}
                     >
-                      <span className="text-white fw-bold" style={{fontSize: '24px'}}>"</span>
+                      <span className="text-white fw-bold" style={{fontSize: '24px'}}>&ldquo;</span>
                     </div>
                   </div>
                   
@@ -212,7 +212,7 @@ const Testimonials = () => {
                   {/* Testimonial Text */}
                   <blockquote className="mb-4">
                     <p className="text-dark fst-italic" style={{fontSize: '16px', lineHeight: '1.6'}}>
-                      "{testimonial.text}"
+                      &ldquo;{testimonial.text}&rdquo;
                     </p>
                   </blockquote>
                   

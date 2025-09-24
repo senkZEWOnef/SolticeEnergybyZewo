@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useChatContext } from '@/contexts/ChatContext';
+// import { useChatContext } from '@/contexts/ChatContext';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +15,7 @@ const ContactSection = () => {
     urgency: 'normal'
   });
 
-  const { initializeChat } = useChatContext();
+  // const { initializeChat } = useChatContext();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +39,7 @@ const ContactSection = () => {
     });
   };
 
+  /*
   const contactMethods = [
     {
       icon: '📞',
@@ -84,6 +85,7 @@ const ContactSection = () => {
       onClick: () => initializeChat()
     }
   ];
+  */
 
   const testimonials = [
     {
@@ -516,7 +518,7 @@ const ContactSection = () => {
                 
                 {/* Review Text */}
                 <blockquote className="text-slate-300 text-sm leading-relaxed italic font-medium">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </blockquote>
                 
                 {/* Customer Info */}

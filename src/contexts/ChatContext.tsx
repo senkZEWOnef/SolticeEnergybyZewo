@@ -118,7 +118,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
   const [formSubmissions, setFormSubmissions] = useState<FormSubmission[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
-  const [isConnected, setIsConnected] = useState(true); // Simulate connection
+  const [isConnected] = useState(true); // Simulate connection
+  // const [, setIsConnected] = useState(true); // Simulate connection
 
   // Load chat data from localStorage on mount
   useEffect(() => {
@@ -134,7 +135,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     
     if (savedMessages) {
       try {
-        const parsedMessages = JSON.parse(savedMessages).map((msg: any) => ({
+        const parsedMessages = JSON.parse(savedMessages).map((msg: Message) => ({
           ...msg,
           timestamp: new Date(msg.timestamp)
         }));
@@ -146,7 +147,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     if (savedSessions) {
       try {
-        const parsedSessions = JSON.parse(savedSessions).map((session: any) => ({
+        const parsedSessions = JSON.parse(savedSessions).map((session: ChatSession) => ({
           ...session,
           createdAt: new Date(session.createdAt),
           lastMessage: session.lastMessage ? {
@@ -162,7 +163,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     if (savedSubmissions) {
       try {
-        const parsedSubmissions = JSON.parse(savedSubmissions).map((submission: any) => ({
+        const parsedSubmissions = JSON.parse(savedSubmissions).map((submission: FormSubmission) => ({
           ...submission,
           submittedAt: new Date(submission.submittedAt)
         }));
@@ -174,7 +175,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     if (savedProducts) {
       try {
-        const parsedProducts = JSON.parse(savedProducts).map((product: any) => ({
+        const parsedProducts = JSON.parse(savedProducts).map((product: Product) => ({
           ...product,
           createdAt: new Date(product.createdAt)
         }));

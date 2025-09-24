@@ -13,10 +13,10 @@ const ChatWidget = () => {
   const { 
     currentChatId, 
     messages, 
-    isConnected, 
     sendMessage, 
     initializeChat 
   } = useChatContext();
+  // isConnected unused
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

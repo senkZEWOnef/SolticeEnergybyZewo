@@ -1,13 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/Chat/ChatWidget';
 import AdminWidget from '@/components/AdminWidget';
 
 const AboutPage = () => {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const testimonials = [
     {
@@ -407,7 +406,7 @@ const AboutPage = () => {
                     {/* Review Text */}
                     <blockquote className="mb-6">
                       <p className="text-gray-900 leading-relaxed font-semibold italic">
-                        "{testimonial.text}"
+                        &ldquo;{testimonial.text}&rdquo;
                       </p>
                     </blockquote>
                     

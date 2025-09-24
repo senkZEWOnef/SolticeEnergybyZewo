@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, Star, Search, Filter, Grid, List } from 'lucide-react';
+import { Phone, MessageCircle, Mail, Star, Search, Grid, List } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -33,7 +33,7 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showFilters, setShowFilters] = useState(false);
+  // const [showFilters, setShowFilters] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const categories = [

@@ -263,12 +263,12 @@ const AdminDashboard = () => {
               💬 Chats
             </button>
             <button
-              className={`btn btn-sm border-0 fw-bold ${activeTab === 'products' ? 'active' : ''}`}
+              className={`btn btn-sm border-0 fw-bold ${(activeTab as string) === 'products' ? 'active' : ''}`}
               style={{
-                background: activeTab === 'products' 
+                background: (activeTab as string) === 'products' 
                   ? 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)'
                   : 'rgba(255, 255, 255, 0.1)',
-                color: activeTab === 'products' ? '#131d3b' : '#ffffff',
+                color: (activeTab as string) === 'products' ? '#131d3b' : '#ffffff',
                 borderRadius: '8px',
                 fontSize: '12px',
                 padding: '6px 12px'
