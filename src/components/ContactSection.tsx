@@ -42,24 +42,46 @@ const ContactSection = () => {
   const contactMethods = [
     {
       icon: '📞',
-      title: 'Llámanos',
-      description: 'Respuesta inmediata',
+      title: 'Llamar',
       action: 'tel:+1787-XXX-XXXX',
-      actionText: '(787) XXX-XXXX'
+      actionText: '(787) XXX-XXXX',
+      bgColor: 'from-blue-500 to-blue-600'
     },
     {
       icon: '💬',
       title: 'WhatsApp',
-      description: 'Chat directo',
       action: 'https://wa.me/1787XXXXXXX',
-      actionText: 'Chatear'
+      actionText: 'Chat',
+      bgColor: 'from-green-500 to-green-600'
     },
     {
       icon: '📧',
       title: 'Email',
-      description: '24h respuesta',
       action: 'mailto:info@solticeenergy.com',
-      actionText: 'Escribir'
+      actionText: 'Escribir',
+      bgColor: 'from-red-500 to-red-600'
+    },
+    {
+      icon: '📘',
+      title: 'Facebook',
+      action: 'https://facebook.com/solticeenergy',
+      actionText: 'Seguir',
+      bgColor: 'from-blue-600 to-blue-700'
+    },
+    {
+      icon: '📷',
+      title: 'Instagram',
+      action: 'https://instagram.com/solticeenergy',
+      actionText: 'Ver',
+      bgColor: 'from-pink-500 to-purple-600'
+    },
+    {
+      icon: '💬',
+      title: 'Chat Web',
+      action: '#',
+      actionText: 'Abrir',
+      bgColor: 'from-emerald-500 to-emerald-600',
+      onClick: () => initializeChat()
     }
   ];
 
@@ -97,8 +119,18 @@ const ContactSection = () => {
   return (
     <section 
       id="contacto"
-      className="relative overflow-hidden py-20 lg:py-32 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900"
+      className="relative overflow-hidden py-20 lg:py-32"
     >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="/consulta.jpg" 
+          alt="Solar consultation background" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-gray-900/80 to-black/90"></div>
+      </div>
+      
       {/* Ultra-Enhanced background patterns */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-glow-primary rounded-full blur-3xl animate-float transform will-change-transform"></div>
@@ -177,141 +209,14 @@ const ContactSection = () => {
         <div className="absolute top-1/3 right-20 text-accent-400/20 text-xl animate-pulse-soft">📧</div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
-        {/* Ultra-Enhanced Header */}
-        <div className="text-center mb-20 animate-fade-in-up">
-          <div className="space-y-8">
-            {/* Enhanced section badge */}
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-neon rounded-full"></div>
-              <div className="px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-                <span className="text-slate-300 text-sm font-bold tracking-widest uppercase">
-                  Conecta con Nosotros
-                </span>
-              </div>
-              <div className="w-20 h-0.5 bg-gradient-to-r from-neon via-primary-400 to-transparent rounded-full"></div>
-            </div>
-            
-            <div className="relative">
-              <h2 className="font-heading font-black text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-white">
-                ¿Listo para tu{' '}
-                <span className="text-gradient-neon relative inline-block group">
-                  independencia energética
-                  <div className="absolute inset-0 bg-gradient-to-r from-neon/20 to-primary-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </span>
-                ?
-              </h2>
-              
-              {/* Dynamic background text */}
-              <div className="absolute inset-0 font-heading font-black text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight text-primary-400/5 transform translate-x-1 translate-y-1 -z-10">
-                ¿Listo para tu independencia energética?
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-medium">
-                <span className="text-white font-bold">Contáctanos hoy</span>{' '}
-                y descubre cómo nuestras baterías solares pueden{' '}
-                <span className="text-neon font-semibold">transformar tu experiencia energética</span>
-              </p>
-              
-              {/* Response time indicator */}
-              <div className="flex items-center justify-center space-x-6 text-sm text-slate-400">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
-                  <span>Respuesta en 24h</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <span>Consulta gratuita</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
-                  <span>Sin compromiso</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-center space-x-3">
-                <div className="w-32 h-1 bg-gradient-to-r from-neon to-primary-400 rounded-full animate-shimmer shadow-glow-neon"></div>
-                <div className="flex space-x-1">
-                  {[...Array(3)].map((_, i) => (
-                    <div 
-                      key={i}
-                      className="w-2 h-2 bg-neon/60 rounded-full animate-pulse"
-                      style={{ animationDelay: `${i * 0.3}s` }}
-                    />
-                  ))}
-                </div>
-                <div className="w-32 h-1 bg-gradient-to-r from-primary-400 to-neon rounded-full animate-shimmer shadow-glow-primary"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Ultra-Enhanced Contact Methods */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 mb-20">
-          {contactMethods.map((method, index) => (
-            <div 
-              key={index}
-              className="relative group animate-fade-in-up"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-neon/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <a 
-                href={method.action}
-                className="relative bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 text-center p-8 block transition-all duration-500 hover:scale-105 hover:border-primary-400/40 hover:shadow-glow-primary"
-              >
-                <div className="space-y-6">
-                  {/* Enhanced icon with animated background */}
-                  <div className="relative mx-auto w-20 h-20">
-                    <div className="absolute inset-0 bg-gradient-to-br from-neon to-primary-400 rounded-2xl animate-pulse-soft opacity-80"></div>
-                    <div className="relative w-full h-full bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center shadow-glow-neon group-hover:shadow-glow-neon group-hover:scale-110 transition-all duration-300">
-                      <span className="text-3xl filter group-hover:brightness-110">{method.icon}</span>
-                    </div>
-                    {/* Orbiting elements */}
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon/60 rounded-full animate-pulse"></div>
-                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-primary-400/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <h3 className="font-heading font-bold text-2xl text-white group-hover:text-neon transition-colors duration-300">
-                      {method.title}
-                    </h3>
-                    
-                    <p className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors duration-300">
-                      {method.description}
-                    </p>
-                    
-                    {/* Enhanced action button */}
-                    <div className="relative inline-block">
-                      <div className="px-6 py-3 bg-gradient-to-r from-neon/20 to-primary-400/20 border border-neon/40 rounded-xl transition-all duration-300 group-hover:border-neon/60 group-hover:bg-neon/30">
-                        <span className="text-neon font-bold text-sm tracking-wide flex items-center justify-center gap-2">
-                          {method.actionText}
-                          <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Animated border on hover */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-primary-400/0 group-hover:border-primary-400/50 transition-all duration-300"></div>
-              </a>
-            </div>
-          ))}
-        </div>
-
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Ultra-Enhanced Contact Form */}
-        <div className="max-w-5xl mx-auto mb-20">
+        <div className="max-w-5xl mx-auto mb-16 lg:mb-20">
           <div className="relative group">
             {/* Enhanced glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-neon/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden animate-fade-in-up hover:border-primary-400/40 transition-all duration-500">
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-3xl border border-white/20 overflow-hidden animate-fade-in-up hover:border-primary-400/40 transition-all duration-500">
               {/* Animated background pattern */}
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{
@@ -324,18 +229,18 @@ const ContactSection = () => {
                 }}></div>
               </div>
               
-              <div className="relative p-8 lg:p-16">
-                <div className="text-center mb-12">
+              <div className="relative p-6 sm:p-8 lg:p-16">
+                <div className="text-center mb-8 lg:mb-12">
                   {/* Enhanced form header */}
-                  <div className="flex items-center justify-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center animate-pulse-soft shadow-glow-neon">
-                      <svg className="w-8 h-8 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center justify-center mb-6 lg:mb-8">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-neon to-primary-400 rounded-2xl flex items-center justify-center animate-pulse-soft shadow-glow-neon">
+                      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
                   </div>
                   
-                  <h3 className="font-heading font-bold text-3xl lg:text-5xl text-white mb-6 leading-tight">
+                  <h3 className="font-heading font-bold text-2xl sm:text-3xl lg:text-5xl text-white mb-4 lg:mb-6 leading-tight">
                     Solicita tu{' '}
                     <span className="text-gradient-neon relative inline-block group/text">
                       Consulta Personalizada
@@ -343,7 +248,7 @@ const ContactSection = () => {
                     </span>
                   </h3>
                   
-                  <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                  <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4">
                     Completa este formulario y{' '}
                     <span className="text-white font-semibold">
                       nuestros expertos diseñarán la solución perfecta para ti
@@ -352,24 +257,24 @@ const ContactSection = () => {
                   </p>
                   
                   {/* Form benefits */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 lg:mt-8 px-4">
+                    <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-slate-400">
                       <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
                       <span>Asesoría especializada</span>
                     </div>
-                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                    <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-slate-400">
                       <div className="w-2 h-2 bg-neon rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
                       <span>Cotización personalizada</span>
                     </div>
-                    <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
+                    <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-slate-400">
                       <div className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
                       <span>Respuesta garantizada</span>
                     </div>
                   </div>
                 </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {/* Required Fields */}
                 <div className="space-y-2">
                   <label 

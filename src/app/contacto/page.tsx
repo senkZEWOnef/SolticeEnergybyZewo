@@ -108,13 +108,9 @@ const ContactPage = () => {
             <div className="row justify-content-center text-center">
               <div className="col-lg-8">
                 <h1 
-                  className="mb-4"
+                  className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight"
                   style={{
-                    fontSize: 'clamp(3rem, 6vw, 5rem)',
-                    fontWeight: '800',
                     lineHeight: '1.1',
-                    fontFamily: 'Space Grotesk, system-ui, sans-serif',
-                    letterSpacing: '-0.02em',
                     color: '#ffffff'
                   }}
                 >
@@ -122,11 +118,9 @@ const ContactPage = () => {
                   <span style={{ color: '#b4fe00', fontWeight: '900' }}>CON NOSOTROS</span>
                 </h1>
                 <p 
-                  className="mb-0"
-                  style={{ 
-                    fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
+                  className="mb-0 text-lg sm:text-xl lg:text-2xl leading-relaxed font-light"
+                  style={{
                     color: 'var(--slate-300)',
-                    fontWeight: '600',
                     maxWidth: '800px',
                     margin: '0 auto'
                   }}
@@ -158,22 +152,18 @@ const ContactPage = () => {
           <div className="container">
             <div className="text-center mb-5">
               <h2 
-                className="mb-4"
+                className="mb-4 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight"
                 style={{
-                  fontSize: 'clamp(2rem, 4vw, 3rem)',
-                  fontWeight: '700',
-                  color: '#ffffff',
-                  fontFamily: 'Space Grotesk, system-ui, sans-serif'
+                  color: '#ffffff'
                 }}
               >
                 Múltiples formas de{' '}
                 <span style={{ color: '#b4fe00' }}>conectar</span>
               </h2>
               <p 
+                className="text-base sm:text-lg leading-relaxed font-medium"
                 style={{
-                  fontSize: '18px',
                   color: 'var(--slate-300)',
-                  fontWeight: '500',
                   maxWidth: '600px',
                   margin: '0 auto'
                 }}
@@ -212,22 +202,18 @@ const ContactPage = () => {
                     </div>
                     
                     <h5 
-                      className="mb-3"
+                      className="mb-3 text-lg font-bold tracking-tight"
                       style={{
-                        color: '#ffffff',
-                        fontWeight: '600',
-                        fontSize: '18px'
+                        color: '#ffffff'
                       }}
                     >
                       {method.title}
                     </h5>
                     
                     <p 
-                      className="mb-3"
+                      className="mb-3 text-sm leading-relaxed font-light"
                       style={{
                         color: 'var(--slate-300)',
-                        fontSize: '14px',
-                        lineHeight: '1.5',
                         whiteSpace: 'pre-line'
                       }}
                     >
@@ -281,22 +267,18 @@ const ContactPage = () => {
                 >
                   <div className="text-center mb-4">
                     <h3 
-                      className="mb-3"
+                      className="mb-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight"
                       style={{
-                        color: '#ffffff',
-                        fontWeight: '600',
-                        fontSize: '28px',
-                        fontFamily: 'Space Grotesk, system-ui, sans-serif'
+                        color: '#ffffff'
                       }}
                     >
                       Solicita tu{' '}
                       <span style={{ color: '#b4fe00' }}>Consulta Personalizada</span>
                     </h3>
                     <p 
+                      className="text-sm sm:text-base leading-relaxed font-medium"
                       style={{
-                        color: 'var(--slate-300)',
-                        fontSize: '16px',
-                        fontWeight: '500'
+                        color: 'var(--slate-300)'
                       }}
                     >
                       Completa este formulario y nuestros expertos se pondrán en contacto contigo{' '}
@@ -312,8 +294,8 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="name" 
-                          className="form-label"
-                          style={{ color: '#ffffff', fontWeight: '600', fontSize: '14px' }}
+                          className="form-label text-sm font-semibold tracking-wide"
+                          style={{ color: '#ffffff' }}
                         >
                           Nombre Completo *
                         </label>
@@ -339,8 +321,8 @@ const ContactPage = () => {
                       <div className="col-md-6">
                         <label 
                           htmlFor="phone" 
-                          className="form-label"
-                          style={{ color: '#ffffff', fontWeight: '600', fontSize: '14px' }}
+                          className="form-label text-sm font-semibold tracking-wide"
+                          style={{ color: '#ffffff' }}
                         >
                           Teléfono *
                         </label>
@@ -368,7 +350,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="email" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Email (opcional)
                         </label>
@@ -394,7 +377,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="company" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Empresa/Negocio (opcional)
                         </label>
@@ -420,7 +404,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="location" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Ubicación/Ciudad
                         </label>
@@ -446,7 +431,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="batteryInterest" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Batería de Interés
                         </label>
@@ -490,7 +476,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="preferredContact" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Método de Contacto Preferido
                         </label>
@@ -526,7 +513,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="urgency" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Urgencia de la Consulta
                         </label>
@@ -561,7 +549,8 @@ const ContactPage = () => {
                         <label 
                           htmlFor="message" 
                           className="form-label"
-                          style={{ color: 'var(--slate-300)', fontWeight: '500', fontSize: '14px' }}
+                          className="text-sm font-medium tracking-wide"
+                          style={{ color: 'var(--slate-300)' }}
                         >
                           Mensaje Adicional (opcional)
                         </label>
@@ -639,20 +628,17 @@ const ContactPage = () => {
                   }}
                 >
                   <h5 
-                    className="mb-3"
+                    className="mb-3 text-lg font-bold tracking-tight"
                     style={{
-                      color: '#b4fe00',
-                      fontWeight: '600',
-                      fontSize: '18px'
+                      color: '#b4fe00'
                     }}
                   >
                     🚀 Respuesta Rápida
                   </h5>
                   <p 
+                    className="text-sm leading-relaxed font-light"
                     style={{
-                      color: 'var(--slate-300)',
-                      fontSize: '14px',
-                      lineHeight: '1.6'
+                      color: 'var(--slate-300)'
                     }}
                   >
                     Nuestro equipo se compromete a responder todas las consultas en menos de 24 horas, 
@@ -671,20 +657,17 @@ const ContactPage = () => {
                   }}
                 >
                   <h5 
-                    className="mb-3"
+                    className="mb-3 text-lg font-bold tracking-tight"
                     style={{
-                      color: '#b4fe00',
-                      fontWeight: '600',
-                      fontSize: '18px'
+                      color: '#b4fe00'
                     }}
                   >
                     📋 Consulta Gratuita
                   </h5>
                   <p 
+                    className="text-sm leading-relaxed font-light"
                     style={{
-                      color: 'var(--slate-300)',
-                      fontSize: '14px',
-                      lineHeight: '1.6'
+                      color: 'var(--slate-300)'
                     }}
                   >
                     Evaluación completa de tus necesidades energéticas sin costo alguno. 
@@ -703,20 +686,17 @@ const ContactPage = () => {
                   }}
                 >
                   <h5 
-                    className="mb-3"
+                    className="mb-3 text-lg font-bold tracking-tight"
                     style={{
-                      color: '#b4fe00',
-                      fontWeight: '600',
-                      fontSize: '18px'
+                      color: '#b4fe00'
                     }}
                   >
                     🛡️ Sin Compromiso
                   </h5>
                   <p 
+                    className="text-sm leading-relaxed font-light"
                     style={{
-                      color: 'var(--slate-300)',
-                      fontSize: '14px',
-                      lineHeight: '1.6'
+                      color: 'var(--slate-300)'
                     }}
                   >
                     Recibe información detallada y asesoría experta sin presión de compra. 

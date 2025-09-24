@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useChatContext, Product } from '@/contexts/ChatContext';
 
 const ProductManager = () => {
@@ -14,6 +14,7 @@ const ProductManager = () => {
     name: '',
     power: '',
     description: '',
+    category: '',
     capacity: '',
     outlets: [''],
     cycles: '',
@@ -23,7 +24,10 @@ const ProductManager = () => {
     portability: '',
     maintenance: '',
     tagline: '',
-    image: ''
+    image: '',
+    price: '',
+    rating: 4.9,
+    features: ['']
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,6 +62,30 @@ const ProductManager = () => {
     }));
   };
 
+  const handleFeatureChange = (index: number, value: string) => {
+    const newFeatures = [...formData.features];
+    newFeatures[index] = value;
+    setFormData(prev => ({
+      ...prev,
+      features: newFeatures
+    }));
+  };
+
+  const addFeature = () => {
+    setFormData(prev => ({
+      ...prev,
+      features: [...prev.features, '']
+    }));
+  };
+
+  const removeFeature = (index: number) => {
+    const newFeatures = formData.features.filter((_, i) => i !== index);
+    setFormData(prev => ({
+      ...prev,
+      features: newFeatures
+    }));
+  };
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -79,6 +107,7 @@ const ProductManager = () => {
       name: '',
       power: '',
       description: '',
+      category: '',
       capacity: '',
       outlets: [''],
       cycles: '',
@@ -88,7 +117,10 @@ const ProductManager = () => {
       portability: '',
       maintenance: '',
       tagline: '',
-      image: ''
+      image: '',
+      price: '',
+      rating: 4.9,
+      features: ['']
     });
     setImagePreview('');
     setIsEditing(false);
@@ -101,6 +133,7 @@ const ProductManager = () => {
       name: product.name,
       power: product.power,
       description: product.description,
+      category: product.category || '',
       capacity: product.specifications.capacity,
       outlets: product.specifications.outlets,
       cycles: product.specifications.cycles,
@@ -110,7 +143,10 @@ const ProductManager = () => {
       portability: product.specifications.portability,
       maintenance: product.specifications.maintenance,
       tagline: product.tagline,
-      image: product.image
+      image: product.image,
+      price: (product as Product & {price?: string; rating?: number; features?: string[]}).price || '',
+      rating: (product as Product & {price?: string; rating?: number; features?: string[]}).rating || 4.9,
+      features: (product as Product & {price?: string; rating?: number; features?: string[]}).features || ['']
     });
     setImagePreview(product.image);
     setEditingProduct(product);
@@ -125,6 +161,7 @@ const ProductManager = () => {
       name: formData.name,
       power: formData.power,
       description: formData.description,
+      category: formData.category,
       specifications: {
         capacity: formData.capacity,
         outlets: formData.outlets.filter(outlet => outlet.trim() !== ''),
@@ -136,7 +173,10 @@ const ProductManager = () => {
         maintenance: formData.maintenance
       },
       tagline: formData.tagline,
-      image: formData.image
+      image: formData.image,
+      price: formData.price,
+      rating: formData.rating,
+      features: formData.features.filter(feature => feature.trim() !== '')
     };
 
     if (isEditing && editingProduct) {
@@ -267,6 +307,29 @@ const ProductManager = () => {
                         }}
                         required
                       />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label text-white">Categoría</label>
+                      <select
+                        name="category"
+                        value={formData.category}
+                        onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                        className="form-control"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '10px',
+                          color: '#ffffff'
+                        }}
+                        required
+                      >
+                        <option value="">Seleccionar categoría</option>
+                        <option value="batteries">Baterías Portátiles</option>
+                        <option value="panels">Paneles Solares</option>
+                        <option value="inverters">Inversores</option>
+                        <option value="accessories">Accesorios</option>
+                      </select>
                     </div>
 
                     {/* Description */}
@@ -480,6 +543,85 @@ const ProductManager = () => {
                         }}
                         required
                       />
+                    </div>
+
+                    {/* New fields */}
+                    <div className="col-md-6">
+                      <label className="form-label text-white">Precio</label>
+                      <input
+                        type="text"
+                        name="price"
+                        value={formData.price}
+                        onChange={handleInputChange}
+                        className="form-control"
+                        placeholder="Ej: Desde $1,799"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '10px',
+                          color: '#ffffff'
+                        }}
+                        required
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label text-white">Calificación (1-5)</label>
+                      <input
+                        type="number"
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleInputChange}
+                        className="form-control"
+                        min="1"
+                        max="5"
+                        step="0.1"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '10px',
+                          color: '#ffffff'
+                        }}
+                        required
+                      />
+                    </div>
+
+                    {/* Features */}
+                    <div className="col-12">
+                      <label className="form-label text-white">Características Destacadas</label>
+                      {formData.features.map((feature, index) => (
+                        <div key={index} className="d-flex gap-2 mb-2">
+                          <input
+                            type="text"
+                            value={feature}
+                            onChange={(e) => handleFeatureChange(index, e.target.value)}
+                            className="form-control"
+                            placeholder="Ej: Sin gasolina"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              borderRadius: '10px',
+                              color: '#ffffff'
+                            }}
+                          />
+                          {formData.features.length > 1 && (
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-danger"
+                              onClick={() => removeFeature(index)}
+                            >
+                              ✕
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-light"
+                        onClick={addFeature}
+                      >
+                        ➕ Agregar Característica
+                      </button>
                     </div>
 
                     {/* Image Upload */}

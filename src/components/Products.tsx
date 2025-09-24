@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Phone, MessageCircle, Mail, Star, Search, Filter, Grid, List } from 'lucide-react';
 
 interface Product {
   id: string;
   name: string;
   power: string;
   description: string;
+  category: string;
   specifications: {
     capacity: string;
     outlets: string[];
@@ -20,555 +22,377 @@ interface Product {
   tagline: string;
   image: string;
   createdAt: Date;
+  price?: string;
+  rating?: number;
+  features?: string[];
 }
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const categories = [
+    { id: 'all', name: 'Todos los productos' },
+    { id: 'batteries', name: 'Baterías Portátiles' },
+    { id: 'panels', name: 'Paneles Solares' },
+    { id: 'inverters', name: 'Inversores' },
+    { id: 'accessories', name: 'Accesorios' }
+  ];
 
   useEffect(() => {
-    // Load products from localStorage or initialize with default products
-    const savedProducts = localStorage.getItem('soltice_products');
-    
-    if (savedProducts) {
-      try {
-        const parsedProducts = JSON.parse(savedProducts).map((product: any) => ({
-          ...product,
-          createdAt: new Date(product.createdAt)
-        }));
-        setProducts(parsedProducts);
-      } catch (error) {
-        console.error('Error parsing saved products:', error);
-        initializeDefaultProducts();
-      }
-    } else {
-      initializeDefaultProducts();
-    }
-  }, []);
-
-  const initializeDefaultProducts = () => {
+    // Load products with categories
     const defaultProducts: Product[] = [
       {
         id: 'solar-2500',
-        name: 'Batería Portátil Soltice Energy – 2500 W',
+        name: 'Batería Portátil Soltice Energy – 2500W',
         power: '2500W',
-        description: 'La solución ideal para apartamentos, estudios, campers o como respaldo esencial en tu hogar. Esta batería portátil te ofrece energía limpia y silenciosa sin necesidad de gasolina ni mantenimiento. Perfecta para los apagones frecuentes en Puerto Rico.',
+        category: 'batteries',
+        price: 'Desde $1,799',
+        rating: 4.9,
+        description: 'La solución ideal para apartamentos, estudios, campers o como respaldo esencial en tu hogar.',
         specifications: {
           capacity: '2,048 watts hora (Wh)',
           outlets: ['4 conectores AC 110 / 120V', '2 puertos USB', '2 puertos USB-C'],
           cycles: '3,000',
           chargeTime: '1 hora y 30 minutos',
-          display: 'Monitoreo en tiempo real del consumo y carga',
-          usage: 'Neveras, microondas, abanicos, televisores, lámparas, lavadoras pequeñas, celulares y más',
-          portability: 'No requiere instalación, fácil de transportar',
-          maintenance: 'Cero mantenimiento requerido'
+          display: 'Monitoreo en tiempo real',
+          usage: 'Neveras, microondas, abanicos, televisores',
+          portability: 'No requiere instalación',
+          maintenance: 'Cero mantenimiento'
         },
+        features: ['Sin gasolina', '100% Silencioso', 'Portátil', '7 años garantía'],
         tagline: 'Silenciosa. Eficiente. Siempre lista.',
         image: '/Solar2500-1.png',
         createdAt: new Date()
       },
       {
         id: 'solar-3600',
-        name: 'Batería Portátil Soltice Energy – 3600 W',
+        name: 'Batería Portátil Soltice Energy – 3600W',
         power: '3600W',
-        description: 'Potente, confiable y silenciosa. Esta batería es ideal para hogares que necesitan más capacidad sin depender de gasolina ni instalaciones complicadas. Mantén tu casa funcionando durante los apagones más largos, con energía limpia y segura.',
+        category: 'batteries',
+        price: 'Desde $2,299',
+        rating: 4.9,
+        description: 'Potente, confiable y silenciosa. Ideal para hogares que necesitan más capacidad.',
         specifications: {
           capacity: '3,072 watts hora (Wh)',
-          outlets: [
-            '3 conectores AC 110 / 120V',
-            '2 conectores para transfer switch de 30 amperes',
-            '4 puertos USB',
-            '2 puertos USB-C',
-            '1 puerto tipo encendedor (12V / 8A)'
-          ],
+          outlets: ['3 conectores AC 110 / 120V', '2 transfer switch 30A', '4 USB', '2 USB-C'],
           cycles: '4,000',
           chargeTime: '1 hora y 30 minutos',
-          display: 'Monitoreo de consumo y nivel de carga en tiempo real',
-          usage: 'Neveras grandes, microondas, televisores, abanicos, lavadoras, laptops, routers, cargadores de celulares y más',
-          portability: 'Compacta, fácil de mover, no requiere instalación',
-          maintenance: 'Cero mantenimiento requerido'
+          display: 'Monitoreo en tiempo real',
+          usage: 'Neveras grandes, microondas, televisores, laptops',
+          portability: 'Compacta, fácil de mover',
+          maintenance: 'Cero mantenimiento'
         },
+        features: ['Sin gasolina', '100% Silencioso', 'Transfer Switch', '7 años garantía'],
         tagline: 'Más energía. Más control. Cero ruido.',
         image: '/Solar3600-1.png',
         createdAt: new Date()
       },
       {
         id: 'solar-6000',
-        name: 'Batería Portátil Soltice Energy – 6000 W',
+        name: 'Batería Portátil Soltice Energy – 6000W',
         power: '6000W',
-        description: 'La opción más potente y versátil de nuestra línea. Esta batería portátil ofrece salida de 110 y 220 voltios, ideal para hogares con equipos de alto consumo. Perfecta para enfrentar apagones prolongados sin ruido, sin gasolina y sin mantenimiento.',
+        category: 'batteries',
+        price: 'Desde $2,899',
+        rating: 5.0,
+        description: 'La más potente. Salida 110 y 220V para equipos de alto consumo.',
         specifications: {
           capacity: '3,072 watts hora (Wh)',
-          outlets: [
-            '3 conectores AC 110 / 220V',
-            '2 conectores para transfer switch de 30 amperes',
-            '4 puertos USB',
-            '2 puertos USB-C',
-            '1 puerto tipo encendedor (12V / 8A)'
-          ],
+          outlets: ['3 conectores AC 110 / 220V', '2 transfer switch 30A', '4 USB', '2 USB-C'],
           cycles: '4,000',
           chargeTime: '1 hora y 30 minutos',
-          display: 'Monitoreo preciso de energía y consumo',
-          usage: 'Aires acondicionados, calentadores, bombas de agua, estufas eléctricas pequeñas, neveras, microondas, televisores, routers, laptops y más',
-          portability: 'Portátil, sin instalación técnica requerida',
-          maintenance: 'Cero gasolina, cero aceite, cero ruido'
+          display: 'Monitoreo preciso',
+          usage: 'Aires acondicionados, bombas de agua, estufas',
+          portability: 'Portátil, sin instalación',
+          maintenance: 'Cero gasolina, cero aceite'
         },
-        tagline: 'Sin mantenimiento: Cero gasolina, cero aceite, cero ruido',
+        features: ['Doble voltaje 110/220V', '100% Silencioso', 'Máxima potencia', '7 años garantía'],
+        tagline: 'Máxima potencia. Cero mantenimiento.',
         image: '/Solar6000-1.png',
         createdAt: new Date()
       }
     ];
 
     setProducts(defaultProducts);
-    localStorage.setItem('soltice_products', JSON.stringify(defaultProducts));
-  };
+    setFilteredProducts(defaultProducts);
+  }, []);
+
+  // Filter products
+  useEffect(() => {
+    let filtered = products;
+
+    // Filter by category
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(product => product.category === selectedCategory);
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.power.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(filtered);
+  }, [products, selectedCategory, searchTerm]);
+
+  const ProductModal = ({ product, onClose }: { product: Product; onClose: () => void }) => (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="flex justify-between items-center p-6 border-b">
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">{product.name}</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+          >
+            ×
+          </button>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8 p-6">
+          <div>
+            <img 
+              src={product.image}
+              alt={product.name}
+              className="w-full h-64 object-contain bg-gray-50 rounded-lg"
+            />
+          </div>
+          
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${i < Math.floor(product.rating!) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                  />
+                ))}
+                <span className="ml-2 text-gray-600">({product.rating})</span>
+              </div>
+              <span className="text-2xl font-bold text-green-600">{product.price}</span>
+            </div>
+            
+            <p className="text-gray-600 leading-relaxed font-light">{product.description}</p>
+            
+            <div className="space-y-3">
+              <h4 className="font-bold text-gray-900 tracking-tight">Especificaciones:</h4>
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="font-medium">Capacidad:</span>
+                  <p className="text-gray-600">{product.specifications.capacity}</p>
+                </div>
+                <div>
+                  <span className="font-medium">Ciclos:</span>
+                  <p className="text-gray-600">{product.specifications.cycles}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex gap-3 pt-4">
+              <button className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold">
+                💬 Chatear
+              </button>
+              <button className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                📞 Llamar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <section 
-      id="productos"
-      className="position-relative overflow-hidden"
-      style={{
-        paddingTop: '120px',
-        paddingBottom: '80px',
-        background: `
-          linear-gradient(135deg, 
-            var(--slate-900) 0%, 
-            var(--slate-800) 50%,
-            var(--slate-900) 100%
-          )
-        `,
-        minHeight: '100vh'
-      }}
-    >
-      {/* Same background pattern as Hero */}
-      <div 
-        className="position-absolute top-0 start-0 w-100 h-100 opacity-10"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 25% 25%, var(--emerald-500) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, var(--sky-500) 0%, transparent 50%)
-          `
-        }}
-      />
-      
-      {/* Floating elements */}
-      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden">
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
-            top: '10%',
-            right: '20%',
-            animation: 'subtleFloat 8s ease-in-out infinite'
-          }}
-        />
-        <div 
-          className="position-absolute rounded-circle"
-          style={{
-            width: '150px',
-            height: '150px',
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%)',
-            bottom: '20%',
-            left: '15%',
-            animation: 'subtleFloat 6s ease-in-out infinite reverse'
-          }}
-        />
-      </div>
-      <div className="container position-relative" style={{ zIndex: 10 }}>
-        <div className="text-center mb-5">
-          <h2 
-            className="mb-4"
-            style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '700',
-              lineHeight: '1.1',
-              fontFamily: 'Space Grotesk, system-ui, sans-serif',
-              letterSpacing: '-0.02em',
-              color: '#ffffff'
-            }}
-          >
-            Nuestras{' '}
-            <span style={{ color: '#b4fe00', fontWeight: '800' }}>
-              Baterías Solares
-            </span>
-          </h2>
-          <p 
-            className="mb-0"
-            style={{ 
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
-              color: 'var(--slate-300)',
-              fontWeight: '500',
-              maxWidth: '600px',
-              margin: '0 auto'
-            }}
-          >
-            Tecnología avanzada para{' '}
-            <span style={{ color: '#ffffff', fontWeight: '600' }}>
-              independencia energética total
-            </span>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm pt-20 lg:pt-24">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 lg:mb-6 tracking-tight">
+            Nuestros Productos
+          </h1>
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-light">
+            Encuentra la solución perfecta de energía solar para tu hogar o negocio
           </p>
         </div>
+      </div>
 
-        {/* Benefits Section */}
-        <div className="mb-5">
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <div 
-                className="card-modern p-5"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <div className="row g-4 align-items-center">
-                  <div className="col-lg-7">
-                    <h3 
-                      className="mb-4"
-                      style={{
-                        fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-                        fontWeight: '700',
-                        color: '#ffffff',
-                        fontFamily: 'Space Grotesk, system-ui, sans-serif'
-                      }}
-                    >
-                      ¿Por qué elegir{' '}
-                      <span style={{ color: '#b4fe00' }}>energía solar?</span>
-                    </h3>
-                    
-                    <p 
-                      className="mb-4"
-                      style={{
-                        fontSize: '16px',
-                        color: 'var(--slate-300)',
-                        fontWeight: '500',
-                        lineHeight: '1.6'
-                      }}
-                    >
-                      Las baterías solares ofrecen una fuente de energía{' '}
-                      <span style={{ color: '#ffffff', fontWeight: '600' }}>
-                        limpia, silenciosa y confiable
-                      </span>, ideal para enfrentar los apagones frecuentes en Puerto Rico.{' '}
-                      <span style={{ color: '#ffffff', fontWeight: '600' }}>
-                        Almacena energía durante el día para usarla cuando más la necesites.
-                      </span>
-                    </p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Filters */}
+          <div className="lg:w-64">
+            <div className="bg-white rounded-lg shadow-sm p-6 space-y-6">
+              {/* Search */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 tracking-wide">
+                  Buscar productos
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Buscar..."
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
 
-                    <div className="row g-3">
-                      {[
-                        { icon: '🔇', text: 'Funcionamiento silencioso' },
-                        { icon: '🌱', text: 'Cero emisiones contaminantes' },
-                        { icon: '⚙️', text: 'Sin mantenimiento requerido' },
-                        { icon: '📱', text: 'Fácil instalación y uso' },
-                        { icon: '🔄', text: 'Múltiples métodos de carga' }
-                      ].map((benefit, index) => (
-                        <div key={index} className="col-md-6">
-                          <div className="d-flex align-items-center">
-                            <div 
-                              className="d-flex align-items-center justify-content-center me-3"
-                              style={{
-                                width: '40px',
-                                height: '40px',
-                                background: 'rgba(180, 254, 0, 0.1)',
-                                borderRadius: '12px',
-                                fontSize: '18px'
-                              }}
-                            >
-                              {benefit.icon}
-                            </div>
-                            <span 
-                              style={{
-                                color: 'var(--slate-300)',
-                                fontSize: '15px',
-                                fontWeight: '500'
-                              }}
-                            >
-                              {benefit.text}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="col-lg-5">
-                    <div 
-                      className="text-center p-4 rounded-4"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(180, 254, 0, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%)',
-                        border: '2px solid rgba(180, 254, 0, 0.2)'
-                      }}
+              {/* Categories */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-3 tracking-wide">
+                  Categorías
+                </label>
+                <div className="space-y-2">
+                  {categories.map(category => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                        selectedCategory === category.id
+                          ? 'bg-green-100 text-green-800 font-medium'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
                     >
-                      <div 
-                        className="mb-3"
-                        style={{
-                          fontSize: 'clamp(3rem, 6vw, 4rem)',
-                          fontWeight: '900',
-                          color: '#b4fe00',
-                          fontFamily: 'Space Grotesk, system-ui, sans-serif',
-                          textShadow: '0 0 20px rgba(180, 254, 0, 0.3)'
-                        }}
-                      >
-                        5
-                      </div>
-                      <h4 
-                        className="mb-3"
-                        style={{
-                          color: '#ffffff',
-                          fontWeight: '700',
-                          fontSize: '24px'
-                        }}
-                      >
-                        Beneficios que te brinda la{' '}
-                        <span style={{ color: '#b4fe00' }}>energía solar</span>
-                      </h4>
-                      <p 
-                        style={{
-                          color: 'var(--slate-300)',
-                          fontSize: '14px',
-                          marginBottom: '0'
-                        }}
-                      >
-                        Energía limpia, confiable y económica para tu hogar o negocio
-                      </p>
-                    </div>
-                  </div>
+                      {category.name}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="row g-4">
-          {products.map((product, index) => (
-            <div key={product.id} className="col-lg-4 col-md-6">
-              <div 
-                className="card-modern h-100"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  overflow: 'hidden'
-                }}
-              >
-                {/* Product Image */}
-                <div 
-                  className="position-relative"
-                  style={{
-                    height: '250px',
-                    background: `linear-gradient(45deg, rgba(180, 254, 0, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%)`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Toolbar */}
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex items-center gap-4">
+                <span className="text-gray-600 font-medium">
+                  {filteredProducts.length} productos encontrados
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:text-gray-600'}`}
                 >
-                  <img 
-                    src={product.image}
-                    alt={product.name}
-                    style={{
-                      maxHeight: '220px',
-                      maxWidth: '90%',
-                      objectFit: 'contain'
-                    }}
-                  />
-                  
-                  {/* Power Badge */}
-                  <div 
-                    className="position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill"
-                    style={{
-                      background: '#b4fe00',
-                      color: '#000000',
-                      fontWeight: '700',
-                      fontSize: '14px'
-                    }}
-                  >
-                    {product.power}
-                  </div>
-                </div>
-
-                <div className="card-body p-4">
-                  {/* Product Name */}
-                  <h5 
-                    className="card-title fw-bold mb-3"
-                    style={{ 
-                      color: '#ffffff',
-                      fontSize: '1.2rem',
-                      lineHeight: '1.3'
-                    }}
-                  >
-                    {product.name}
-                  </h5>
-
-                  {/* Description */}
-                  <p 
-                    className="card-text mb-3"
-                    style={{ 
-                      color: 'rgba(255, 255, 255, 0.8)',
-                      fontSize: '14px',
-                      lineHeight: '1.5'
-                    }}
-                  >
-                    {product.description}
-                  </p>
-
-                  {/* Key Specifications */}
-                  <div className="mb-3">
-                    <h6 
-                      className="fw-bold mb-2"
-                      style={{ color: '#b4fe00', fontSize: '14px' }}
-                    >
-                      Especificaciones Clave:
-                    </h6>
-                    
-                    <div className="row g-2 mb-2">
-                      <div className="col-6">
-                        <small style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          <strong>Capacidad:</strong><br />
-                          {product.specifications.capacity}
-                        </small>
-                      </div>
-                      <div className="col-6">
-                        <small style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          <strong>Ciclos:</strong><br />
-                          {product.specifications.cycles}
-                        </small>
-                      </div>
-                    </div>
-                    
-                    <div className="row g-2 mb-2">
-                      <div className="col-6">
-                        <small style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          <strong>Carga:</strong><br />
-                          {product.specifications.chargeTime}
-                        </small>
-                      </div>
-                      <div className="col-6">
-                        <small style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                          <strong>Puertos:</strong><br />
-                          {product.specifications.outlets.length} tipos
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Tagline */}
-                  <div 
-                    className="text-center p-2 rounded-3 mb-3"
-                    style={{
-                      background: 'rgba(180, 254, 0, 0.1)',
-                      border: '1px solid rgba(180, 254, 0, 0.3)'
-                    }}
-                  >
-                    <small 
-                      className="fw-bold"
-                      style={{ 
-                        color: '#b4fe00',
-                        fontSize: '12px'
-                      }}
-                    >
-                      {product.tagline}
-                    </small>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="d-grid gap-2">
-                    <button 
-                      className="btn btn-modern gradient-primary"
-                      style={{
-                        color: '#000000',
-                        padding: '12px',
-                        fontSize: '14px',
-                        fontWeight: '600'
-                      }}
-                    >
-                      Solicitar Consulta
-                    </button>
-                    <button 
-                      className="btn btn-outline-light border-2"
-                      style={{
-                        borderRadius: '12px',
-                        padding: '10px',
-                        fontSize: '14px',
-                        color: 'rgba(255, 255, 255, 0.9)'
-                      }}
-                    >
-                      Ver Detalles
-                    </button>
-                  </div>
-                </div>
+                  <Grid className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  <List className="w-5 h-5" />
+                </button>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-5">
-          <div 
-            className="card-modern mx-auto p-4"
-            style={{
-              maxWidth: '600px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <h5 
-              className="mb-3"
-              style={{ 
-                color: '#ffffff',
-                fontWeight: '600',
-                fontSize: '20px'
-              }}
-            >
-              ¿Necesitas ayuda para elegir?
-            </h5>
-            <p 
-              className="mb-3"
-              style={{ 
-                color: 'var(--slate-300)',
-                fontSize: '16px',
-                fontWeight: '500'
-              }}
-            >
-              Nuestros expertos te ayudan a seleccionar la{' '}
-              <span style={{ color: '#ffffff', fontWeight: '600' }}>
-                batería perfecta para tus necesidades específicas
-              </span>
-            </p>
-            <div className="d-flex gap-3 justify-content-center flex-wrap">
-              <a 
-                href="#contacto"
-                className="btn btn-modern gradient-primary"
-                style={{
-                  color: '#000000',
-                  padding: '12px 24px',
-                  fontSize: '15px',
-                  fontWeight: '600',
-                  textDecoration: 'none'
-                }}
-              >
-                Consulta Personalizada
-              </a>
-              <a 
-                href="tel:+1234567890"
-                className="btn btn-modern text-white"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  padding: '12px 24px',
-                  fontSize: '15px',
-                  fontWeight: '600',
-                  textDecoration: 'none'
-                }}
-              >
-                📞 Llamar Ahora
-              </a>
+            {/* Products Grid */}
+            <div className={viewMode === 'grid' ? 'grid md:grid-cols-2 xl:grid-cols-3 gap-6' : 'space-y-4'}>
+              {filteredProducts.map(product => (
+                <div 
+                  key={product.id}
+                  className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 ${
+                    viewMode === 'list' ? 'flex' : ''
+                  }`}
+                >
+                  <div className={`relative bg-gray-50 flex items-center justify-center ${
+                    viewMode === 'list' ? 'w-48 h-32' : 'h-48'
+                  }`}>
+                    <img 
+                      src={product.image}
+                      alt={product.name}
+                      className="max-h-full max-w-full object-contain p-4"
+                    />
+                    <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                      {product.power}
+                    </div>
+                    <div className="absolute top-2 left-2 flex items-center gap-1 bg-white bg-opacity-90 px-2 py-1 rounded-full">
+                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                      <span className="text-xs font-medium">{product.rating}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6 flex-1">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 tracking-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-600 text-sm lg:text-base mb-3 line-clamp-2 leading-relaxed">
+                      {product.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {product.features?.slice(0, 3).map((feature, idx) => (
+                        <span 
+                          key={idx}
+                          className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-green-600">{product.price}</span>
+                      <button
+                        onClick={() => setSelectedProduct(product)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      >
+                        Ver detalles
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
+
+            {filteredProducts.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg mb-4 font-medium">No se encontraron productos</p>
+                <button
+                  onClick={() => {
+                    setSearchTerm('');
+                    setSelectedCategory('all');
+                  }}
+                  className="text-blue-500 hover:text-blue-600 font-medium"
+                >
+                  Limpiar filtros
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </section>
+
+      {/* Contact Buttons */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <button className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
+          <MessageCircle className="w-6 h-6" />
+        </button>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
+          <Phone className="w-6 h-6" />
+        </button>
+        <button className="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
+          <Mail className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Product Modal */}
+      {selectedProduct && (
+        <ProductModal 
+          product={selectedProduct} 
+          onClose={() => setSelectedProduct(null)} 
+        />
+      )}
+    </div>
   );
 };
 

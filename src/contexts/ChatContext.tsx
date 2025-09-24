@@ -45,6 +45,7 @@ export interface Product {
   name: string;
   power: string;
   description: string;
+  category: string;
   specifications: {
     capacity: string;
     outlets: string[];
@@ -58,6 +59,9 @@ export interface Product {
   tagline: string;
   image: string;
   createdAt: Date;
+  price?: string;
+  rating?: number;
+  features?: string[];
 }
 
 interface ChatContextType {
