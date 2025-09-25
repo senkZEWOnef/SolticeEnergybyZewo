@@ -7,10 +7,12 @@ import OfficesSection from '@/components/OfficesSection';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/Chat/ChatWidget';
 import AdminWidget from '@/components/AdminWidget';
+import VisitorTracker from '@/components/Analytics/VisitorTracker';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <VisitorTracker />
       <Header />
       <Hero />
       <ProductsPreview />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ChatProvider from "@/contexts/ChatContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://solticeenergypr.org'),
@@ -51,9 +52,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="antialiased">
-        <ChatProvider>
-          {children}
-        </ChatProvider>
+        <AuthProvider>
+          <ChatProvider>
+            {children}
+          </ChatProvider>
+        </AuthProvider>
       </body>
     </html>
   );
