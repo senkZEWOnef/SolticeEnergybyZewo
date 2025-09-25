@@ -144,19 +144,19 @@ const Products = () => {
   }, [products, selectedCategory, searchTerm]);
 
   const ProductModal = ({ product, onClose }: { product: Product; onClose: () => void }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center p-6 border-b">
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">{product.name}</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black bg-opacity-50">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto mx-2 sm:mx-4">
+        <div className="flex justify-between items-center p-4 sm:p-6 border-b">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight pr-4">{product.name}</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+            className="text-gray-400 hover:text-gray-600 text-2xl font-bold min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             ×
           </button>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 p-6">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 p-4 sm:p-6">
           <div>
             <img 
               src={product.image}
@@ -212,14 +212,45 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm pt-20 lg:pt-24">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 lg:mb-6 tracking-tight">
-            Nuestros Productos
-          </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-light">
-            Encuentra la solución perfecta de energía solar para tu hogar o negocio
-          </p>
+      <div className="relative overflow-hidden pt-20 lg:pt-24 py-16 lg:py-20">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/perla.jpg" 
+            alt="Solar energy background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/80 to-white/90"></div>
+        </div>
+        
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-green-400/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/15 rounded-full blur-3xl animate-float-delayed"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center">
+            <div className="inline-block mb-6">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-green-400/10 backdrop-blur-sm border border-green-400/20 text-green-600 text-sm font-semibold tracking-wide">
+                ⚡ PRODUCTOS SOLARES
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-green-600 to-gray-900 mb-6 tracking-tight">
+              Nuestros Productos
+            </h1>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
+              Encuentra la solución perfecta de energía solar para tu{' '}
+              <span className="text-green-600 font-semibold">hogar o negocio</span>
+            </p>
+          </div>
         </div>
       </div>
 

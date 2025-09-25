@@ -35,13 +35,13 @@ const Header = () => {
           <div className="flex items-center justify-between h-full">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center group -ml-32">
+            <Link href="/" className="flex items-center group">
               <img 
                 src="/name.png" 
                 alt="Soltice Energy" 
                 className={`transition-all duration-300 ${
-                  isScrolled ? 'h-28' : 'h-36'
-                } max-w-[450px] filter brightness-0 invert group-hover:scale-105`}
+                  isScrolled ? 'h-12 sm:h-16 md:h-20' : 'h-16 sm:h-20 md:h-24'
+                } max-w-[200px] sm:max-w-[300px] lg:max-w-[450px] filter brightness-0 invert group-hover:scale-105`}
               />
             </Link>
 
@@ -73,7 +73,7 @@ const Header = () => {
               
               <a 
                 href="#contacto"
-                className="bg-green-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 shadow-lg hover:shadow-green-400/25"
+                className="bg-green-400 text-black px-4 sm:px-6 py-3 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 shadow-lg hover:shadow-green-400/25 min-h-[44px] flex items-center text-sm sm:text-base"
               >
                 COTIZACIÓN GRATIS
               </a>
@@ -81,7 +81,7 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button 
-              className="lg:hidden p-2 text-white hover:text-green-400 transition-colors duration-200"
+              className="lg:hidden p-3 text-white hover:text-green-400 transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -58,137 +58,61 @@ const ChatWidget = () => {
   return (
     <>
       {/* Chat Toggle Button */}
-      <div 
-        className="position-fixed"
-        style={{
-          bottom: '20px',
-          right: '20px',
-          zIndex: 1000
-        }}
-      >
+      <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="btn rounded-circle border-0 d-flex align-items-center justify-content-center"
-          style={{
-            width: '60px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-            color: '#131d3b',
-            boxShadow: '0 8px 25px rgba(180, 254, 0, 0.3)',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'scale(1.1)';
-            e.currentTarget.style.boxShadow = '0 12px 35px rgba(180, 254, 0, 0.4)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 8px 25px rgba(180, 254, 0, 0.3)';
-          }}
+          className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center text-slate-900 shadow-2xl hover:scale-110 transition-all duration-300 min-h-[56px] min-w-[56px]"
         >
           {isOpen ? (
-            <span style={{ fontSize: '20px' }}>✕</span>
+            <span className="text-xl">✕</span>
           ) : (
-            <span style={{ fontSize: '20px' }}>💬</span>
+            <span className="text-xl">💬</span>
           )}
         </button>
       </div>
 
       {/* Chat Window */}
       {isOpen && (
-        <div 
-          className="position-fixed"
-          style={{
-            bottom: '90px',
-            right: '20px',
-            width: '350px',
-            height: '500px',
-            zIndex: 999,
-            background: 'rgba(19, 29, 59, 0.98)',
-            backdropFilter: 'blur(20px)',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-        >
+        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-80 md:w-96 h-[60vh] sm:h-[500px] z-50 bg-slate-900/95 backdrop-blur-lg rounded-2xl border border-slate-700/50 shadow-2xl flex flex-col">
           {/* Chat Header */}
-          <div 
-            className="p-3 border-bottom"
-            style={{
-              borderColor: 'rgba(255, 255, 255, 0.1)',
-              background: 'linear-gradient(135deg, rgba(180, 254, 0, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%)'
-            }}
-          >
-            <div className="d-flex align-items-center">
-              <div 
-                className="rounded-circle me-2 d-flex align-items-center justify-content-center"
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)'
-                }}
-              >
-                <span style={{ fontSize: '16px' }}>👤</span>
+          <div className="p-4 border-b border-slate-700/50 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-t-2xl">
+            <div className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center mr-3">
+                <span className="text-lg">👤</span>
               </div>
-              <div>
-                <h6 className="mb-0" style={{ color: '#ffffff', fontSize: '14px', fontWeight: '600' }}>
+              <div className="flex-1">
+                <h6 className="text-white font-semibold text-sm mb-0">
                   Soltice Energy
                 </h6>
-                <small style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '12px' }}>
+                <p className="text-white/70 text-xs">
                   Servicio al Cliente
-                </small>
+                </p>
               </div>
-              <div className="ms-auto">
-                <div 
-                  className="rounded-circle"
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    background: '#25D366'
-                  }}
-                />
-              </div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
             </div>
           </div>
 
           {/* Messages Area */}
-          <div 
-            className="flex-grow-1 p-3 overflow-auto"
-            style={{
-              maxHeight: '350px'
-            }}
-          >
+          <div className="flex-1 p-4 overflow-y-auto max-h-[350px] sm:max-h-[300px]">
             {messages.map((message) => (
               <div 
                 key={message.id}
-                className={`mb-3 d-flex ${message.sender === 'client' ? 'justify-content-end' : 'justify-content-start'}`}
+                className={`mb-3 flex ${message.sender === 'client' ? 'justify-end' : 'justify-start'}`}
               >
                 <div 
-                  className="px-3 py-2 rounded-3"
-                  style={{
-                    maxWidth: '80%',
-                    background: message.sender === 'client' 
-                      ? 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)'
-                      : 'rgba(255, 255, 255, 0.1)',
-                    color: message.sender === 'client' ? '#131d3b' : '#ffffff',
-                    fontSize: '14px'
-                  }}
+                  className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${
+                    message.sender === 'client'
+                      ? 'bg-gradient-to-r from-green-400 to-blue-400 text-slate-900'
+                      : 'bg-white/10 text-white'
+                  }`}
                 >
                   {message.sender === 'admin' && message.senderName && (
-                    <div style={{ fontSize: '11px', opacity: 0.8, marginBottom: '2px' }}>
+                    <div className="text-xs opacity-80 mb-1">
                       {message.senderName}
                     </div>
                   )}
                   <div>{message.text}</div>
-                  <div 
-                    className="text-end mt-1"
-                    style={{ 
-                      fontSize: '10px', 
-                      opacity: 0.7 
-                    }}
-                  >
+                  <div className="text-right mt-1 text-xs opacity-70">
                     {formatTime(message.timestamp)}
                   </div>
                 </div>
@@ -196,45 +120,14 @@ const ChatWidget = () => {
             ))}
             
             {isTyping && (
-              <div className="mb-3 d-flex justify-content-start">
-                <div 
-                  className="px-3 py-2 rounded-3"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    color: '#ffffff',
-                    fontSize: '14px'
-                  }}
-                >
-                  <div className="d-flex align-items-center">
+              <div className="mb-3 flex justify-start">
+                <div className="bg-white/10 text-white px-3 py-2 rounded-2xl text-sm">
+                  <div className="flex items-center">
                     <span>Escribiendo</span>
-                    <div className="ms-2 d-flex">
-                      <div 
-                        className="rounded-circle me-1"
-                        style={{
-                          width: '4px',
-                          height: '4px',
-                          background: '#b4fe00',
-                          animation: 'pulse 1.5s infinite'
-                        }}
-                      />
-                      <div 
-                        className="rounded-circle me-1"
-                        style={{
-                          width: '4px',
-                          height: '4px',
-                          background: '#b4fe00',
-                          animation: 'pulse 1.5s infinite 0.2s'
-                        }}
-                      />
-                      <div 
-                        className="rounded-circle"
-                        style={{
-                          width: '4px',
-                          height: '4px',
-                          background: '#b4fe00',
-                          animation: 'pulse 1.5s infinite 0.4s'
-                        }}
-                      />
+                    <div className="ml-2 flex space-x-1">
+                      <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+                      <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                      <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
                     </div>
                   </div>
                 </div>
@@ -244,39 +137,20 @@ const ChatWidget = () => {
           </div>
 
           {/* Message Input */}
-          <div 
-            className="p-3 border-top"
-            style={{
-              borderColor: 'rgba(255, 255, 255, 0.1)'
-            }}
-          >
-            <form onSubmit={handleSendMessage} className="d-flex">
+          <div className="p-4 border-t border-slate-700/50">
+            <form onSubmit={handleSendMessage} className="flex space-x-3">
               <input
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Escribe tu mensaje..."
-                className="form-control me-2"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '20px',
-                  color: '#ffffff',
-                  fontSize: '14px',
-                  padding: '8px 16px'
-                }}
+                className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[40px]"
               />
               <button
                 type="submit"
-                className="btn rounded-circle border-0 d-flex align-items-center justify-content-center"
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  background: 'linear-gradient(135deg, #b4fe00 0%, #00d4ff 100%)',
-                  color: '#131d3b'
-                }}
+                className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center text-slate-900 hover:scale-105 transition-transform min-h-[44px] min-w-[44px]"
               >
-                <span style={{ fontSize: '16px' }}>→</span>
+                <span className="text-lg">→</span>
               </button>
             </form>
           </div>

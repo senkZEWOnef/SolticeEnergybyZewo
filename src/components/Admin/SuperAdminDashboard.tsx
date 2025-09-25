@@ -15,15 +15,17 @@ import {
   CheckCircle,
   AlertCircle,
   LogOut,
-  RefreshCw
+  RefreshCw,
+  Package
 } from 'lucide-react';
 import SecretaryManagement from './SecretaryManagement';
 import LiveChatMonitor from './LiveChatMonitor';
+import ProductManager from './ProductManager';
 
 const SuperAdminDashboard = () => {
   const { user, logout } = useAuth();
   const { analytics, isLoading, refreshAnalytics } = useAnalytics();
-  const [activeTab, setActiveTab] = useState<'overview' | 'secretaries' | 'chats' | 'analytics'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'secretaries' | 'chats' | 'products' | 'analytics'>('overview');
 
   // Auto refresh every 30 seconds
   useEffect(() => {
@@ -135,11 +137,12 @@ const SuperAdminDashboard = () => {
               { id: 'overview', label: 'Resumen', icon: BarChart3 },
               { id: 'secretaries', label: 'Secretarias', icon: Users },
               { id: 'chats', label: 'Chat en Vivo', icon: MessageSquare },
+              { id: 'products', label: 'Productos', icon: Package },
               { id: 'analytics', label: 'Analíticas', icon: Activity }
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as 'overview' | 'secretaries' | 'chats' | 'analytics')}
+                onClick={() => setActiveTab(tab.id as 'overview' | 'secretaries' | 'chats' | 'products' | 'analytics')}
                 className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'text-green-400 border-b-2 border-green-400 bg-white/5'
@@ -255,6 +258,8 @@ const SuperAdminDashboard = () => {
         {activeTab === 'secretaries' && <SecretaryManagement />}
         
         {activeTab === 'chats' && <LiveChatMonitor />}
+        
+        {activeTab === 'products' && <ProductManager />}
 
         {activeTab === 'analytics' && (
           <div className="space-y-6">

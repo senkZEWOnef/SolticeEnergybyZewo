@@ -94,10 +94,10 @@ const Hero = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="bg-green-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-300 transition-colors duration-200 shadow-xl">
+                <button className="bg-green-400 text-black px-6 sm:px-8 py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-green-300 transition-colors duration-200 shadow-xl min-h-[48px] flex items-center justify-center">
                   CONSULTA GRATUITA
                 </button>
-                <a href="/productos" className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-black transition-all duration-200 text-center inline-block">
+                <a href="/productos" className="border-2 border-white text-white px-6 sm:px-8 py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-200 text-center inline-flex items-center justify-center min-h-[48px]">
                   VER PRODUCTOS
                 </a>
               </div>
@@ -105,7 +105,7 @@ const Hero = () => {
 
             {/* Contact Form */}
             <div className="lg:ml-auto">
-              <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md">
+              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full">
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">
                     Cotización Inmediata
@@ -121,7 +121,7 @@ const Hero = () => {
                       type="text"
                       name="name"
                       placeholder="Nombre completo *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -133,7 +133,7 @@ const Hero = () => {
                       type="tel"
                       name="phone"
                       placeholder="Teléfono *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
                       value={formData.phone}
                       onChange={handleChange}
                       required
@@ -145,7 +145,7 @@ const Hero = () => {
                       type="email"
                       name="email"
                       placeholder="Email"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -156,7 +156,7 @@ const Hero = () => {
                       type="text"
                       name="location"
                       placeholder="Ciudad"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
                       value={formData.location}
                       onChange={handleChange}
                     />
@@ -167,7 +167,7 @@ const Hero = () => {
                       name="message"
                       rows={3}
                       placeholder="¿Cuál es tu consumo eléctrico mensual?"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none transition-colors text-gray-900 resize-none"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 resize-none min-h-[44px]"
                       value={formData.message}
                       onChange={handleChange}
                     ></textarea>
@@ -175,7 +175,7 @@ const Hero = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-gray-900 text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg"
+                    className="w-full bg-gray-900 text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg min-h-[48px] flex items-center justify-center"
                   >
                     OBTENER COTIZACIÓN
                   </button>
