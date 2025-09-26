@@ -45,9 +45,9 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 min-h-screen flex items-start lg:items-center pt-24 pb-12 lg:pt-0 lg:pb-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center w-full">
+      <div className="relative z-20 min-h-screen lg:min-h-screen flex flex-col justify-start lg:justify-center pt-24 pb-8 px-4 sm:px-6 lg:px-0">
+        <div className="container mx-auto lg:px-12 w-full flex-1 flex flex-col justify-start lg:justify-center">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-start lg:items-center w-full">
             
             {/* Hero Content */}
             <div className="text-white space-y-8">
@@ -104,10 +104,10 @@ const Hero = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:ml-auto w-full mt-8 lg:mt-0">
+            <div className="lg:ml-auto w-full mt-6 lg:mt-0">
               <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto lg:mx-0">
-                <div className="text-center mb-4 sm:mb-8">
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                <div className="text-center mb-3 sm:mb-6">
+                  <h2 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">
                     Cotización Inmediata
                   </h2>
                   <p className="text-sm sm:text-base text-gray-600">
@@ -115,14 +115,14 @@ const Hero = () => {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                   <div>
                     <input
                       type="text"
                       name="name"
                       autoComplete="name"
                       placeholder="Nombre completo *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -136,7 +136,7 @@ const Hero = () => {
                       autoComplete="tel"
                       inputMode="tel"
                       placeholder="Teléfono *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.phone}
                       onChange={handleChange}
                       required
@@ -150,7 +150,7 @@ const Hero = () => {
                       autoComplete="email"
                       inputMode="email"
                       placeholder="Email"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -161,7 +161,7 @@ const Hero = () => {
                       type="text"
                       name="location"
                       placeholder="Ciudad"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
                       value={formData.location}
                       onChange={handleChange}
                     />
@@ -180,7 +180,7 @@ const Hero = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-gray-900 text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg min-h-[48px] flex items-center justify-center"
+                    className="w-full bg-gray-900 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg min-h-[48px] flex items-center justify-center"
                   >
                     OBTENER COTIZACIÓN
                   </button>

@@ -97,45 +97,64 @@ const Header = () => {
 
         </div>
 
-        {/* Mobile Navigation Overlay */}
-        {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl shadow-2xl z-50 border-t border-gray-800">
-            <nav className="container mx-auto px-6 py-6">
-              <div className="flex flex-col space-y-4">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-white hover:text-green-400 transition-colors duration-200 py-3 text-lg font-medium border-b border-gray-800 last:border-b-0"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <div className="pt-4 space-y-4">
-                  <a 
-                    href="tel:7875207505"
-                    className="text-white hover:text-green-400 transition-colors duration-200 flex items-center space-x-3 py-3 text-lg"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>(787) 520-7505</span>
-                  </a>
-                  <a 
-                    href="/contacto"
-                    className="bg-green-400 text-black px-6 py-4 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 text-center block text-lg"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    COTIZACIÓN GRATIS
-                  </a>
-                </div>
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
+
+      {/* Mobile Navigation Full Screen Overlay */}
+      {isMenuOpen && (
+        <div className="lg:hidden fixed inset-0 bg-black/98 z-50 flex flex-col">
+          {/* Header area with close button */}
+          <div className="flex justify-between items-center p-6 border-b border-gray-700">
+            <img 
+              src="/name.png" 
+              alt="Soltice Energy" 
+              className="h-8"
+            />
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="text-white p-2 hover:text-green-400"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex-1 px-6 py-8">
+            <div className="space-y-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block text-white hover:text-green-400 transition-colors duration-200 py-4 text-2xl font-bold border-b border-gray-700"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Contact Section */}
+            <div className="mt-8 pt-8 border-t border-gray-700">
+              <a 
+                href="tel:7875207505"
+                className="block text-white hover:text-green-400 transition-colors duration-200 py-4 text-xl font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                📞 (787) 520-7505
+              </a>
+              
+              <a 
+                href="/contacto"
+                className="block bg-green-400 text-black px-6 py-4 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 text-center text-xl mt-6"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                COTIZACIÓN GRATIS
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-8 right-8 z-40 flex flex-col space-y-4">        
