@@ -16,7 +16,9 @@ import {
   AlertCircle,
   LogOut,
   RefreshCw,
-  Package
+  Package,
+  Menu,
+  X
 } from 'lucide-react';
 import UserManagement from './SecretaryManagement';
 import LiveChatMonitor from './LiveChatMonitor';
@@ -26,6 +28,7 @@ const SuperAdminDashboard = () => {
   const { user, logout } = useAuth();
   const { analytics, isLoading, refreshAnalytics } = useAnalytics();
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'chats' | 'products' | 'analytics'>('overview');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Auto refresh every 30 seconds
   useEffect(() => {
@@ -94,45 +97,31 @@ const SuperAdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <div className="bg-black/20 backdrop-blur-xl border-b border-white/10">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex">
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-black/30 backdrop-blur-xl border-r border-white/10 transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
+        <div className="flex flex-col h-full">
+          {/* Sidebar Header */}
+          <div className="flex items-center justify-between p-4 border-b border-white/10">
+            <div className="flex items-center space-x-3">
               <div className="p-2 bg-gradient-to-r from-green-400 to-green-500 rounded-xl">
-                <Shield className="w-6 h-6 text-black" />
+                <Shield className="w-5 h-5 text-black" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-white">Super Admin Panel</h1>
-                <p className="text-gray-400 font-medium">Bienvenido, {user?.name}</p>
+                <h1 className="text-lg font-bold text-white">Admin Panel</h1>
+                <p className="text-xs text-gray-400">{user?.name}</p>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={refreshAnalytics}
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 text-white transition-all duration-200"
-                title="Actualizar datos"
-              >
-                <RefreshCw className="w-5 h-5" />
-              </button>
-              <button
-                onClick={logout}
-                className="flex items-center space-x-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-xl border border-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="font-medium">Cerrar Sesión</span>
-              </button>
-            </div>
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors duration-200"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
-        </div>
-      </div>
 
-      {/* Navigation Tabs */}
-      <div className="bg-black/10 backdrop-blur-xl border-b border-white/10">
-        <div className="container mx-auto px-4">
-          <nav className="flex space-x-1">
+          {/* Navigation */}
+          <nav className="flex-1 p-4 space-y-2">
             {[
               { id: 'overview', label: 'Resumen', icon: BarChart3 },
               { id: 'users', label: 'Usuarios', icon: Users },
@@ -142,23 +131,95 @@ const SuperAdminDashboard = () => {
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as 'overview' | 'users' | 'chats' | 'products' | 'analytics')}
-                className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 ${
+                onClick={() => {
+                  setActiveTab(tab.id as 'overview' | 'users' | 'chats' | 'products' | 'analytics');
+                  setIsSidebarOpen(false);
+                }}
+                className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl font-medium transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'text-green-400 border-b-2 border-green-400 bg-white/5'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-green-400/20 text-green-400 border border-green-400/30'
+                    : 'text-gray-400 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-5 h-5" />
                 <span>{tab.label}</span>
               </button>
             ))}
           </nav>
+
+          {/* Sidebar Footer */}
+          <div className="p-4 border-t border-white/10">
+            <button
+              onClick={refreshAnalytics}
+              className="w-full mb-3 flex items-center space-x-3 px-3 py-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 text-white transition-all duration-200"
+              title="Actualizar datos"
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span className="text-sm">Actualizar</span>
+            </button>
+            <button
+              onClick={logout}
+              className="w-full flex items-center space-x-3 px-3 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-xl border border-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="text-sm">Cerrar Sesión</span>
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Overlay for mobile */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="flex-1 flex flex-col min-h-screen lg:ml-0">
+        {/* Top Header */}
+        <div className="bg-black/20 backdrop-blur-xl border-b border-white/10">
+          <div className="px-4 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setIsSidebarOpen(true)}
+                  className="lg:hidden p-2 text-white hover:text-green-400 transition-colors duration-200"
+                >
+                  <Menu className="w-6 h-6" />
+                </button>
+                <div className="lg:hidden">
+                  <h1 className="text-xl font-bold text-white">Super Admin</h1>
+                </div>
+                <div className="hidden lg:block">
+                  <h1 className="text-2xl font-black text-white">Super Admin Panel</h1>
+                  <p className="text-gray-400 font-medium">Bienvenido, {user?.name}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-2 lg:hidden">
+                <button
+                  onClick={refreshAnalytics}
+                  className="p-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 text-white transition-all duration-200"
+                  title="Actualizar datos"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={logout}
+                  className="p-2 bg-red-500/20 hover:bg-red-500/30 rounded-xl border border-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200"
+                  title="Cerrar Sesión"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="flex-1 p-4 lg:p-8">
         {activeTab === 'overview' && (
           <div className="space-y-8">
             {/* Stats Grid */}
@@ -357,6 +418,7 @@ const SuperAdminDashboard = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
