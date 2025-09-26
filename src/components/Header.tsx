@@ -101,7 +101,7 @@ const Header = () => {
 
       {/* Mobile Navigation Clean Dropdown */}
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg shadow-xl z-50 border-t border-gray-700">
+        <div className={`lg:hidden fixed left-0 right-0 bg-black/95 backdrop-blur-lg shadow-xl z-[60] border-t border-gray-700 ${isScrolled ? 'top-16' : 'top-20'}`}>
           <nav className="px-6 py-4">
             <div className="space-y-1">
               {navLinks.map((link) => (
