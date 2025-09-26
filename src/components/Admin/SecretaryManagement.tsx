@@ -10,29 +10,36 @@ import {
   ToggleLeft, 
   ToggleRight, 
   Trash2, 
-  RefreshCw
+  RefreshCw,
+  ArrowUp
 } from 'lucide-react';
 
-const SecretaryManagement = () => {
+const UserManagement = () => {
   const { 
-    createSecretary, 
-    getAllSecretaries, 
-    toggleSecretaryStatus, 
-    deleteSecretary, 
-    forcePasswordReset 
+    user: currentUser,
+    createUser, 
+    getAllUsers, 
+    toggleUserStatus, 
+    deleteUser, 
+    forcePasswordReset,
+    elevateUser 
   } = useAuth();
 
-  const [secretaries] = useState(() => getAllSecretaries());
+  const [users] = useState(() => getAllUsers());
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   // const [showPasswords, setShowPasswords] = useState<{ [key: string]: boolean }>({});
   // const [copiedPasswords, setCopiedPasswords] = useState<{ [key: string]: boolean }>({});
 
-  const [newSecretary, setNewSecretary] = useState({
+  const [newAssistant, setNewAssistant] = useState<{
+    name: string;
+    email: string;
+    role: 'assistant' | 'admin';
+  }>({
     name: '',
     email: '',
-    customPassword: ''
+    role: 'assistant'
   });
 
   const showMessage = (type: 'success' | 'error', text: string) => {
@@ -40,25 +47,25 @@ const SecretaryManagement = () => {
     setTimeout(() => setMessage(null), 5000);
   };
 
-  const handleCreateSecretary = async (e: React.FormEvent) => {
+  const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const result = await createSecretary({
-      name: newSecretary.name,
-      email: newSecretary.email,
-      role: 'secretary',
-      temporaryPassword: newSecretary.customPassword || undefined
+    const result = await createUser({
+      name: newAssistant.name,
+      email: newAssistant.email,
+      role: newAssistant.role,
+      // temporaryPassword will be set to 'Soltice2025!' by default in createUser
     });
 
     if (result.success) {
-      showMessage('success', `Secretaria creada exitosamente. Contraseña temporal: ${result.temporaryPassword}`);
-      setNewSecretary({ name: '', email: '', customPassword: '' });
+      showMessage('success', `${newAssistant.role === 'admin' ? 'Administrador' : 'Asistente'} creado exitosamente. Contraseña temporal: ${result.temporaryPassword}`);
+      setNewAssistant({ name: '', email: '', role: 'assistant' });
       setShowCreateForm(false);
       // Refresh the page to show updated data
       setTimeout(() => window.location.reload(), 1500);
     } else {
-      showMessage('error', result.error || 'Error creando secretaria');
+      showMessage('error', result.error || 'Error creando usuario');
     }
 
     setIsLoading(false);
@@ -66,7 +73,7 @@ const SecretaryManagement = () => {
 
   const handleToggleStatus = async (userId: string) => {
     setIsLoading(true);
-    const result = await toggleSecretaryStatus(userId);
+    const result = await toggleUserStatus(userId);
     
     if (result.success) {
       showMessage('success', 'Estado actualizado correctamente');
@@ -78,19 +85,19 @@ const SecretaryManagement = () => {
     setIsLoading(false);
   };
 
-  const handleDeleteSecretary = async (userId: string, name: string) => {
+  const handleDeleteUser = async (userId: string, name: string) => {
     if (!confirm(`¿Estás seguro que deseas eliminar a ${name}? Esta acción no se puede deshacer.`)) {
       return;
     }
 
     setIsLoading(true);
-    const result = await deleteSecretary(userId);
+    const result = await deleteUser(userId);
     
     if (result.success) {
-      showMessage('success', 'Secretaria eliminada correctamente');
+      showMessage('success', 'Asistente eliminado correctamente');
       setTimeout(() => window.location.reload(), 1000);
     } else {
-      showMessage('error', result.error || 'Error eliminando secretaria');
+      showMessage('error', result.error || 'Error eliminando asistente');
     }
     
     setIsLoading(false);
@@ -108,6 +115,24 @@ const SecretaryManagement = () => {
       showMessage('success', `Nueva contraseña para ${name}: ${result.temporaryPassword}`);
     } else {
       showMessage('error', result.error || 'Error reiniciando contraseña');
+    }
+    
+    setIsLoading(false);
+  };
+
+  const handleElevateUser = async (userId: string, name: string) => {
+    if (!confirm(`¿Deseas elevar a ${name} a Administrador? Esta acción le dará acceso completo al sistema.`)) {
+      return;
+    }
+
+    setIsLoading(true);
+    const result = await elevateUser({ userId, newRole: 'admin' });
+    
+    if (result.success) {
+      showMessage('success', `${name} ha sido elevado a Administrador exitosamente`);
+      setTimeout(() => window.location.reload(), 1500);
+    } else {
+      showMessage('error', result.error || 'Error elevando usuario');
     }
     
     setIsLoading(false);
@@ -138,15 +163,15 @@ const SecretaryManagement = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Gestión de Secretarias</h2>
-          <p className="text-gray-400">Administra las cuentas de las secretarias del sistema</p>
+          <h2 className="text-2xl font-bold text-white mb-2">Gestión de Usuarios</h2>
+          <p className="text-gray-400">Administra las cuentas de administradores y asistentes del sistema</p>
         </div>
         <button
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black rounded-xl font-bold transition-all duration-300 transform hover:scale-105"
         >
           <UserPlus className="w-5 h-5" />
-          <span>Nueva Secretaria</span>
+          <span>Nuevo Usuario</span>
         </button>
       </div>
 
@@ -161,16 +186,16 @@ const SecretaryManagement = () => {
         </div>
       )}
 
-      {/* Create Secretary Form */}
+      {/* Create User Form */}
       {showCreateForm && (
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
           <h3 className="text-xl font-bold text-white mb-4 flex items-center">
             <UserPlus className="w-5 h-5 mr-2 text-green-400" />
-            Crear Nueva Secretaria
+            Crear Nuevo Usuario
           </h3>
           
-          <form onSubmit={handleCreateSecretary} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={handleCreateUser} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Nombre Completo
@@ -179,8 +204,8 @@ const SecretaryManagement = () => {
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
-                    value={newSecretary.name}
-                    onChange={(e) => setNewSecretary(prev => ({ ...prev, name: e.target.value }))}
+                    value={newAssistant.name}
+                    onChange={(e) => setNewAssistant(prev => ({ ...prev, name: e.target.value }))}
                     className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
                     placeholder="María González"
                     required
@@ -196,33 +221,47 @@ const SecretaryManagement = () => {
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="email"
-                    value={newSecretary.email}
-                    onChange={(e) => setNewSecretary(prev => ({ ...prev, email: e.target.value }))}
+                    value={newAssistant.email}
+                    onChange={(e) => setNewAssistant(prev => ({ ...prev, email: e.target.value }))}
                     className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
                     placeholder="maria@solticeenergy.com"
                     required
                   />
                 </div>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Rol
+                </label>
+                <div className="relative">
+                  <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <select
+                    value={newAssistant.role}
+                    onChange={(e) => setNewAssistant(prev => ({ ...prev, role: e.target.value as 'admin' | 'assistant' }))}
+                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-400 appearance-none"
+                    required
+                  >
+                    <option value="assistant" className="bg-slate-800">Asistente</option>
+                    <option value="admin" className="bg-slate-800">Administrador</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Contraseña Personalizada (Opcional)
-              </label>
-              <div className="relative">
-                <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  value={newSecretary.customPassword}
-                  onChange={(e) => setNewSecretary(prev => ({ ...prev, customPassword: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  placeholder="Si se deja vacío, se generará automáticamente"
-                />
+              <div className="bg-blue-500/20 border border-blue-500/30 rounded-xl p-4">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Shield className="w-5 h-5 text-blue-400" />
+                  <span className="text-sm font-medium text-blue-400">Contraseña Predeterminada</span>
+                </div>
+                <p className="text-sm text-gray-300">
+                  Todos los nuevos usuarios recibirán la contraseña: <span className="font-mono bg-gray-800 px-2 py-1 rounded text-green-400">Soltice2025!</span>
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  El usuario deberá cambiar su contraseña en el primer inicio de sesión.
+                </p>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Si no especificas una contraseña, se generará una temporal que deberá ser cambiada en el primer acceso.
-              </p>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -231,7 +270,7 @@ const SecretaryManagement = () => {
                 disabled={isLoading}
                 className="px-6 py-3 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 disabled:from-gray-400 disabled:to-gray-500 text-black rounded-xl font-bold transition-all duration-300"
               >
-                {isLoading ? 'Creando...' : 'Crear Secretaria'}
+                {isLoading ? 'Creando...' : `Crear ${newAssistant.role === 'admin' ? 'Administrador' : 'Asistente'}`}
               </button>
               
               <button
@@ -246,29 +285,29 @@ const SecretaryManagement = () => {
         </div>
       )}
 
-      {/* Secretaries List */}
+      {/* Users List */}
       <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden">
         <div className="p-6 border-b border-white/10">
           <h3 className="text-xl font-bold text-white flex items-center">
             <Shield className="w-5 h-5 mr-2 text-blue-400" />
-            Secretarias Registradas ({secretaries.length})
+            Usuarios Registrados ({users.length})
           </h3>
         </div>
 
-        {secretaries.length === 0 ? (
+        {users.length === 0 ? (
           <div className="p-8 text-center">
             <UserPlus className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-400 text-lg font-medium">No hay secretarias registradas</p>
-            <p className="text-gray-500 text-sm mt-2">Crea la primera secretaria para comenzar</p>
+            <p className="text-gray-400 text-lg font-medium">No hay usuarios registrados</p>
+            <p className="text-gray-500 text-sm mt-2">Crea el primer usuario para comenzar</p>
           </div>
         ) : (
           <div className="divide-y divide-white/10">
-            {secretaries.map((secretary) => (
-              <div key={secretary.id} className="p-6 hover:bg-white/5 transition-all duration-200">
+            {users.map((user) => (
+              <div key={user.id} className="p-6 hover:bg-white/5 transition-all duration-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className={`p-3 rounded-xl ${
-                      secretary.isActive 
+                      user.isActive 
                         ? 'bg-green-400/20 text-green-400' 
                         : 'bg-gray-400/20 text-gray-400'
                     }`}>
@@ -276,22 +315,31 @@ const SecretaryManagement = () => {
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-bold text-white">{secretary.name}</h4>
-                      <p className="text-gray-400">{secretary.email}</p>
+                      <div className="flex items-center space-x-2">
+                        <h4 className="text-lg font-bold text-white">{user.name}</h4>
+                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                          user.role === 'admin' 
+                            ? 'bg-purple-400/20 text-purple-400' 
+                            : 'bg-blue-400/20 text-blue-400'
+                        }`}>
+                          {user.role === 'admin' ? 'ADMIN' : 'ASISTENTE'}
+                        </span>
+                      </div>
+                      <p className="text-gray-400">{user.email}</p>
                       <div className="flex items-center space-x-4 mt-2 text-sm">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          secretary.isActive 
+                          user.isActive 
                             ? 'bg-green-400/20 text-green-400' 
                             : 'bg-red-400/20 text-red-400'
                         }`}>
-                          {secretary.isActive ? 'Activa' : 'Inactiva'}
+                          {user.isActive ? 'Activo' : 'Inactivo'}
                         </span>
                         <span className="text-gray-500">
-                          Creada: {secretary.createdAt.toLocaleDateString()}
+                          Creado: {user.createdAt.toLocaleDateString()}
                         </span>
-                        {secretary.lastLogin && (
+                        {user.lastLogin && (
                           <span className="text-gray-500">
-                            Último acceso: {secretary.lastLogin.toLocaleDateString()}
+                            Último acceso: {user.lastLogin.toLocaleDateString()}
                           </span>
                         )}
                       </div>
@@ -301,21 +349,21 @@ const SecretaryManagement = () => {
                   <div className="flex items-center space-x-2">
                     {/* Toggle Status */}
                     <button
-                      onClick={() => handleToggleStatus(secretary.id)}
+                      onClick={() => handleToggleStatus(user.id)}
                       disabled={isLoading}
                       className={`p-2 rounded-xl transition-all duration-200 ${
-                        secretary.isActive
+                        user.isActive
                           ? 'bg-green-400/20 text-green-400 hover:bg-green-400/30'
                           : 'bg-gray-400/20 text-gray-400 hover:bg-gray-400/30'
                       }`}
-                      title={secretary.isActive ? 'Desactivar' : 'Activar'}
+                      title={user.isActive ? 'Desactivar' : 'Activar'}
                     >
-                      {secretary.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
+                      {user.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                     </button>
 
                     {/* Reset Password */}
                     <button
-                      onClick={() => handleResetPassword(secretary.id, secretary.name)}
+                      onClick={() => handleResetPassword(user.id, user.name)}
                       disabled={isLoading}
                       className="p-2 bg-blue-400/20 text-blue-400 hover:bg-blue-400/30 rounded-xl transition-all duration-200"
                       title="Reiniciar contraseña"
@@ -323,9 +371,21 @@ const SecretaryManagement = () => {
                       <RefreshCw className="w-5 h-5" />
                     </button>
 
+                    {/* Elevate to Admin - Only show for SuperAdmin and only for Assistants */}
+                    {currentUser?.role === 'superadmin' && user.role === 'assistant' && (
+                      <button
+                        onClick={() => handleElevateUser(user.id, user.name)}
+                        disabled={isLoading}
+                        className="p-2 bg-purple-400/20 text-purple-400 hover:bg-purple-400/30 rounded-xl transition-all duration-200"
+                        title="Elevar a Administrador"
+                      >
+                        <ArrowUp className="w-5 h-5" />
+                      </button>
+                    )}
+
                     {/* Delete */}
                     <button
-                      onClick={() => handleDeleteSecretary(secretary.id, secretary.name)}
+                      onClick={() => handleDeleteUser(user.id, user.name)}
                       disabled={isLoading}
                       className="p-2 bg-red-400/20 text-red-400 hover:bg-red-400/30 rounded-xl transition-all duration-200"
                       title="Eliminar"
@@ -354,4 +414,4 @@ const SecretaryManagement = () => {
   );
 };
 
-export default SecretaryManagement;
+export default UserManagement;

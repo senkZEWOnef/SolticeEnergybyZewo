@@ -13,17 +13,17 @@ import {
 
 interface ChatAssignment {
   chatId: string;
-  secretaryId: string;
+  assistantId: string;
   assignedAt: Date;
   status: 'active' | 'completed' | 'transferred';
 }
 
 const LiveChatMonitor = () => {
   const { chatSessions, messages, sendAdminMessage, updateChatStatus } = useChatContext();
-  const { getAllSecretaries } = useAuth();
+  const { getAllAssistants } = useAuth();
   
   const [assignments, setAssignments] = useState<ChatAssignment[]>([]);
-  const [secretaries] = useState(() => getAllSecretaries());
+  const [assistants] = useState(() => getAllAssistants());
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [autoAssign, setAutoAssign] = useState(true);
@@ -42,7 +42,7 @@ const LiveChatMonitor = () => {
 
   // Auto-assign new chats if enabled
   useEffect(() => {
-    if (!autoAssign || secretaries.length === 0) return;
+    if (!autoAssign || assistants.length === 0) return;
 
     const unassignedChats = chatSessions.filter(chat => 
       chat.status === 'active' && 
@@ -51,26 +51,26 @@ const LiveChatMonitor = () => {
 
     unassignedChats.forEach(chat => {
       // Find secretary with least active assignments
-      const secretaryWorkloads = secretaries
+      const assistantWorkloads = assistants
         .filter(s => s.isActive)
-        .map(secretary => ({
-          ...secretary,
+        .map(assistant => ({
+          ...assistant,
           activeChats: assignments.filter(a => 
-            a.secretaryId === secretary.id && a.status === 'active'
+            a.assistantId === assistant.id && a.status === 'active'
           ).length
         }))
         .sort((a, b) => a.activeChats - b.activeChats);
 
-      if (secretaryWorkloads.length > 0) {
-        assignChatToSecretary(chat.id, secretaryWorkloads[0].id);
+      if (assistantWorkloads.length > 0) {
+        assignChatToAssistant(chat.id, assistantWorkloads[0].id);
       }
     });
-  }, [chatSessions, assignments, autoAssign, secretaries]);
+  }, [chatSessions, assignments, autoAssign, assistants]);
 
-  const assignChatToSecretary = (chatId: string, secretaryId: string) => {
+  const assignChatToAssistant = (chatId: string, assistantId: string) => {
     const newAssignment: ChatAssignment = {
       chatId,
-      secretaryId,
+      assistantId,
       assignedAt: new Date(),
       status: 'active'
     };
@@ -80,13 +80,13 @@ const LiveChatMonitor = () => {
     localStorage.setItem('soltice_chat_assignments', JSON.stringify(updatedAssignments));
 
     // Send notification message to the chat
-    const secretary = secretaries.find(s => s.id === secretaryId);
-    if (secretary) {
-      sendAdminMessage(chatId, `Hola! Soy ${secretary.name}, tu asesora de Soltice Energy. ¿En qué puedo ayudarte hoy? 😊`, secretary.name);
+    const assistant = assistants.find(s => s.id === assistantId);
+    if (assistant) {
+      sendAdminMessage(chatId, `Hola! Soy ${assistant.name}, tu asesor de Soltice Energy. ¿En qué puedo ayudarte hoy? 😊`, assistant.name);
     }
   };
 
-  const transferChat = (chatId: string, newSecretaryId: string) => {
+  const transferChat = (chatId: string, newAssistantId: string) => {
     const updatedAssignments = assignments.map(a => 
       a.chatId === chatId 
         ? { ...a, status: 'transferred' as const }
@@ -95,7 +95,7 @@ const LiveChatMonitor = () => {
 
     const newAssignment: ChatAssignment = {
       chatId,
-      secretaryId: newSecretaryId,
+      assistantId: newAssistantId,
       assignedAt: new Date(),
       status: 'active'
     };
@@ -104,9 +104,9 @@ const LiveChatMonitor = () => {
     setAssignments(finalAssignments);
     localStorage.setItem('soltice_chat_assignments', JSON.stringify(finalAssignments));
 
-    const secretary = secretaries.find(s => s.id === newSecretaryId);
-    if (secretary) {
-      sendAdminMessage(chatId, `Hola! Soy ${secretary.name}, me haré cargo de tu consulta desde ahora. ¿En qué puedo ayudarte? 😊`, secretary.name);
+    const assistant = assistants.find(s => s.id === newAssistantId);
+    if (assistant) {
+      sendAdminMessage(chatId, `Hola! Soy ${assistant.name}, me haré cargo de tu consulta desde ahora. ¿En qué puedo ayudarte? 😊`, assistant.name);
     }
   };
 
@@ -131,10 +131,10 @@ const LiveChatMonitor = () => {
     setNewMessage('');
   };
 
-  const getAssignedSecretary = (chatId: string) => {
+  const getAssignedAssistant = (chatId: string) => {
     const assignment = assignments.find(a => a.chatId === chatId && a.status === 'active');
     if (!assignment) return null;
-    return secretaries.find(s => s.id === assignment.secretaryId);
+    return assistants.find(s => s.id === assignment.assistantId);
   };
 
   const getChatMessages = (chatId: string) => {
@@ -195,7 +195,7 @@ const LiveChatMonitor = () => {
           ) : (
             <div className="space-y-1 p-2">
               {activeChats.map(chat => {
-                const assignedSecretary = getAssignedSecretary(chat.id);
+                const assignedAssistant = getAssignedAssistant(chat.id);
                 const chatMessages = getChatMessages(chat.id);
                 const lastMessage = chatMessages[chatMessages.length - 1];
                 
@@ -221,11 +221,11 @@ const LiveChatMonitor = () => {
                       </span>
                     </div>
                     
-                    {assignedSecretary ? (
+                    {assignedAssistant ? (
                       <div className="flex items-center space-x-2 mb-2">
                         <UserCheck className="w-3 h-3 text-blue-400" />
                         <span className="text-blue-400 text-xs font-medium">
-                          {assignedSecretary.name}
+                          {assignedAssistant.name}
                         </span>
                       </div>
                     ) : (
@@ -264,10 +264,10 @@ const LiveChatMonitor = () => {
                       Cliente #{selectedChat.slice(-8).toUpperCase()}
                     </h4>
                     {(() => {
-                      const assignedSecretary = getAssignedSecretary(selectedChat);
-                      return assignedSecretary ? (
+                      const assignedAssistant = getAssignedAssistant(selectedChat);
+                      return assignedAssistant ? (
                         <p className="text-blue-400 text-sm">
-                          Asignado a: {assignedSecretary.name}
+                          Asignado a: {assignedAssistant.name}
                         </p>
                       ) : (
                         <p className="text-orange-400 text-sm">Sin asignar</p>
@@ -281,19 +281,19 @@ const LiveChatMonitor = () => {
                   <select
                     onChange={(e) => {
                       if (e.target.value) {
-                        if (getAssignedSecretary(selectedChat)) {
+                        if (getAssignedAssistant(selectedChat)) {
                           transferChat(selectedChat, e.target.value);
                         } else {
-                          assignChatToSecretary(selectedChat, e.target.value);
+                          assignChatToAssistant(selectedChat, e.target.value);
                         }
                       }
                     }}
                     className="bg-white/10 border border-white/20 rounded-lg px-3 py-1 text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
                   >
                     <option value="">Asignar/Transferir</option>
-                    {secretaries.filter(s => s.isActive).map(secretary => (
-                      <option key={secretary.id} value={secretary.id} className="bg-slate-800">
-                        {secretary.name}
+                    {assistants.filter(s => s.isActive).map(assistant => (
+                      <option key={assistant.id} value={assistant.id} className="bg-slate-800">
+                        {assistant.name}
                       </option>
                     ))}
                   </select>

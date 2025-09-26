@@ -2,11 +2,12 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'admin' | 'secretary';
+  role: 'superadmin' | 'admin' | 'assistant';
   isActive: boolean;
   createdAt: Date;
   lastLogin?: Date;
-  createdBy?: string; // ID of admin who created this user
+  createdBy?: string; // ID of user who created this user
+  mustChangePassword?: boolean; // Forces password change on next login
 }
 
 export interface AuthState {
@@ -23,8 +24,13 @@ export interface LoginCredentials {
 export interface CreateUserData {
   email: string;
   name: string;
-  role: 'secretary';
+  role: 'admin' | 'assistant';
   temporaryPassword?: string;
+}
+
+export interface ElevateUserData {
+  userId: string;
+  newRole: 'admin';
 }
 
 export interface ChangePasswordData {
@@ -48,9 +54,9 @@ export interface SiteAnalytics {
     hour: number;
     count: number;
   }>;
-  chatsBySecretary: Array<{
-    secretaryId: string;
-    secretaryName: string;
+  chatsByAssistant: Array<{
+    assistantId: string;
+    assistantName: string;
     activeChats: number;
     completedChats: number;
   }>;
@@ -58,7 +64,7 @@ export interface SiteAnalytics {
 
 export interface ChatAssignment {
   chatId: string;
-  secretaryId: string;
+  assistantId: string;
   assignedAt: Date;
   status: 'active' | 'completed' | 'transferred';
 }

@@ -1,48 +1,22 @@
 'use client';
 
-import { useAuth } from '@/contexts/AuthContext';
-import LoginPage from '@/components/Auth/LoginPage';
-import SecretaryDashboard from '@/components/Secretary/SecretaryDashboard';
 import { useEffect } from 'react';
-import { useAnalytics } from '@/hooks/useAnalytics';
+import { useRouter } from 'next/navigation';
 
 export default function SecretaryPage() {
-  const { isAuthenticated, user, isLoading } = useAuth();
-  const { trackPageVisit } = useAnalytics();
+  const router = useRouter();
 
   useEffect(() => {
-    trackPageVisit('/secretary');
-  }, [trackPageVisit]);
+    // Redirect to the new assistant page
+    router.replace('/assistant');
+  }, [router]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-xl font-semibold">Verificando acceso...</p>
-        </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+      <div className="text-white text-center">
+        <div className="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-xl font-semibold">Redirigiendo...</p>
       </div>
-    );
-  }
-
-  if (!isAuthenticated || !user) {
-    return <LoginPage />;
-  }
-
-  // Only secretaries can access this page
-  if (user.role !== 'secretary') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">🚫</span>
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Acceso Denegado</h1>
-          <p className="text-gray-400">Esta página es solo para secretarias.</p>
-        </div>
-      </div>
-    );
-  }
-
-  return <SecretaryDashboard />;
+    </div>
+  );
 }

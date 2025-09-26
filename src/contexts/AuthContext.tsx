@@ -1,16 +1,19 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { User, AuthState, LoginCredentials, CreateUserData, ChangePasswordData } from '@/types/auth';
+import { User, AuthState, LoginCredentials, CreateUserData, ChangePasswordData, ElevateUserData } from '@/types/auth';
 
 interface AuthContextType extends AuthState {
   login: (credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
-  createSecretary: (userData: CreateUserData) => Promise<{ success: boolean; error?: string; temporaryPassword?: string }>;
+  createUser: (userData: CreateUserData) => Promise<{ success: boolean; error?: string; temporaryPassword?: string }>;
   changePassword: (passwordData: ChangePasswordData) => Promise<{ success: boolean; error?: string }>;
-  getAllSecretaries: () => User[];
-  toggleSecretaryStatus: (userId: string) => Promise<{ success: boolean; error?: string }>;
-  deleteSecretary: (userId: string) => Promise<{ success: boolean; error?: string }>;
+  getAllUsers: () => User[];
+  getAllAssistants: () => User[];
+  getAllAdmins: () => User[];
+  toggleUserStatus: (userId: string) => Promise<{ success: boolean; error?: string }>;
+  deleteUser: (userId: string) => Promise<{ success: boolean; error?: string }>;
+  elevateUser: (elevateData: ElevateUserData) => Promise<{ success: boolean; error?: string }>;
   forcePasswordReset: (userId: string) => Promise<{ success: boolean; temporaryPassword?: string; error?: string }>;
 }
 
@@ -24,12 +27,12 @@ export const useAuth = () => {
   return context;
 };
 
-// Default admin credentials - In production, this should be properly hashed and stored securely
-const DEFAULT_ADMIN = {
-  id: 'admin-001',
+// Default Super Admin credentials - In production, this should be properly hashed and stored securely
+const DEFAULT_SUPERADMIN = {
+  id: 'superadmin-001',
   email: 'admin@solticeenergy.com',
   name: 'Super Administrator',
-  role: 'admin' as const,
+  role: 'superadmin' as const,
   isActive: true,
   createdAt: new Date('2024-01-01'),
   password: 'SolticeAdmin2024!' // In production, this should be hashed
@@ -81,14 +84,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = useCallback(async (credentials: LoginCredentials) => {
     try {
-      // Check default admin
-      if (credentials.email === DEFAULT_ADMIN.email && credentials.password === DEFAULT_ADMIN.password) {
+      // Check default Super Admin
+      if (credentials.email === DEFAULT_SUPERADMIN.email && credentials.password === DEFAULT_SUPERADMIN.password) {
         const user: User = {
-          ...DEFAULT_ADMIN,
+          ...DEFAULT_SUPERADMIN,
           lastLogin: new Date()
         };
         
-        const token = 'admin-token-' + Date.now();
+        const token = 'superadmin-token-' + Date.now();
         
         localStorage.setItem('soltice_auth_user', JSON.stringify(user));
         localStorage.setItem('soltice_auth_token', token);
@@ -102,27 +105,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: true };
       }
 
-      // Check secretaries
-      const savedSecretaries = localStorage.getItem('soltice_secretaries');
-      if (savedSecretaries) {
-        const secretaries = JSON.parse(savedSecretaries);
-        const secretary = secretaries.find((s: User & { password: string }) => 
-          s.email === credentials.email && s.password === credentials.password && s.isActive
+      // Check users (admins and assistants)
+      const savedUsers = localStorage.getItem('soltice_users');
+      if (savedUsers) {
+        const users = JSON.parse(savedUsers);
+        const foundUser = users.find((u: User & { password: string }) => 
+          u.email === credentials.email && u.password === credentials.password && u.isActive
         );
 
-        if (secretary) {
+        if (foundUser) {
           const user: User = {
-            id: secretary.id,
-            email: secretary.email,
-            name: secretary.name,
-            role: secretary.role,
-            isActive: secretary.isActive,
-            createdAt: new Date(secretary.createdAt),
+            id: foundUser.id,
+            email: foundUser.email,
+            name: foundUser.name,
+            role: foundUser.role,
+            isActive: foundUser.isActive,
+            createdAt: new Date(foundUser.createdAt),
             lastLogin: new Date(),
-            createdBy: secretary.createdBy
+            createdBy: foundUser.createdBy,
+            mustChangePassword: foundUser.mustChangePassword
           };
           
-          const token = 'secretary-token-' + Date.now();
+          const token = `${foundUser.role}-token-` + Date.now();
           
           localStorage.setItem('soltice_auth_user', JSON.stringify(user));
           localStorage.setItem('soltice_auth_token', token);
@@ -154,39 +158,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   }, []);
 
-  const createSecretary = useCallback(async (userData: CreateUserData) => {
+  const createUser = useCallback(async (userData: CreateUserData) => {
     try {
-      if (authState.user?.role !== 'admin') {
+      // Only superadmin and admin can create users
+      if (!authState.user || !['superadmin', 'admin'].includes(authState.user.role)) {
         return { success: false, error: 'No tienes permisos para crear usuarios' };
       }
 
-      const savedSecretaries = localStorage.getItem('soltice_secretaries');
-      const secretaries = savedSecretaries ? JSON.parse(savedSecretaries) : [];
+      const savedUsers = localStorage.getItem('soltice_users');
+      const users = savedUsers ? JSON.parse(savedUsers) : [];
       
       // Check if email already exists
-      const existingUser = secretaries.find((s: User) => s.email === userData.email);
+      const existingUser = users.find((u: User) => u.email === userData.email);
       if (existingUser) {
         return { success: false, error: 'El email ya está en uso' };
       }
 
-      const temporaryPassword = userData.temporaryPassword || generateTemporaryPassword();
-      const newSecretary = {
-        id: 'secretary-' + Date.now(),
+      // Use generic password as specified: Soltice2025!
+      const defaultPassword = 'Soltice2025!';
+      const newUser = {
+        id: `${userData.role}-` + Date.now(),
         email: userData.email,
         name: userData.name,
         role: userData.role,
         isActive: true,
         createdAt: new Date(),
         createdBy: authState.user.id,
-        password: temporaryPassword // In production, this should be hashed
+        mustChangePassword: true, // Force password change on first login
+        password: defaultPassword // In production, this should be hashed
       };
 
-      secretaries.push(newSecretary);
-      localStorage.setItem('soltice_secretaries', JSON.stringify(secretaries));
+      users.push(newUser);
+      localStorage.setItem('soltice_users', JSON.stringify(users));
       
-      return { success: true, temporaryPassword };
+      return { success: true, temporaryPassword: defaultPassword };
     } catch (error) {
-      console.error('Create secretary error:', error);
+      console.error('Create user error:', error);
       return { success: false, error: 'Error creando usuario' };
     }
   }, [authState.user]);
@@ -197,38 +204,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: false, error: 'Usuario no autenticado' };
       }
 
-      if (authState.user.role === 'admin') {
-        // For admin, check against default password
-        if (passwordData.currentPassword !== DEFAULT_ADMIN.password) {
+      if (authState.user.role === 'superadmin') {
+        // For superadmin, check against default password
+        if (passwordData.currentPassword !== DEFAULT_SUPERADMIN.password) {
           return { success: false, error: 'Contraseña actual incorrecta' };
         }
         
-        // Update admin password (in production, implement proper security)
-        DEFAULT_ADMIN.password = passwordData.newPassword;
+        // Update superadmin password (in production, implement proper security)
+        DEFAULT_SUPERADMIN.password = passwordData.newPassword;
         
         return { success: true };
       } else {
-        // For secretary, update in localStorage
-        const savedSecretaries = localStorage.getItem('soltice_secretaries');
-        if (!savedSecretaries) {
+        // For admin and assistant, update in localStorage
+        const savedUsers = localStorage.getItem('soltice_users');
+        if (!savedUsers) {
           return { success: false, error: 'Usuario no encontrado' };
         }
 
-        const secretaries = JSON.parse(savedSecretaries);
-        const secretaryIndex = secretaries.findIndex((s: User & { password: string }) => 
-          s.id === authState.user!.id
+        const users = JSON.parse(savedUsers);
+        const userIndex = users.findIndex((u: User & { password: string }) => 
+          u.id === authState.user!.id
         );
 
-        if (secretaryIndex === -1) {
+        if (userIndex === -1) {
           return { success: false, error: 'Usuario no encontrado' };
         }
 
-        if (secretaries[secretaryIndex].password !== passwordData.currentPassword) {
+        if (users[userIndex].password !== passwordData.currentPassword) {
           return { success: false, error: 'Contraseña actual incorrecta' };
         }
 
-        secretaries[secretaryIndex].password = passwordData.newPassword;
-        localStorage.setItem('soltice_secretaries', JSON.stringify(secretaries));
+        users[userIndex].password = passwordData.newPassword;
+        users[userIndex].mustChangePassword = false; // Remove mandatory change flag
+        localStorage.setItem('soltice_users', JSON.stringify(users));
+        
+        // Update current user state to remove mustChangePassword flag
+        const updatedUser = { ...authState.user, mustChangePassword: false };
+        localStorage.setItem('soltice_auth_user', JSON.stringify(updatedUser));
+        setAuthState(prev => ({ ...prev, user: updatedUser }));
         
         return { success: true };
       }
@@ -238,94 +251,144 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [authState.user]);
 
-  const getAllSecretaries = useCallback(() => {
-    const savedSecretaries = localStorage.getItem('soltice_secretaries');
-    if (!savedSecretaries) return [];
+  const getAllUsers = useCallback(() => {
+    const savedUsers = localStorage.getItem('soltice_users');
+    if (!savedUsers) return [];
     
-    return JSON.parse(savedSecretaries).map((s: User & { password: string }) => ({
-      id: s.id,
-      email: s.email,
-      name: s.name,
-      role: s.role,
-      isActive: s.isActive,
-      createdAt: new Date(s.createdAt),
-      lastLogin: s.lastLogin ? new Date(s.lastLogin) : undefined,
-      createdBy: s.createdBy
+    return JSON.parse(savedUsers).map((u: User & { password: string }) => ({
+      id: u.id,
+      email: u.email,
+      name: u.name,
+      role: u.role,
+      isActive: u.isActive,
+      createdAt: new Date(u.createdAt),
+      lastLogin: u.lastLogin ? new Date(u.lastLogin) : undefined,
+      createdBy: u.createdBy,
+      mustChangePassword: u.mustChangePassword
     }));
   }, []);
 
-  const toggleSecretaryStatus = useCallback(async (userId: string) => {
+  const getAllAssistants = useCallback(() => {
+    return getAllUsers().filter((user: User) => user.role === 'assistant');
+  }, [getAllUsers]);
+
+  const getAllAdmins = useCallback(() => {
+    return getAllUsers().filter((user: User) => user.role === 'admin');
+  }, [getAllUsers]);
+
+  const toggleUserStatus = useCallback(async (userId: string) => {
     try {
-      if (authState.user?.role !== 'admin') {
+      if (!authState.user || !['superadmin', 'admin'].includes(authState.user.role)) {
         return { success: false, error: 'No tienes permisos' };
       }
 
-      const savedSecretaries = localStorage.getItem('soltice_secretaries');
-      if (!savedSecretaries) {
+      const savedUsers = localStorage.getItem('soltice_users');
+      if (!savedUsers) {
         return { success: false, error: 'Usuario no encontrado' };
       }
 
-      const secretaries = JSON.parse(savedSecretaries);
-      const secretaryIndex = secretaries.findIndex((s: User) => s.id === userId);
+      const users = JSON.parse(savedUsers);
+      const userIndex = users.findIndex((u: User) => u.id === userId);
 
-      if (secretaryIndex === -1) {
+      if (userIndex === -1) {
         return { success: false, error: 'Usuario no encontrado' };
       }
 
-      secretaries[secretaryIndex].isActive = !secretaries[secretaryIndex].isActive;
-      localStorage.setItem('soltice_secretaries', JSON.stringify(secretaries));
+      users[userIndex].isActive = !users[userIndex].isActive;
+      localStorage.setItem('soltice_users', JSON.stringify(users));
       
       return { success: true };
     } catch (error) {
-      console.error('Toggle secretary status error:', error);
+      console.error('Toggle user status error:', error);
       return { success: false, error: 'Error actualizando estado' };
     }
   }, [authState.user]);
 
-  const deleteSecretary = useCallback(async (userId: string) => {
+  const deleteUser = useCallback(async (userId: string) => {
     try {
-      if (authState.user?.role !== 'admin') {
+      if (!authState.user || !['superadmin', 'admin'].includes(authState.user.role)) {
         return { success: false, error: 'No tienes permisos' };
       }
 
-      const savedSecretaries = localStorage.getItem('soltice_secretaries');
-      if (!savedSecretaries) {
+      const savedUsers = localStorage.getItem('soltice_users');
+      if (!savedUsers) {
         return { success: false, error: 'Usuario no encontrado' };
       }
 
-      const secretaries = JSON.parse(savedSecretaries);
-      const filteredSecretaries = secretaries.filter((s: User) => s.id !== userId);
+      const users = JSON.parse(savedUsers);
+      const userToDelete = users.find((u: User) => u.id === userId);
       
-      localStorage.setItem('soltice_secretaries', JSON.stringify(filteredSecretaries));
+      // Prevent deletion of admins by non-superadmin users
+      if (userToDelete && userToDelete.role === 'admin' && authState.user.role !== 'superadmin') {
+        return { success: false, error: 'Solo el Super Admin puede eliminar Administradores' };
+      }
+      
+      const filteredUsers = users.filter((u: User) => u.id !== userId);
+      localStorage.setItem('soltice_users', JSON.stringify(filteredUsers));
       
       return { success: true };
     } catch (error) {
-      console.error('Delete secretary error:', error);
+      console.error('Delete user error:', error);
       return { success: false, error: 'Error eliminando usuario' };
+    }
+  }, [authState.user]);
+
+  const elevateUser = useCallback(async (elevateData: ElevateUserData) => {
+    try {
+      // Only superadmin can elevate users
+      if (authState.user?.role !== 'superadmin') {
+        return { success: false, error: 'Solo el Super Admin puede elevar usuarios' };
+      }
+
+      const savedUsers = localStorage.getItem('soltice_users');
+      if (!savedUsers) {
+        return { success: false, error: 'Usuario no encontrado' };
+      }
+
+      const users = JSON.parse(savedUsers);
+      const userIndex = users.findIndex((u: User) => u.id === elevateData.userId);
+
+      if (userIndex === -1) {
+        return { success: false, error: 'Usuario no encontrado' };
+      }
+
+      // Only elevate assistants to admin
+      if (users[userIndex].role !== 'assistant') {
+        return { success: false, error: 'Solo se pueden elevar Asistentes a Administrador' };
+      }
+
+      users[userIndex].role = elevateData.newRole;
+      localStorage.setItem('soltice_users', JSON.stringify(users));
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Elevate user error:', error);
+      return { success: false, error: 'Error elevando usuario' };
     }
   }, [authState.user]);
 
   const forcePasswordReset = useCallback(async (userId: string) => {
     try {
-      if (authState.user?.role !== 'admin') {
+      if (!authState.user || !['superadmin', 'admin'].includes(authState.user.role)) {
         return { success: false, error: 'No tienes permisos' };
       }
 
-      const savedSecretaries = localStorage.getItem('soltice_secretaries');
-      if (!savedSecretaries) {
+      const savedUsers = localStorage.getItem('soltice_users');
+      if (!savedUsers) {
         return { success: false, error: 'Usuario no encontrado' };
       }
 
-      const secretaries = JSON.parse(savedSecretaries);
-      const secretaryIndex = secretaries.findIndex((s: User) => s.id === userId);
+      const users = JSON.parse(savedUsers);
+      const userIndex = users.findIndex((u: User) => u.id === userId);
 
-      if (secretaryIndex === -1) {
+      if (userIndex === -1) {
         return { success: false, error: 'Usuario no encontrado' };
       }
 
       const temporaryPassword = generateTemporaryPassword();
-      secretaries[secretaryIndex].password = temporaryPassword;
-      localStorage.setItem('soltice_secretaries', JSON.stringify(secretaries));
+      users[userIndex].password = temporaryPassword;
+      users[userIndex].mustChangePassword = true;
+      localStorage.setItem('soltice_users', JSON.stringify(users));
       
       return { success: true, temporaryPassword };
     } catch (error) {
@@ -338,11 +401,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     ...authState,
     login,
     logout,
-    createSecretary,
+    createUser,
     changePassword,
-    getAllSecretaries,
-    toggleSecretaryStatus,
-    deleteSecretary,
+    getAllUsers,
+    getAllAssistants,
+    getAllAdmins,
+    toggleUserStatus,
+    deleteUser,
+    elevateUser,
     forcePasswordReset
   };
 

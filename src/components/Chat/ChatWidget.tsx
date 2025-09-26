@@ -58,7 +58,7 @@ const ChatWidget = () => {
   return (
     <>
       {/* Chat Toggle Button */}
-      <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50">
+      <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 pb-safe">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center text-slate-900 shadow-2xl hover:scale-110 transition-all duration-300 min-h-[56px] min-w-[56px]"
@@ -73,7 +73,7 @@ const ChatWidget = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-80 md:w-96 h-[60vh] sm:h-[500px] z-50 bg-slate-900/95 backdrop-blur-lg rounded-2xl border border-slate-700/50 shadow-2xl flex flex-col">
+        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[min(calc(100vw-2rem),320px)] sm:w-80 md:w-96 max-h-[min(60vh,480px)] sm:h-[500px] z-50 bg-slate-900/95 backdrop-blur-lg rounded-2xl border border-slate-700/50 shadow-2xl flex flex-col pb-safe pt-safe">
           {/* Chat Header */}
           <div className="p-4 border-b border-slate-700/50 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-t-2xl">
             <div className="flex items-center">

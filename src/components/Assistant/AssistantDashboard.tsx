@@ -13,7 +13,7 @@ import {
   Send
 } from 'lucide-react';
 
-const SecretaryDashboard = () => {
+const AssistantDashboard = () => {
   const { user, logout, changePassword } = useAuth();
   const { chatSessions, messages, sendAdminMessage } = useChatContext();
   
@@ -407,4 +407,4 @@ const SecretaryDashboard = () => {
   );
 };
 
-export default SecretaryDashboard;
+export default AssistantDashboard;

@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/Chat/ChatWidget';
 import AdminWidget from '@/components/AdminWidget';
+import FloatingContactWidget from '@/components/FloatingContactWidget';
 import { 
   Phone, 
   Mail, 
@@ -60,8 +61,8 @@ const ContactPage = () => {
       icon: Phone,
       title: 'Llámanos',
       description: 'Lunes a Viernes: 8:00 AM - 6:00 PM\nSábados: 9:00 AM - 2:00 PM',
-      action: 'tel:+1787-XXX-XXXX',
-      actionText: '(787) XXX-XXXX',
+      action: 'tel:+17875207505',
+      actionText: '(787) 520-7505',
       color: 'green'
     },
     {
@@ -76,7 +77,7 @@ const ContactPage = () => {
       icon: MessageCircle,
       title: 'WhatsApp',
       description: 'Chat directo con nuestros expertos\nRespuesta inmediata',
-      action: 'https://wa.me/1787XXXXXXX',
+      action: 'https://wa.me/17875207505',
       actionText: 'Chatear Ahora',
       color: 'emerald'
     },
@@ -91,8 +92,8 @@ const ContactPage = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, name: 'Facebook', url: '#', color: 'blue' },
-    { icon: Instagram, name: 'Instagram', url: '#', color: 'pink' },
+    { icon: Facebook, name: 'Facebook', url: 'https://www.facebook.com/p/Soltice-Energy-61561365922592/', color: 'blue' },
+    { icon: Instagram, name: 'Instagram', url: 'https://www.instagram.com/soltice.energy/', color: 'pink' },
     { icon: Twitter, name: 'Twitter', url: '#', color: 'sky' },
     { icon: Linkedin, name: 'LinkedIn', url: '#', color: 'indigo' }
   ];
@@ -211,7 +212,7 @@ const ContactPage = () => {
                     <a
                       key={index}
                       href={social.url}
-                      className={`w-12 h-12 ${colorClasses[social.color as keyof typeof colorClasses]} rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg`}
+                      className={`w-14 h-14 ${colorClasses[social.color as keyof typeof colorClasses]} rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg min-h-[56px] min-w-[56px]`}
                       title={social.name}
                     >
                       <Icon className="w-6 h-6 text-white" />
@@ -245,14 +246,15 @@ const ContactPage = () => {
                   {/* Required Fields Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-bold text-gray-900 mb-2">
+                      <label htmlFor="name" className="block text-base font-bold text-gray-900 mb-2">
                         Nombre Completo *
                       </label>
                       <input
                         type="text"
                         id="name"
                         name="name"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px]"
+                        autoComplete="name"
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px] text-base"
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Tu nombre completo"
@@ -261,14 +263,16 @@ const ContactPage = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-bold text-gray-900 mb-2">
+                      <label htmlFor="phone" className="block text-base font-bold text-gray-900 mb-2">
                         Teléfono *
                       </label>
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px]"
+                        autoComplete="tel"
+                        inputMode="tel"
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px] text-base"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="(787) 123-4567"
@@ -287,7 +291,9 @@ const ContactPage = () => {
                         type="email"
                         id="email"
                         name="email"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px]"
+                        autoComplete="email"
+                        inputMode="email"
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200 min-h-[44px] text-base"
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="tu@email.com"
@@ -493,6 +499,7 @@ const ContactPage = () => {
       <Footer />
       <ChatWidget />
       <AdminWidget />
+      <FloatingContactWidget />
     </>
   );
 };

@@ -7,6 +7,7 @@ import OfficesSection from '@/components/OfficesSection';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/Chat/ChatWidget';
 import AdminWidget from '@/components/AdminWidget';
+import FloatingContactWidget from '@/components/FloatingContactWidget';
 import VisitorTracker from '@/components/Analytics/VisitorTracker';
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <Footer />
       <ChatWidget />
       <AdminWidget />
+      <FloatingContactWidget />
     </main>
   );
 }

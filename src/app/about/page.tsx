@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/Chat/ChatWidget';
 import AdminWidget from '@/components/AdminWidget';
+import FloatingContactWidget from '@/components/FloatingContactWidget';
 
 const AboutPage = () => {
 
@@ -112,8 +113,12 @@ const AboutPage = () => {
                 
                 {/* Founder Avatar */}
                 <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-r from-green-400 to-green-500 rounded-full text-4xl lg:text-5xl mb-6 shadow-lg">
-                    👨‍💼
+                  <div className="inline-flex items-center justify-center w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-r from-green-400 to-green-500 rounded-full mb-6 shadow-lg overflow-hidden">
+                    <img 
+                      src="/amaury.png" 
+                      alt="Amaury Rivera - CEO de Soltice Energy"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight">
                     Nuestra Visión en{' '}
@@ -162,7 +167,7 @@ const AboutPage = () => {
                 
                 <div className="text-center mt-8 pt-8 border-t border-gray-200">
                   <p className="text-xl font-bold text-green-600 mb-2">
-                    [Nombre del Fundador]
+                    Amaury Rivera
                   </p>
                   <p className="text-gray-500 font-medium">
                     Fundador y CEO, Soltice Energy
@@ -294,7 +299,7 @@ const AboutPage = () => {
                     </p>
                     <div className="flex justify-center space-x-4">
                       <a 
-                        href="https://facebook.com/solticeenergy" 
+                        href="https://www.facebook.com/p/Soltice-Energy-61561365922592/" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300 transform hover:scale-110 shadow-lg"
@@ -305,7 +310,7 @@ const AboutPage = () => {
                       </a>
                       
                       <a 
-                        href="https://instagram.com/solticeenergy" 
+                        href="https://www.instagram.com/soltice.energy/" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-colors duration-300 transform hover:scale-110 shadow-lg"
@@ -316,7 +321,7 @@ const AboutPage = () => {
                       </a>
                       
                       <a 
-                        href="https://wa.me/1787XXXXXXX" 
+                        href="https://wa.me/17875207505" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors duration-300 transform hover:scale-110 shadow-lg"
@@ -471,6 +476,7 @@ const AboutPage = () => {
       <Footer />
       <ChatWidget />
       <AdminWidget />
+      <FloatingContactWidget />
     </>
   );
 };

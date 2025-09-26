@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, Star, Search, Grid, List } from 'lucide-react';
+import { Star, Search, Grid, List } from 'lucide-react';
+import FloatingContactWidget from './FloatingContactWidget';
 
 interface Product {
   id: string;
@@ -144,8 +145,8 @@ const Products = () => {
   }, [products, selectedCategory, searchTerm]);
 
   const ProductModal = ({ product, onClose }: { product: Product; onClose: () => void }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black bg-opacity-50">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto mx-2 sm:mx-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black bg-opacity-50 pt-safe pb-safe">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[min(95vh,600px)] sm:max-h-[90vh] overflow-y-auto mx-2 sm:mx-4 ios-scroll-fix">
         <div className="flex justify-between items-center p-4 sm:p-6 border-b">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight pr-4">{product.name}</h2>
           <button
@@ -403,18 +404,8 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Contact Buttons */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
-        <button className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-          <MessageCircle className="w-6 h-6" />
-        </button>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-          <Phone className="w-6 h-6" />
-        </button>
-        <button className="bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110">
-          <Mail className="w-6 h-6" />
-        </button>
-      </div>
+      {/* Floating Contact Widget */}
+      <FloatingContactWidget />
 
       {/* Product Modal */}
       {selectedProduct && (

@@ -130,7 +130,7 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex justify-center space-x-6 pt-6">
               <a 
-                href="https://facebook.com/solticeenergy" 
+                href="https://www.facebook.com/p/Soltice-Energy-61561365922592/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600/20 transition-all duration-300"
@@ -141,7 +141,7 @@ const Footer = () => {
               </a>
               
               <a 
-                href="https://instagram.com/solticeenergy" 
+                href="https://www.instagram.com/soltice.energy/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300"
@@ -152,7 +152,7 @@ const Footer = () => {
               </a>
               
               <a 
-                href="https://wa.me/1787XXXXXXX" 
+                href="https://wa.me/17875207505" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-green-500/20 transition-all duration-300"

@@ -44,14 +44,14 @@ const ContactSection = () => {
     {
       icon: '📞',
       title: 'Llamar',
-      action: 'tel:+1787-XXX-XXXX',
-      actionText: '(787) XXX-XXXX',
+      action: 'tel:+17875207505',
+      actionText: '(787) 520-7505',
       bgColor: 'from-blue-500 to-blue-600'
     },
     {
       icon: '💬',
       title: 'WhatsApp',
-      action: 'https://wa.me/1787XXXXXXX',
+      action: 'https://wa.me/17875207505',
       actionText: 'Chat',
       bgColor: 'from-green-500 to-green-600'
     },
@@ -65,14 +65,14 @@ const ContactSection = () => {
     {
       icon: '📘',
       title: 'Facebook',
-      action: 'https://facebook.com/solticeenergy',
+      action: 'https://www.facebook.com/p/Soltice-Energy-61561365922592/',
       actionText: 'Seguir',
       bgColor: 'from-blue-600 to-blue-700'
     },
     {
       icon: '📷',
       title: 'Instagram',
-      action: 'https://instagram.com/solticeenergy',
+      action: 'https://www.instagram.com/soltice.energy/',
       actionText: 'Ver',
       bgColor: 'from-pink-500 to-purple-600'
     },

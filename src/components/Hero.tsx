@@ -61,7 +61,7 @@ const Hero = () => {
                   }}
                 />
                 
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-xl font-light tracking-wide -mt-4">
+                <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-xl font-normal tracking-wide -mt-4">
                   Bienvenido al futuro de la 
                   <span className="text-green-400 font-semibold"> energía renovable</span> en Puerto Rico. 
                   <span className="text-white font-medium">Placas solares, baterías portátiles</span> y 
@@ -73,7 +73,7 @@ const Hero = () => {
               </div>
 
               {/* Key Benefits */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-400">0dB</div>
                   <div className="text-sm text-gray-300">Silencioso</div>
@@ -120,8 +120,9 @@ const Hero = () => {
                     <input
                       type="text"
                       name="name"
+                      autoComplete="name"
                       placeholder="Nombre completo *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -132,8 +133,10 @@ const Hero = () => {
                     <input
                       type="tel"
                       name="phone"
+                      autoComplete="tel"
+                      inputMode="tel"
                       placeholder="Teléfono *"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.phone}
                       onChange={handleChange}
                       required
@@ -144,8 +147,10 @@ const Hero = () => {
                     <input
                       type="email"
                       name="email"
+                      autoComplete="email"
+                      inputMode="email"
                       placeholder="Email"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px]"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-gray-900 min-h-[44px] text-base"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -206,7 +211,7 @@ const Hero = () => {
             <div className="flex items-center space-x-4">
               <span className="text-2xl">📞</span>
               <div>
-                <div className="font-bold text-lg">(787) XXX-XXXX</div>
+                <div className="font-bold text-lg">(787) 520-7505</div>
                 <div className="text-sm">Disponible 24/7 para emergencias</div>
               </div>
             </div>
@@ -219,7 +224,7 @@ const Hero = () => {
             
             <div className="flex items-center space-x-4">
               <a 
-                href="https://instagram.com/solticeenergy" 
+                href="https://www.instagram.com/soltice.energy/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-green-400 hover:bg-gray-800 transition-colors duration-200"
@@ -230,7 +235,7 @@ const Hero = () => {
               </a>
               
               <a 
-                href="https://facebook.com/solticeenergy" 
+                href="https://www.facebook.com/p/Soltice-Energy-61561365922592/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-green-400 hover:bg-gray-800 transition-colors duration-200"
@@ -241,7 +246,7 @@ const Hero = () => {
               </a>
               
               <a 
-                href="https://wa.me/1787XXXXXXX" 
+                href="https://wa.me/17875207505" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-green-400 hover:bg-green-600 transition-colors duration-200"

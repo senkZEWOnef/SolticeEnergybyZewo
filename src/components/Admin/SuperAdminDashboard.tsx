@@ -18,14 +18,14 @@ import {
   RefreshCw,
   Package
 } from 'lucide-react';
-import SecretaryManagement from './SecretaryManagement';
+import UserManagement from './SecretaryManagement';
 import LiveChatMonitor from './LiveChatMonitor';
 import ProductManager from './ProductManager';
 
 const SuperAdminDashboard = () => {
   const { user, logout } = useAuth();
   const { analytics, isLoading, refreshAnalytics } = useAnalytics();
-  const [activeTab, setActiveTab] = useState<'overview' | 'secretaries' | 'chats' | 'products' | 'analytics'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'chats' | 'products' | 'analytics'>('overview');
 
   // Auto refresh every 30 seconds
   useEffect(() => {
@@ -135,14 +135,14 @@ const SuperAdminDashboard = () => {
           <nav className="flex space-x-1">
             {[
               { id: 'overview', label: 'Resumen', icon: BarChart3 },
-              { id: 'secretaries', label: 'Secretarias', icon: Users },
+              { id: 'users', label: 'Usuarios', icon: Users },
               { id: 'chats', label: 'Chat en Vivo', icon: MessageSquare },
               { id: 'products', label: 'Productos', icon: Package },
               { id: 'analytics', label: 'Analíticas', icon: Activity }
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as 'overview' | 'secretaries' | 'chats' | 'products' | 'analytics')}
+                onClick={() => setActiveTab(tab.id as 'overview' | 'users' | 'chats' | 'products' | 'analytics')}
                 className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'text-green-400 border-b-2 border-green-400 bg-white/5'
@@ -220,25 +220,25 @@ const SuperAdminDashboard = () => {
                 </div>
               </div>
 
-              {/* Secretary Performance */}
+              {/* Assistant Performance */}
               <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center">
                   <Users className="w-5 h-5 mr-2 text-blue-400" />
-                  Rendimiento Secretarias
+                  Rendimiento Asistentes
                 </h3>
                 <div className="space-y-3">
-                  {analytics.chatsBySecretary.length > 0 ? (
-                    analytics.chatsBySecretary.map((secretary) => (
-                      <div key={secretary.secretaryId} className="flex items-center justify-between">
+                  {analytics.chatsByAssistant.length > 0 ? (
+                    analytics.chatsByAssistant.map((assistant) => (
+                      <div key={assistant.assistantId} className="flex items-center justify-between">
                         <div>
-                          <span className="text-white font-medium">{secretary.secretaryName}</span>
+                          <span className="text-white font-medium">{assistant.assistantName}</span>
                           <div className="flex items-center space-x-2 mt-1">
                             <span className="text-green-400 text-sm">
-                              {secretary.activeChats} activos
+                              {assistant.activeChats} activos
                             </span>
                             <span className="text-gray-400">•</span>
                             <span className="text-blue-400 text-sm">
-                              {secretary.completedChats} completados
+                              {assistant.completedChats} completados
                             </span>
                           </div>
                         </div>
@@ -246,7 +246,7 @@ const SuperAdminDashboard = () => {
                     ))
                   ) : (
                     <p className="text-gray-400 text-center py-4">
-                      No hay secretarias registradas
+                      No hay asistentes registrados
                     </p>
                   )}
                 </div>
@@ -255,7 +255,7 @@ const SuperAdminDashboard = () => {
           </div>
         )}
 
-        {activeTab === 'secretaries' && <SecretaryManagement />}
+        {activeTab === 'users' && <UserManagement />}
         
         {activeTab === 'chats' && <LiveChatMonitor />}
         
@@ -265,25 +265,68 @@ const SuperAdminDashboard = () => {
           <div className="space-y-6">
             {/* Visitors by Hour Chart */}
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
-              <h3 className="text-xl font-bold text-white mb-6">Visitantes por Hora (Hoy)</h3>
-              <div className="grid grid-cols-12 gap-2 h-32">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-white">Visitantes por Hora (Hoy)</h3>
+                <div className="text-sm text-gray-400">
+                  Total: {analytics.visitorsByHour.reduce((sum, v) => sum + v.count, 0)} visitantes
+                </div>
+              </div>
+              <div className="grid grid-cols-12 gap-1 sm:gap-2 h-40 mb-4">
                 {analytics.visitorsByHour.map(({ hour, count }) => {
                   const maxCount = Math.max(...analytics.visitorsByHour.map(v => v.count)) || 1;
-                  const height = (count / maxCount) * 100;
+                  const height = count > 0 ? Math.max((count / maxCount) * 100, 8) : 2; // Minimum 8% height for visibility
+                  const isCurrentHour = hour === new Date().getHours();
                   
                   return (
-                    <div key={hour} className="flex flex-col items-center justify-end">
+                    <div key={hour} className="flex flex-col items-center justify-end h-full">
+                      {/* Visitor count label */}
+                      {count > 0 && (
+                        <span className="text-xs text-green-400 font-bold mb-1">
+                          {count}
+                        </span>
+                      )}
+                      
+                      {/* Bar */}
                       <div 
-                        className="bg-gradient-to-t from-green-400 to-green-500 rounded-t-sm w-full transition-all duration-300 hover:opacity-75"
-                        style={{ height: `${height}%`, minHeight: count > 0 ? '4px' : '0px' }}
-                        title={`${hour}:00 - ${count} visitantes`}
+                        className={`w-full rounded-t-sm transition-all duration-300 hover:opacity-75 cursor-pointer ${
+                          count > 0 
+                            ? isCurrentHour 
+                              ? 'bg-gradient-to-t from-green-300 to-green-400 shadow-lg' 
+                              : 'bg-gradient-to-t from-green-400 to-green-500'
+                            : 'bg-gray-600/30'
+                        }`}
+                        style={{ 
+                          height: `${height}%`,
+                          minHeight: count > 0 ? '8px' : '2px'
+                        }}
+                        title={`${hour.toString().padStart(2, '0')}:00 - ${count} visitante${count !== 1 ? 's' : ''}`}
                       ></div>
-                      <span className="text-xs text-gray-400 mt-2">
+                      
+                      {/* Hour label */}
+                      <span className={`text-xs mt-2 font-medium ${
+                        isCurrentHour ? 'text-green-400' : 'text-gray-400'
+                      }`}>
                         {hour.toString().padStart(2, '0')}
                       </span>
                     </div>
                   );
                 })}
+              </div>
+              
+              {/* Legend */}
+              <div className="flex items-center justify-center space-x-6 text-xs text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gradient-to-t from-green-300 to-green-400 rounded-sm"></div>
+                  <span>Hora actual</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gradient-to-t from-green-400 to-green-500 rounded-sm"></div>
+                  <span>Otras horas</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-600/30 rounded-sm"></div>
+                  <span>Sin visitantes</span>
+                </div>
               </div>
             </div>
 
