@@ -45,8 +45,8 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 min-h-screen lg:min-h-screen flex flex-col justify-start lg:justify-center pt-24 pb-8 px-4 sm:px-6 lg:px-0">
-        <div className="container mx-auto lg:px-12 w-full flex-1 flex flex-col justify-start lg:justify-center">
+      <div className="relative z-20 flex flex-col pt-24 pb-0 px-4 sm:px-6 lg:px-0">
+        <div className="container mx-auto lg:px-12 w-full py-8 lg:py-16">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-start lg:items-center w-full">
             
             {/* Hero Content */}
@@ -205,7 +205,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom CTA Banner */}
-      <div className="absolute bottom-0 left-0 right-0 bg-green-400 text-black py-4 z-20">
+      <div className="bg-green-400 text-black py-4 z-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
