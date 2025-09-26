@@ -99,34 +99,16 @@ const Header = () => {
 
       </header>
 
-      {/* Mobile Navigation Full Screen Overlay */}
+      {/* Mobile Navigation Clean Dropdown */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 bg-black/98 z-50 flex flex-col">
-          {/* Header area with close button */}
-          <div className="flex justify-between items-center p-6 border-b border-gray-700">
-            <img 
-              src="/name.png" 
-              alt="Soltice Energy" 
-              className="h-8"
-            />
-            <button 
-              onClick={() => setIsMenuOpen(false)}
-              className="text-white p-2 hover:text-green-400"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="flex-1 px-6 py-8">
-            <div className="space-y-6">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg shadow-xl z-50 border-t border-gray-700">
+          <nav className="px-6 py-4">
+            <div className="space-y-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-white hover:text-green-400 transition-colors duration-200 py-4 text-2xl font-bold border-b border-gray-700"
+                  className="block text-white hover:text-green-400 hover:bg-white/10 transition-all duration-200 py-3 px-4 rounded-lg text-lg font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
@@ -135,10 +117,10 @@ const Header = () => {
             </div>
 
             {/* Contact Section */}
-            <div className="mt-8 pt-8 border-t border-gray-700">
+            <div className="mt-4 pt-4 border-t border-gray-700">
               <a 
                 href="tel:7875207505"
-                className="block text-white hover:text-green-400 transition-colors duration-200 py-4 text-xl font-medium"
+                className="block text-white hover:text-green-400 hover:bg-white/10 transition-all duration-200 py-3 px-4 rounded-lg text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 📞 (787) 520-7505
@@ -146,7 +128,7 @@ const Header = () => {
               
               <a 
                 href="/contacto"
-                className="block bg-green-400 text-black px-6 py-4 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 text-center text-xl mt-6"
+                className="block bg-green-400 text-black px-4 py-3 rounded-lg font-bold hover:bg-green-300 transition-colors duration-200 text-center mt-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 COTIZACIÓN GRATIS
