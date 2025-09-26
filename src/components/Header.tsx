@@ -81,8 +81,9 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button 
-              className="lg:hidden p-3 text-white hover:text-green-400 transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-3 text-white hover:text-green-400 transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center relative z-50"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -95,8 +96,8 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="lg:hidden mt-6 pb-6 border-t border-gray-800">
+          <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+            <div className="mt-6 pb-6 border-t border-gray-800 bg-black/95 backdrop-blur-xl">
               <nav className="flex flex-col space-y-4 pt-6">
                 {navLinks.map((link) => (
                   <a
@@ -128,7 +129,7 @@ const Header = () => {
                 </div>
               </nav>
             </div>
-          )}
+          </div>
         </div>
       </header>
 

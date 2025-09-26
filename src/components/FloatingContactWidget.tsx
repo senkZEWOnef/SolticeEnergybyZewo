@@ -4,7 +4,7 @@ import { Phone, MessageCircle, Mail } from 'lucide-react';
 
 const FloatingContactWidget = () => {
   return (
-    <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <div className="fixed bottom-6 right-20 z-40 flex flex-col gap-3">
       {/* WhatsApp Button */}
       <a 
         href="https://wa.me/17875207505" 
@@ -14,7 +14,7 @@ const FloatingContactWidget = () => {
         title="WhatsApp - Chatear ahora"
       >
         <MessageCircle className="w-6 h-6" />
-        <span className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        <span className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
           WhatsApp
         </span>
       </a>
@@ -26,7 +26,7 @@ const FloatingContactWidget = () => {
         title="Llamar - (787) 520-7505"
       >
         <Phone className="w-6 h-6" />
-        <span className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        <span className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
           (787) 520-7505
         </span>
       </a>
@@ -38,7 +38,7 @@ const FloatingContactWidget = () => {
         title="Email - info@solticeenergy.com"
       >
         <Mail className="w-6 h-6" />
-        <span className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        <span className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
           Email
         </span>
       </a>

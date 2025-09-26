@@ -45,9 +45,9 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 min-h-screen flex items-center">
+      <div className="relative z-20 min-h-screen flex items-center py-20 lg:py-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center">
             
             {/* Hero Content */}
             <div className="text-white space-y-8">
@@ -104,8 +104,8 @@ const Hero = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:ml-auto">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full">
+            <div className="lg:ml-auto w-full">
+              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full mx-auto lg:mx-0">
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">
                     Cotización Inmediata
