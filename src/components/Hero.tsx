@@ -45,9 +45,9 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-20 min-h-screen flex items-center py-20 lg:py-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center">
+      <div className="relative z-20 min-h-screen flex items-start lg:items-center pt-24 pb-12 lg:pt-0 lg:pb-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center w-full">
             
             {/* Hero Content */}
             <div className="text-white space-y-8">
@@ -104,18 +104,18 @@ const Hero = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:ml-auto w-full">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full mx-auto lg:mx-0">
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <div className="lg:ml-auto w-full mt-8 lg:mt-0">
+              <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto lg:mx-0">
+                <div className="text-center mb-4 sm:mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                     Cotización Inmediata
                   </h2>
-                  <p className="text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600">
                     Respuesta en menos de 2 horas
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
                     <input
                       type="text"
